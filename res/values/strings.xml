@@ -1,5 +1,4 @@
 <resources>
-
     <string name="app_name">HealthNow</string>
 	<string name="drawer_open">Choose An Option</string>
 	<string name="drawer_close">HealthNow</string>
@@ -12,4 +11,13 @@
 	    <item>Medication</item>
 	    <item>Reports</item>
 	</string-array>
+	
+	<!-- Navigation Drawer List Item Icons -->
+	<!-- Keep them in order as the titles are in -->
+	<array name="nav_drawer_icons">
+	    <item>@drawable/ic_communities</item>
+	    <item>@drawable/ic_communities</item>
+	    <item>@drawable/ic_communities</item>
+	    <item>@drawable/ic_communities</item>
+	</array>
 </resources>
