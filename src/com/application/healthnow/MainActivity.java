@@ -7,6 +7,7 @@ import com.application.healthnow.model.NavDrawerItem;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -15,7 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity 
+{
 	
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -147,5 +149,24 @@ public class MainActivity extends Activity {
 	{
 		mTitle = title;
 		getActionBar().setTitle(mTitle);
+	}
+	
+	// When using the ActionBarDrawerToggle, you must call it
+	// during onPostCreate() and onConfigurationChanged()
+	
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState)
+	{
+		super.onPostCreate(savedInstanceState);
+		
+		// Sync the toggle state after onRestoreInstanceState has ocurred
+		mDrawerToggle.syncState();
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		// Pass any configuration change to the drawer toggle
+		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 }
