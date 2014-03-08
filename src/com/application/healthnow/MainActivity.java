@@ -11,6 +11,7 @@ import android.content.res.TypedArray;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -93,11 +94,16 @@ public class MainActivity extends Activity {
         
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         
-//        if(savedInstanceState == null)
-//        {
-//        	// the first time display the view for the first navigation item
-//        	displayView(0);
-//        }
+        if(savedInstanceState == null)
+        {
+        	// the first time display the view for the first navigation item
+        	displayView(0);
+        }
+	}
+
+	private void displayView(int i) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -106,5 +112,40 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		// toggle navigation drawer on selecting action bar app icon/title
+		if(mDrawerToggle.onOptionsItemSelected(item))
+		{
+			return true;
+		}
+		
+		// the handle for the action bar actions click
+		switch(item.getItemId())
+		{
+			case R.id.action_settings:
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	// this method is called when invalidateOptionsMenu() is triggered
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu)
+	{
+		// if navigation drawer is opened, hide the action items
+		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
+	@Override
+	public void setTitle(CharSequence title)
+	{
+		mTitle = title;
+		getActionBar().setTitle(mTitle);
+	}
 }
