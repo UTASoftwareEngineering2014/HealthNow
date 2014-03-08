@@ -73,7 +73,7 @@ public class MainActivity extends Activity
         // setting the navigation drawer list adapter
         adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
         mDrawerList.setAdapter(adapter);
-        
+        //testing
         // enabling the action bar app icon and making it behave as a toggle button
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
