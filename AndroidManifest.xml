@@ -17,17 +17,14 @@
             android:name="com.application.healthnow.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
-<<<<<<< HEAD
-=======
         <activity
-            android:name="com.application.healthnow.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:name="com.application.healthnow.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
->>>>>>> e8663224f5240b7a312f0c39d3305d19c38a7a10
     </application>
 </manifest>
