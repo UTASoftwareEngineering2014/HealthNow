@@ -60,15 +60,15 @@ public class MainActivity extends Activity {
 		// adding nav drawer items to array
 		// Home
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-		// Find People
+		// Diet
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-		// Photos
+		// Exercise
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
-		// Communities, Will add a counter here
+		// Medication, Will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
-		// Pages
+		// Vital Signs
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
-		// What's hot, We  will add a counter here
+		// Reports, We  will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
 		
 
