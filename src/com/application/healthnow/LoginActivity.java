@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -99,6 +100,7 @@ public class LoginActivity extends Activity {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
+		
 		if (mAuthTask != null) {
 			return;
 		}
@@ -130,7 +132,7 @@ public class LoginActivity extends Activity {
 			mEmailView.setError(getString(R.string.error_field_required));
 			focusView = mEmailView;
 			cancel = true;
-		} else if (!mEmail.contains("@")) {
+		} else if (mEmail.contains("@") == false) {
 			mEmailView.setError(getString(R.string.error_invalid_email));
 			focusView = mEmailView;
 			cancel = true;
@@ -155,6 +157,7 @@ public class LoginActivity extends Activity {
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showProgress(final boolean show) {
+		final Intent openMainActivtyIntent = new Intent(this, MainActivity.class);
 		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
 		// for very easy animations. If available, use these APIs to fade-in
 		// the progress spinner.
@@ -170,6 +173,7 @@ public class LoginActivity extends Activity {
 						public void onAnimationEnd(Animator animation) {
 							mLoginStatusView.setVisibility(show ? View.VISIBLE
 									: View.GONE);
+							//startActivity(openMainActivtyIntent);
 						}
 					});
 
@@ -181,6 +185,7 @@ public class LoginActivity extends Activity {
 						public void onAnimationEnd(Animator animation) {
 							mLoginFormView.setVisibility(show ? View.GONE
 									: View.VISIBLE);
+							startActivity(openMainActivtyIntent);
 						}
 					});
 		} else {
@@ -188,6 +193,7 @@ public class LoginActivity extends Activity {
 			// and hide the relevant UI components.
 			mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+			startActivity(openMainActivtyIntent);
 		}
 	}
 
