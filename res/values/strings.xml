@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">HealthNow</string>
     <string name="drawer_open">Choose An Option</string>
     <string name="drawer_close">HealthNow</string>
@@ -28,4 +30,26 @@
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="title_activity_main">HealthNow</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_diet_main">DietMainActivity</string>
+    <string name="string_weight">Weight(LB)</string>
+    <string name="string_search_recipes">Search Recipes</string>
+    <string name="diet_save">Save</string>
+    <string name="string_calorie_counter">0</string>
+    <string name="string_breakfast_counter">0</string>
+    <string name="string_lunch_counter">0</string>
+    <string name="string_dinner_counter">0</string>
+    <string name="string_dinner">Dinner</string>
+    <string name="string_calories">Calories</string>
+    <string name="string_breakfast">Breakfast</string>
+    <string name="string_lunch">Lunch</string>
+    <string name="string_BMI">BMI</string>
+    <string name="string_weight_counter">0</string>
+    <string name="string_height">Height(IN)</string>
+    <string name="string_BMI_counter">0</string>
+    <string name="string_height_counter">0</string>
+    <string name="string_saved_recipes">Saved Recipes</string>
+    <string name="description">Menu Prefs</string>
+    <string name="title_activity_view_recipe">View Recipe</string>
 </resources>

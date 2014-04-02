@@ -1,20 +1,227 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-     
-    <TextView
-        android:id="@+id/txtLabel"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_diet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="16dp"
-        android:text="Diet View"/>
-     
-    <ImageView android:layout_width="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="153dp" >
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_calorie_counter"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtLabel"
-        android:src="@drawable/ic_launcher"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_alignBaseline="@+id/tv_calories"
+        android:layout_alignBottom="@+id/tv_calories"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="58dp"
+        android:text="@string/string_calorie_counter"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/tv_dinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_lunch"
+        android:layout_below="@+id/tv_lunch"
+        android:layout_marginTop="20dp"
+        android:text="@string/string_dinner"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/et_breakfast"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_breakfast"
+        android:layout_alignBottom="@+id/tv_breakfast"
+        android:layout_toLeftOf="@+id/tv_calorie_counter"
+        android:ems="10"
+        android:inputType="number"
+        android:text="@string/string_breakfast_counter"
+        android:textColor="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/et_lunch"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_lunch"
+        android:layout_toLeftOf="@+id/tv_calorie_counter"
+        android:ems="10"
+        android:inputType="number"
+        android:text="@string/string_lunch_counter"
+        android:textColor="@android:color/background_dark" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/et_dinner"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_dinner"
+        android:layout_alignLeft="@+id/et_lunch"
+        android:ems="10"
+        android:inputType="number"
+        android:text="@string/string_dinner_counter"
+        android:textColor="@android:color/background_dark" />
+
+    <ImageButton
+        android:contentDescription="@string/description"
+        android:id="@+id/imgBtn_menu_preferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_Save"
+        android:layout_alignRight="@+id/tv_calories"
+        android:src="@android:drawable/ic_menu_preferences" />
+
+    <TextView
+        android:id="@+id/tv_calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/relativeLayout_diet"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/string_calories"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/tv_breakfast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_calories"
+        android:layout_below="@+id/tv_calorie_counter"
+        android:layout_marginTop="22dp"
+        android:text="@string/string_breakfast"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/tv_lunch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/relativeLayout_diet"
+        android:layout_below="@+id/et_breakfast"
+        android:layout_marginTop="14dp"
+        android:text="@string/string_lunch"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/tv_BMI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayout_diet"
+        android:layout_alignParentLeft="true"
+        android:text="@string/string_BMI"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark" />
+
+    <Button
+        android:id="@+id/btn_Save"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/tv_calorie_counter"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/et_weight"
+        android:text="@string/diet_save"
+        android:textColor="@android:color/background_dark"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btn_Search_Recipes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imgBtn_menu_preferences"
+        android:layout_below="@+id/imgBtn_menu_preferences"
+        android:layout_marginTop="18dp"
+        android:text="@string/string_search_recipes" />
+
+    <TextView
+        android:id="@+id/tv_Weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tv_breakfast"
+        android:layout_below="@+id/btn_Search_Recipes"
+        android:layout_marginTop="14dp"
+        android:text="@string/string_weight"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/et_weight"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_Weight"
+        android:layout_alignBottom="@+id/tv_Weight"
+        android:layout_toRightOf="@+id/tv_Weight"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="@string/string_weight_counter"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/tv_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/et_weight"
+        android:layout_alignBottom="@+id/et_weight"
+        android:layout_toLeftOf="@+id/tv_calorie_counter"
+        android:text="@string/string_height"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@id/tv_BMI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/et_weight"
+        android:layout_below="@+id/et_weight"
+        android:text="@string/string_BMI"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_BMI_Counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_weight"
+        android:layout_below="@+id/tv_weight"
+        android:text="@string/string_BMI_counter"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/background_dark"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/et_height"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_weight"
+        android:layout_alignBottom="@+id/tv_weight"
+        android:layout_alignLeft="@+id/tv_calorie_counter"
+        android:layout_marginLeft="17dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="@string/string_height_counter"
+        android:textColor="@android:color/background_dark" />
+
+    <Button
+        android:id="@+id/btn_Saved_Recipes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btn_Search_Recipes"
+        android:layout_alignBottom="@+id/btn_Search_Recipes"
+        android:layout_alignParentRight="true"
+        android:text="@string/string_saved_recipes"
+        android:textSize="12sp" />
+
 </RelativeLayout>
