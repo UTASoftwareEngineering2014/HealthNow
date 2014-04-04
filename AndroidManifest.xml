@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <application
@@ -26,8 +26,14 @@
             android:name="com.application.healthnow.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
-             
+        </activity>
+        <activity
+            android:name="com.application.healthnow.diet.WebViewActivity"
+            android:label="@string/title_activity_next" >
+        </activity>
+        <activity
+            android:name="com.application.healthnow.diet.PreferencesActivity"
+            android:label="@string/title_activity_preference" >
         </activity>
     </application>
-
 </manifest>

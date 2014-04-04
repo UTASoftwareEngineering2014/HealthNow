@@ -52,4 +52,6 @@
     <string name="string_saved_recipes">Saved Recipes</string>
     <string name="description">Menu Prefs</string>
     <string name="title_activity_view_recipe">View Recipe</string>
+    <string name="title_activity_next">Diet</string>
+    <string name="title_activity_preference">Diet Preferences</string>
 </resources>
