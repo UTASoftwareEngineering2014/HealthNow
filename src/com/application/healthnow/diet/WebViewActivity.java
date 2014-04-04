@@ -54,7 +54,7 @@ public class WebViewActivity extends Activity {
 			}
 		});
 		
-		webView.loadUrl("http://allrecipes.com/");
+		webView.loadUrl("http://www.allrecipes.com/");
 		btnSaveRecipeWebView.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

@@ -21,8 +21,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.application.healthnow.diet.WebViewActivity;
 import com.application.healthnow.diet.PreferencesActivity;
+import com.application.healthnow.diet.WebViewActivity;
 import com.application.healthnow.diet.SavedRecipesActivity;
 
 public class DietFragment extends Fragment{
