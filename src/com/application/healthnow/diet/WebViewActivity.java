@@ -1,9 +1,6 @@
 package com.application.healthnow.diet;
 
 import com.application.healthnow.R;
-import com.application.healthnow.R.layout;
-import com.application.healthnow.R.menu;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,7 +14,6 @@ import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.webkit.WebViewFragment;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
