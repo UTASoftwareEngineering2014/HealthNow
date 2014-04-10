@@ -30,13 +30,21 @@ public class SavedRecipesActivity extends Activity {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		page = settings.getString("url", null);
 		if (page != null) {
-			StringTokenizer st = new StringTokenizer(page, "\n");
+			String[] pageUrlMapping = page.split("\n");
 			final ArrayList<String> names = new ArrayList<String>();
 			final ArrayList<String> url = new ArrayList<String>();
-			while (st.hasMoreElements()) {
-				names.add(st.nextElement().toString());
-				url.add(st.nextElement().toString());
+			for(int i=0;i<pageUrlMapping.length;i++)
+			{
+				if(i%2 == 0)
+				{
+					names.add(pageUrlMapping[i].toString());
+				}
+				else
+				{
+					url.add(pageUrlMapping[i].toString());
+				}
 			}
+			
 			final StableArrayAdapter adapter = new StableArrayAdapter(this,
 					android.R.layout.simple_list_item_1, names);
 			listview.setAdapter(adapter);
