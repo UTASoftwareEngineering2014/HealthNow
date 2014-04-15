@@ -20,7 +20,7 @@
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
         <item>@drawable/ic_home</item>
-        <item>@drawable/ic_communities</item>
+        <item>@drawable/ic_diet</item>
         <item>@drawable/ic_communities</item>
         <item>@drawable/ic_communities</item>
         <item>@drawable/ic_communities</item>
@@ -31,11 +31,10 @@
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="title_activity_main">HealthNow</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_diet_main">DietMainActivity</string>
     <string name="string_weight">Weight(LB)</string>
     <string name="string_search_recipes">Search Recipes</string>
-    <string name="diet_save">Save</string>
+    <string name="diet_save">Save Calories</string>
     <string name="string_calorie_counter">0</string>
     <string name="string_breakfast_counter">0</string>
     <string name="string_lunch_counter">0</string>
@@ -54,4 +53,10 @@
     <string name="title_activity_view_recipe">View Recipe</string>
     <string name="title_activity_next">Diet</string>
     <string name="title_activity_preference">Diet Preferences</string>
+    <string name="title_activity_mail_sender">MailSenderActivity</string>
+    <string name="title_activity_saved_recipes">Saved Recipes</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_alarm">AlarmActivity</string>
+
 </resources>
