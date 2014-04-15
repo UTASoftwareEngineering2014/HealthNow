@@ -3,7 +3,6 @@ package com.application.healthnow.diet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -33,6 +32,7 @@ public class SavedRecipesActivity extends Activity {
 			String[] pageUrlMapping = page.split("\n");
 			final ArrayList<String> names = new ArrayList<String>();
 			final ArrayList<String> url = new ArrayList<String>();
+			
 			for(int i=0;i<pageUrlMapping.length;i++)
 			{
 				if(i%2 == 0)
