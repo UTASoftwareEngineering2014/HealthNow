@@ -57,7 +57,7 @@ public class LoginActivity extends Activity {
 
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
-		mEmailView = (EditText) findViewById(R.id.email);
+		mEmailView = (EditText) findViewById(R.id.et_recipientEmail);
 		mEmailView.setText(mEmail);
 
 		mPasswordView = (EditText) findViewById(R.id.password);

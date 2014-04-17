@@ -76,7 +76,7 @@
         android:id="@+id/imgBtn_menu_preferences"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btn_Save"
+        android:layout_alignBottom="@+id/btn_SaveCalories"
         android:layout_alignRight="@+id/tv_calories"
         android:src="@android:drawable/ic_menu_preferences" />
 
@@ -124,7 +124,7 @@
         android:textColor="@android:color/background_dark" />
 
     <Button
-        android:id="@+id/btn_Save"
+        android:id="@+id/btn_SaveCalories"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignRight="@+id/tv_calorie_counter"

@@ -21,7 +21,6 @@ import android.widget.Toast;
 public class WebViewActivity extends Activity {
 
 	String page=null;
-	private EditText result;
 	final Context context = this;
 	public static final String PREFS_NAME = "MyPrefsFile";
 	

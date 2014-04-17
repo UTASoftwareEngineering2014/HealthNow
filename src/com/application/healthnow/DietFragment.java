@@ -30,7 +30,6 @@ public class DietFragment extends Fragment{
 	
 	private EditText editText;
 	private TextView textView;
-	private String page = null;
 	int storedDay;
 	int breakfast, lunch, dinner;
 	private static final String PREFS_NAME = "MyPrefsFile";
@@ -47,6 +46,7 @@ public class DietFragment extends Fragment{
 		final View rootView = inflater.inflate(R.layout.fragment_diet, container, false);
 		Button btnSearchRecipe = (Button) rootView.findViewById(R.id.btn_Search_Recipes);
 		Button btnSavedRecipe = (Button) rootView.findViewById(R.id.btn_Saved_Recipes);
+		Button btnSaveCalorie = (Button) rootView.findViewById(R.id.btn_SaveCalories);
 		ImageButton imgBtnSetPreferences = (ImageButton) rootView.findViewById(R.id.imgBtn_menu_preferences);
 		checkDay();
 		editText = (EditText)rootView.findViewById(R.id.et_breakfast);
@@ -58,7 +58,7 @@ public class DietFragment extends Fragment{
 		textView = (TextView) rootView.findViewById(R.id.tv_calorie_counter);
 		textView.setText(Integer.toString(breakfast + lunch + dinner));
 		
-		btnSearchRecipe.setOnClickListener(new View.OnClickListener()
+		btnSaveCalorie.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View arg0)
@@ -186,7 +186,7 @@ public class DietFragment extends Fragment{
 	{
 		super.onResume();
 		SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
-		page = settings.getString("url", null);
+		settings.getString("url", null);
 		checkDay();
 		//editText = (EditText) 
 	}
