@@ -1,16 +1,9 @@
 package com.application.healthnow;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.XMLReader;
-
 import android.app.Fragment;
-import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +11,7 @@ import android.view.ViewGroup;
 
 public class HomeFragment extends Fragment{
 	
+	@SuppressWarnings("unused")
 	private List<String> item = new ArrayList<String>();
 	public HomeFragment() { }
 	

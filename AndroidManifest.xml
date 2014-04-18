@@ -25,9 +25,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.application.healthnow.MailSenderActivity"
+            android:name="com.application.healthnow.communication.MailSenderActivity"
             android:label="@string/title_activity_mail_sender"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+            
         </activity>
         <activity
             android:name="com.application.healthnow.LoginActivity"
@@ -51,5 +52,4 @@
             android:label="@string/title_activity_view_recipe" >
         </activity>
     </application>
-
 </manifest>

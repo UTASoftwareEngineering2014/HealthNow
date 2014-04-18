@@ -1,7 +1,9 @@
-package com.appplication.healthnow.communication;
+package com.application.healthnow.communication;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -17,6 +19,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,10 +61,11 @@ public class MailSenderActivity extends Activity {
 	private void sendMail(String email, String subject, String messageBody) throws AddressException  {
 		Session session = createSessionObject();
 		
-		Message message = null;
 		try {
-			message = createMessage(email, subject, messageBody, session);
+			Message message = createMessage(email, subject, messageBody, session);
+			Log.e("SendMail", "Before the Send Mail Task");
 			new SendMailTask().execute(message);
+			Log.e("SendMail", "After the Send Mail Task");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,16 +79,27 @@ public class MailSenderActivity extends Activity {
 	private Message createMessage(String email, String subject,
 			String messageBody, Session session) throws UnsupportedEncodingException, MessagingException{
 		Message message = new MimeMessage(session);
-		message.setFrom(new InternetAddress("UTASoftwareEngineering2014@gmail.com", "Team 3"));
+		message.setFrom(new InternetAddress("vd31192@gmail.com", "Team 3"));
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress(email, email));
 		message.setSubject(subject);
 		message.setText(messageBody);
-		return null;
+		return message;
 	}
 
 	private Session createSessionObject() {
-		// TODO Auto-generated method stub
-		return null;
+		Properties properties = new Properties();
+		properties.put("mail.smtp.auth", true);
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        
+        Session authenticatedSession = Session.getDefaultInstance(properties, new Authenticator() {
+        	protected PasswordAuthentication getPasswordAuthentication() {
+        		return new PasswordAuthentication(username, password);
+        	}
+        });
+        
+		return authenticatedSession;
 	}
 	
 	private class SendMailTask extends AsyncTask<Message, Void, Void> {
@@ -107,7 +122,9 @@ public class MailSenderActivity extends Activity {
 		protected Void doInBackground(Message... messages) {
 			try
 			{
+				Log.e("Transport message", "Beginning Transport");
 				Transport.send(messages[0]);
+				Log.e("Transport message", "Ending Transport");
 			}
 			catch(MessagingException e)
 			{
@@ -116,9 +133,7 @@ public class MailSenderActivity extends Activity {
 			
 			return null;
 		}
-
 	}
-
 }
 
 

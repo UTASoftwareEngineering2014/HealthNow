@@ -16,7 +16,7 @@
             android:id="@+id/et_recipient_email"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:hint="Recipient E-mail"/>
+            android:hint="@string/recipientEmail"/>
 	 
 	 <EditText
             android:layout_width="fill_parent"
