@@ -15,7 +15,7 @@ public class PreferencesActivity extends PreferenceActivity{
 		//addPreferencesFromResource(R.xml.pref);
 	}
 	
-	public class DietPreferenceFragment extends PreferenceFragment
+	public static class DietPreferenceFragment extends PreferenceFragment
 	{
 		@Override
 		public void onCreate(final Bundle savedInstanceState)

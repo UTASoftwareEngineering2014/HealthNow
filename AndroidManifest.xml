@@ -29,6 +29,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.application.healthnow.communication.MailSenderActivity"
+            android:label="@string/title_activity_mail_sender"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            
+        </activity>
+        <activity
             android:name="com.application.healthnow.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
@@ -103,6 +109,7 @@
         
         
     </application>
+<<<<<<< HEAD
     
 
     
@@ -110,3 +117,6 @@
 
 </manifest>
 
+=======
+</manifest>
+>>>>>>> cfd1a822fea6e79240903275800a6091a2492b8d
