@@ -47,6 +47,7 @@ public class DietFragment extends Fragment{
 		final View rootView = inflater.inflate(R.layout.fragment_diet, container, false);
 		Button btnSearchRecipe = (Button) rootView.findViewById(R.id.btn_Search_Recipes);
 		Button btnSavedRecipe = (Button) rootView.findViewById(R.id.btn_Saved_Recipes);
+		Button btnSaveCalories=(Button)rootView.findViewById(R.id.btn_Save);
 		ImageButton imgBtnSetPreferences = (ImageButton) rootView.findViewById(R.id.imgBtn_menu_preferences);
 		checkDay();
 		editText = (EditText)rootView.findViewById(R.id.et_breakfast);
@@ -58,7 +59,7 @@ public class DietFragment extends Fragment{
 		textView = (TextView) rootView.findViewById(R.id.tv_calorie_counter);
 		textView.setText(Integer.toString(breakfast + lunch + dinner));
 		
-		btnSearchRecipe.setOnClickListener(new View.OnClickListener()
+		btnSaveCalories.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View arg0)
@@ -149,7 +150,7 @@ public class DietFragment extends Fragment{
 				{
 					TextView textView = (TextView) rootView.findViewById(R.id.tv_BMI_Counter);
 					double BMI = (weight/(height*height))*703;
-					textView.setText(Double.toString(BMI));
+					textView.setText(String.format("%.3f",BMI));
 				}
 			}
 		});
@@ -166,7 +167,7 @@ public class DietFragment extends Fragment{
 				{
 					TextView textView = (TextView) rootView.findViewById(R.id.tv_BMI_Counter);
 					double BMI = (weight/(height*height))*703;
-					textView.setText(Double.toString(BMI));
+					textView.setText(String.format("%.3f",BMI));
 				}
 			}
 		});

@@ -1,4 +1,4 @@
-package com.application.healthnow.diet;
+package com.application.healthnow.exercise;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,17 +18,19 @@ import android.widget.ListView;
 
 import com.application.healthnow.R;
 
-public class SavedRecipesActivity extends Activity {
+public class Saved_Exercise extends Activity {
 	public static final String PREFS_NAME = "MyPrefsFile";
 	String page = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
+		setTitle("Saved Exercises");
 		setContentView(R.layout.activity_saved_recipes);
 		final ListView listview = (ListView) findViewById(R.id.lv_SavedRecipes);
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		page = settings.getString("url", null);
+		page = settings.getString("urlsaveExercise", null);
 		if (page != null) {
 			String[] pageUrlMapping = page.split("\n");
 			final ArrayList<String> names = new ArrayList<String>();
@@ -64,10 +66,10 @@ public class SavedRecipesActivity extends Activity {
 					 * 
 					 * });
 					 */
-					Intent viewRecipeIntent = new Intent(SavedRecipesActivity.this, ViewRecipeActivity.class);
-					viewRecipeIntent.putExtra("open", url.get(position));
-					viewRecipeIntent.putExtra("name", names.get(position));
-					startActivity(viewRecipeIntent);
+					Intent viewExerciseIntent = new Intent(Saved_Exercise.this, View_Exercise.class);
+					viewExerciseIntent.putExtra("open", url.get(position));
+					viewExerciseIntent.putExtra("name", names.get(position));
+					startActivity(viewExerciseIntent);
 
 				}
 
@@ -109,3 +111,4 @@ class StableArrayAdapter extends ArrayAdapter<String> {
 		return true;
 	}
 }
+

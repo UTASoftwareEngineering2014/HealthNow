@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+    android:title="Running"
+    android:titleCondensed="Running"
+    android:visible="true"
+    android:id="@+id/Running"
+     />
+<item
+    android:title="Cycling"
+    android:titleCondensed="Cycling"
+    android:visible="true"
+    android:id="@+id/Cycling"
+    />
+
+</menu>
