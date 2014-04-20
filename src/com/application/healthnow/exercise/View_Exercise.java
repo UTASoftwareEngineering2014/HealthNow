@@ -1,4 +1,4 @@
-package com.application.healthnow.diet;
+package com.application.healthnow.exercise;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 import com.application.healthnow.R;
 
-public class ViewRecipeActivity extends Activity{
+public class View_Exercise extends Activity
+{
 	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -51,3 +52,4 @@ public class ViewRecipeActivity extends Activity{
 		return true;
 	}
 }
+

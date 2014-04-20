@@ -2,19 +2,97 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-     
-    <TextView
-        android:id="@+id/txtLabel"
+
+    <Button
+        android:id="@+id/btn_calculateCalories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="16sp"
-        android:text="Exercise View"/>
-     
-    <ImageView android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="32dp"
+        android:text="Calculate Calories" />
+
+    <Button
+        android:id="@+id/btn_searchExercise"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtLabel"
-        android:src="@drawable/ic_launcher"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_alignLeft="@+id/btn_calculateCalories"
+        android:layout_alignRight="@+id/btn_calculateCalories"
+        android:layout_below="@+id/btn_calculateCalories"
+        android:layout_marginTop="23dp"
+        android:text="Search Exercise" />
+
+    <Button
+        android:id="@+id/btn_savedexercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_searchExercise"
+        android:layout_alignRight="@+id/btn_searchExercise"
+        android:layout_below="@+id/btn_searchExercise"
+        android:layout_marginTop="30dp"
+        android:text="Saved Exercises" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/cm_exerciseTimer"
+        android:layout_alignBottom="@+id/cm_exerciseTimer"
+        android:layout_alignParentLeft="true"
+        android:ems="10"
+        android:text="Timer" 
+        android:clickable="false" 
+        android:cursorVisible="false" 
+        android:focusable="false" 
+        android:focusableInTouchMode="false"/>
+
+    <ToggleButton
+        android:id="@+id/togbtn_timerToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText1"
+        android:layout_alignBottom="@+id/editText1"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/editText1"
+        android:text="ToggleButton" />
+
+    <Chronometer
+        android:id="@+id/cm_exerciseTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btn_savedexercise"
+        android:layout_below="@+id/btn_savedexercise"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="36dp"
+        android:text="Chronometer" />
+
+    <Button
+        android:id="@+id/btn_resetTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/cm_exerciseTimer"
+        android:layout_alignBottom="@+id/cm_exerciseTimer"
+        android:layout_toRightOf="@+id/cm_exerciseTimer"
+        android:text="Reset" />
+
+    <Button
+        android:id="@+id/btn_startPedometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_savedexercise"
+        android:layout_below="@+id/editText1"
+        android:layout_marginTop="22dp"
+        android:text="Start Pedometer" />
+
+    <Button
+        android:id="@+id/btn_heartRateMonitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btn_startPedometer"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="14dp"
+        android:text="Start HeartRate Monitor" />
+
 </RelativeLayout>
