@@ -21,7 +21,7 @@
     <array name="nav_drawer_icons">
         <item>@drawable/ic_home</item>
         <item>@drawable/ic_diet</item>
-        <item>@drawable/ic_communities</item>
+        <item>@drawable/ic_exercise</item>
         <item>@drawable/ic_communities</item>
         <item>@drawable/ic_communities</item>
         <item>@drawable/ic_communities</item>
