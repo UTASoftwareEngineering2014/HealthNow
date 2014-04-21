@@ -6,10 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.androidplot.xy.*;
+import com.application.healthnow.reporting.ReportingActivity;
+import com.application.healthnow.reporting.ReportsModel;
 
 import java.util.Arrays;
 import java.util.SimpleTimeZone;
@@ -21,43 +28,30 @@ public class ReportsFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-		
 		View rootView = inflater.inflate(R.layout.fragment_reports, container, false);
 		
-		plot = (XYPlot) rootView.findViewById(R.id.mySimpleXYPlot);
+		ListView reportListView = (ListView) rootView.findViewById(R.id.lv_reportList);
 		
-		Number[] series1Numbers = {1,8,5,2,7,4};
-		Number[] series2Numbers = {4,6,3,8,2,10};
+		ReportsModel[] reports = {
+				new ReportsModel(1, "Diet Report"),
+				new ReportsModel(2, "Exercise Report"),
+				new ReportsModel(3, "Medication Report"),
+				new ReportsModel(4, "Vital Signs Report"),
+		};
 		
-		XYSeries series1 = new SimpleXYSeries(Arrays.asList(series1Numbers),
-												SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
-												"Series1");
+		ArrayAdapter<ReportsModel> reportsAdapter = new ArrayAdapter<ReportsModel>(getActivity(), android.R.layout.simple_list_item_1, reports);
 		
-		XYSeries series2 = new SimpleXYSeries(Arrays.asList(series2Numbers),
-				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
-				"Series2");
+		reportListView.setAdapter(reportsAdapter);
 		
-		// Create a formatter to use for drawing a series using LineAndPointRenderer
-        // and configure it from xml:
-        LineAndPointFormatter series1Format = new LineAndPointFormatter();
-        series1Format.setPointLabelFormatter(new PointLabelFormatter());
-        series1Format.configure(getActivity(),
-                R.xml.line_point_formatter_with_plf1);
- 
-        // add a new series' to the xyplot:
-        plot.addSeries(series1, series1Format);
- 
-        // same as above:
-        LineAndPointFormatter series2Format = new LineAndPointFormatter();
-        series2Format.setPointLabelFormatter(new PointLabelFormatter());
-        series2Format.configure(getActivity(),
-                R.xml.line_point_formatter_with_plf2);
-        plot.addSeries(series2, series2Format);
- 
-        // reduce the number of range labels
-        plot.setTicksPerRangeLabel(3);
-        plot.getGraphWidget().setDomainLabelOrientation(-45);	
+		reportListView.setOnItemClickListener(new OnItemClickListener() 
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				Intent reportIntent = new Intent(getActivity(), ReportingActivity.class);
+				startActivity(reportIntent);
+			}
+		});
 		
 		return rootView;
 	}

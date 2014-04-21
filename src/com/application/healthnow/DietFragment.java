@@ -46,11 +46,7 @@ public class DietFragment extends Fragment{
 		final View rootView = inflater.inflate(R.layout.fragment_diet, container, false);
 		Button btnSearchRecipe = (Button) rootView.findViewById(R.id.btn_Search_Recipes);
 		Button btnSavedRecipe = (Button) rootView.findViewById(R.id.btn_Saved_Recipes);
-<<<<<<< HEAD
-		Button btnSaveCalories=(Button)rootView.findViewById(R.id.btn_Save);
-=======
-		Button btnSaveCalorie = (Button) rootView.findViewById(R.id.btn_SaveCalories);
->>>>>>> cfd1a822fea6e79240903275800a6091a2492b8d
+		Button btnSaveCalories=(Button)rootView.findViewById(R.id.btn_SaveCalories);
 		ImageButton imgBtnSetPreferences = (ImageButton) rootView.findViewById(R.id.imgBtn_menu_preferences);
 		checkDay();
 		editText = (EditText)rootView.findViewById(R.id.et_breakfast);
@@ -62,11 +58,8 @@ public class DietFragment extends Fragment{
 		textView = (TextView) rootView.findViewById(R.id.tv_calorie_counter);
 		textView.setText(Integer.toString(breakfast + lunch + dinner));
 		
-<<<<<<< HEAD
+
 		btnSaveCalories.setOnClickListener(new View.OnClickListener()
-=======
-		btnSaveCalorie.setOnClickListener(new View.OnClickListener()
->>>>>>> cfd1a822fea6e79240903275800a6091a2492b8d
 		{
 			@Override
 			public void onClick(View arg0)
