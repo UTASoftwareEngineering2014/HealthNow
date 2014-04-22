@@ -1,6 +1,7 @@
 package com.application.healthnow.reporting;
 
 import java.util.Observable;
+import java.util.Observer;
 
 public class MedicationDataSource implements Runnable {
 
@@ -20,15 +21,21 @@ public class MedicationDataSource implements Runnable {
     private static final int SAMPLE_SIZE = 30;
     private int phase = 0;
     private int sinAmp = 20;
+    private boolean keepRunning = false;
     private DataSourceObserver notifier;
     {
     	notifier = new DataSourceObserver();
+    }
+    
+    public void stopThread() {
+    	keepRunning = false;
     }
     
     
 	@Override
 	public void run() {
 		try {
+			keepRunning = true;
 			boolean isRising = true;
 			while(true) {
 				Thread.sleep(50);
@@ -82,4 +89,12 @@ public class MedicationDataSource implements Runnable {
 				
 		}
 	}		
+	
+	public void addObserver(Observer observer) {
+		notifier.addObserver(observer);
+	}
+	
+	public void removeObserver(Observer observer) {
+		notifier.deleteObserver(observer);
+	}
 }

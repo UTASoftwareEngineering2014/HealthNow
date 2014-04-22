@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.androidplot.xy.*;
 import com.application.healthnow.reporting.DietReportActivity;
+import com.application.healthnow.reporting.MedicationReportActivity;
 import com.application.healthnow.reporting.ReportsModel;
 
 import java.util.Arrays;
