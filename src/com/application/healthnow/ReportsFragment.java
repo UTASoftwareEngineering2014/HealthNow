@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.androidplot.xy.*;
-import com.application.healthnow.reporting.ReportingActivity;
+import com.application.healthnow.reporting.DietReportActivity;
 import com.application.healthnow.reporting.ReportsModel;
 
 import java.util.Arrays;
@@ -48,7 +48,7 @@ public class ReportsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
-				Intent reportIntent = new Intent(getActivity(), ReportingActivity.class);
+				Intent reportIntent = new Intent(getActivity(), DietReportActivity.class);
 				startActivity(reportIntent);
 			}
 		});

@@ -154,4 +154,7 @@
     <string name="title_activity_alarm">AlarmActivity</string>
     <string name="recipientEmail">Recipient Email</string>
     <string name="title_reporting_activity">Report</string>
+    <string name="title_activity_medication_report">MedicationReportActivity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>

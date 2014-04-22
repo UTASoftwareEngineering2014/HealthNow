@@ -10,9 +10,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.flash"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.flash" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +26,7 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -54,7 +57,7 @@
             android:label="@string/title_activity_view_recipe" >
         </activity>
         <activity
-            android:name="com.application.healthnow.reporting.ReportingActivity"
+            android:name="com.application.healthnow.reporting.DietReportActivity"
             android:label="@string/title_reporting_activity" >
         </activity>
         <activity
@@ -68,31 +71,43 @@
         <activity
             android:name="com.application.healthnow.exercise.View_Exercise"
             android:label="@string/title_activity_search_exercise" >
-        </activity>       
-   <activity android:name="name.bagi.levente.pedometer.Pedometer"
-                  android:label="@string/app_name"
-                  android:configChanges="orientation">
+        </activity>
+        <activity
+            android:name="name.bagi.levente.pedometer.Pedometer"
+            android:configChanges="orientation"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="name.bagi.levente.pedometer.Settings"
-                android:label="@string/activity_settings">
+        <activity
+            android:name="name.bagi.levente.pedometer.Settings"
+            android:label="@string/activity_settings" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <service android:name="name.bagi.levente.pedometer.StepService"/>
-                <activity android:name="com.application.healthnow.heartratemonitor.HeartRateMonitor"
-                  android:configChanges="keyboardHidden|orientation"
-                  android:screenOrientation="portrait">
+        <service android:name="name.bagi.levente.pedometer.StepService" />
+
+        <activity
+            android:name="com.application.healthnow.heartratemonitor.HeartRateMonitor"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.application.healthnow.reporting.MedicationReportActivity"
+            android:label="@string/title_activity_medication_report" >
+        </activity>
     </application>
+
 </manifest>
