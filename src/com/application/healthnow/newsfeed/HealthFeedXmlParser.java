@@ -36,7 +36,7 @@ public class HealthFeedXmlParser {
 				continue;
 			}
 			String name = parser.getName();
-			// Starts by looking for the entry tag
+			// Starts by looking for the item tag
 			if (name.equals("item")) {
 				entries.add(readEntry(parser));
 			} else {
@@ -73,8 +73,8 @@ public class HealthFeedXmlParser {
             String name = parser.getName();
             if (name.equals("title")) {
                 title = readTitle(parser);
-            } else if (name.equals("summary")) {
-                summary = readSummary(parser);
+            } else if (name.equals("description")) {
+                summary = readDescription(parser);
             } else if (name.equals("link")) {
                 link = readLink(parser);
             } else {
@@ -104,7 +104,7 @@ public class HealthFeedXmlParser {
         }
     }
 
- // Processes link tags in the feed.
+    // Processes link tags in the feed.
     private String readLink(XmlPullParser parser) throws IOException, XmlPullParserException {
         String link = "";
         parser.require(XmlPullParser.START_TAG, namespace, "link");
@@ -120,8 +120,8 @@ public class HealthFeedXmlParser {
         return link;
     }
 
- // Processes summary tags in the feed.
-    private String readSummary(XmlPullParser parser) throws IOException, XmlPullParserException {
+    // Processes summary tags in the feed.
+    private String readDescription(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, namespace, "description");
         String summary = readText(parser);
         parser.require(XmlPullParser.END_TAG, namespace, "description");
@@ -136,7 +136,7 @@ public class HealthFeedXmlParser {
         return title;
     }
 
- // For the tags title and summary, extracts their text values.
+    // For the tags title and summary, extracts their text values.
     private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
         String result = "";
         if (parser.next() == XmlPullParser.TEXT) {
