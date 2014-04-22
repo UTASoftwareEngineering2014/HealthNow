@@ -1,4 +1,14 @@
 <resources>
+    <!-- Used for the feed -->
+    <string-array name="listArray">
+        <item>Only when on Wi-Fi</item>
+        <item>On any network</item>
+    </string-array>
+    <string-array name="listValues">
+        <item>Wi-Fi</item>
+        <item>Any</item>
+    </string-array>
+    
     <string-array name="sensitivity_preference">
         <item>@string/extra_high</item>
         <item>@string/very_high</item>

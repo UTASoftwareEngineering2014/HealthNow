@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <!--  Menu items -->
+    <string name="refresh">Refresh</string>
+
+    <!--  NetworkActivity -->
+    <string name="page_title">HealthNow News Feed</string>
+    <string name="updated">Last updated:</string>
+    <string name="lost_connection">Lost connection.</string>
+    <string name="wifi_connected">Wi-Fi reconnected.</string>
+    <string name="connection_error">Unable to load content. Check your network connection.</string>
+    <string name="xml_error">Error parsing XML.</string>
 
     <string name="app_name">HealthNow</string>
     <string name="drawer_open">Choose An Option</string>
