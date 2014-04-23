@@ -8,6 +8,7 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.util.Log;
 import android.util.Xml;
 
 public class HealthFeedXmlParser {
@@ -20,7 +21,8 @@ public class HealthFeedXmlParser {
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			parser.setInput(in, null);
 			parser.nextTag();
-			return readFeed(parser);
+			List<Entry> xmlEntries = readFeed(parser);
+			return xmlEntries;
 		} finally {
 			in.close();
 		}
@@ -29,15 +31,17 @@ public class HealthFeedXmlParser {
 	private List<Entry> readFeed(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		List<Entry> entries = new ArrayList<Entry>();
-		parser.require(XmlPullParser.START_TAG, namespace, "feed");
+		parser.require(XmlPullParser.START_TAG, namespace, "rss");
 
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
+			Log.d("readFeed()", "Before name");
 			String name = parser.getName();
+			Log.d("readFeed()", "After name" + " " + "name: "+ name.toString());;
 			// Starts by looking for the item tag
-			if (name.equals("item")) {
+			if (name.equals("channel")) {
 				entries.add(readEntry(parser));
 			} else {
 				skip(parser);
@@ -62,15 +66,18 @@ public class HealthFeedXmlParser {
     // off
     // to their respective &quot;read&quot; methods for processing. Otherwise, skips the tag.
     private Entry readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
-        parser.require(XmlPullParser.START_TAG, namespace, "entry");
+        parser.require(XmlPullParser.START_TAG, namespace, "item");
         String title = null;
         String summary = null;
         String link = null;
+        
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
+            Log.d("readEntry()", "Before name.");
             String name = parser.getName();
+            Log.d("readEntry()", "Before name." + " " + name.toString());
             if (name.equals("title")) {
                 title = readTitle(parser);
             } else if (name.equals("description")) {
@@ -88,16 +95,20 @@ public class HealthFeedXmlParser {
     // if the next tag after a START_TAG isn't a matching END_TAG, it keeps going until it
     // finds the matching END_TAG (as indicated by the value of "depth" being 0).
     private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
+    	Log.d("skip tag", "Parser skip begin");
         if (parser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();
         }
         int depth = 1;
         while (depth != 0) {
+        	Log.d("skip tag", "Parser" + " " + parser.next());
             switch (parser.next()) {
             case XmlPullParser.END_TAG:
+            	Log.d("skip()", "END_TAG" + " " + XmlPullParser.END_TAG);
                     depth--;
                     break;
             case XmlPullParser.START_TAG:
+            	Log.d("skip()", "START_TAG" + " " + XmlPullParser.START_TAG);
                     depth++;
                     break;
             }
