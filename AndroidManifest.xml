@@ -32,7 +32,7 @@
 	        </activity>
         <activity
             android:name="com.application.healthnow.communication.MailSenderActivity"
-            android:label="@string/title_activity_mail_sender"
+            android:label="Mail Sender"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
@@ -50,12 +50,12 @@
         </activity>
         <activity
             android:name="com.application.healthnow.newsfeed.NetworkActivity"
-            android:label="@string/title_activity_saved_recipes" >
+            android:label="NetworkActivity" >
             
         </activity>
         <activity
             android:name="com.application.healthnow.diet.SavedRecipesActivity"
-            android:label="@string/title_activity_saved_recipes" >
+            android:label="SavedRecipes" >
         </activity>
         <activity
             android:name="com.application.healthnow.diet.ViewRecipeActivity"
@@ -92,6 +92,7 @@
             </intent-filter>
         </activity>
 
+ 
         <service android:name="name.bagi.levente.pedometer.StepService" />
 
         <activity
@@ -104,5 +105,5 @@
             android:label="@string/title_activity_medication_report" >
         </activity>
     </application>
-
 </manifest>
+

@@ -57,7 +57,7 @@ public class Search_Exercise extends Activity
 			@Override
 			public void onClick(View v) {
 				LayoutInflater layoutInflater = LayoutInflater.from(context);
-				View promptsView = layoutInflater.inflate(R.layout.recipe_save_prompt, null);
+				View promptsView = layoutInflater.inflate(R.layout.exercise_save_prompt, null);
 				
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 				alertDialogBuilder.setView(promptsView);

@@ -3,6 +3,8 @@ package com.application.healthnow;
 import java.util.ArrayList;
 import java.util.List;
 
+import name.bagi.levente.pedometer.Pedometer;
+
 //import name.bagi.levente.pedometer.Pedometer;
 
 import com.application.healthnow.diet.SavedRecipesActivity;
@@ -162,23 +164,20 @@ public class ExerciseFragment extends Fragment {
 			}
 				break;
 
-			case R.id.btn_startPedometer: {
+			case R.id.btn_startPedometer:
+			{
 				Log.d(tag, "inpedom");
-				// Intent startPedometer =
-				// getActivity().getPackageManager().getLaunchIntentForPackage("name.bagi.levente.pedometer");
-				// Intent startPedometer = new Intent(Intent.ACTION_MAIN);
-				// startPedometer.setComponent(new
-				// ComponentName("name.bagi.levente.pedometer","name.bagi.levente.pedometer.Pedometer"));
+				//Intent startPedometer = getActivity().getPackageManager().getLaunchIntentForPackage("name.bagi.levente.pedometer");
+				//Intent startPedometer = new Intent(Intent.ACTION_MAIN);
+				//startPedometer.setComponent(new ComponentName("name.bagi.levente.pedometer","name.bagi.levente.pedometer.Pedometer"));
 				Context context = getActivity().getApplicationContext();
-				CharSequence text = "Please Calibrate Settings Before Use";
-				int duration = Toast.LENGTH_LONG;
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.show();
-				// Intent startPedometer=new
-				// Intent(getActivity(),Pedometer.class);
-				// startActivity(startPedometer);
-			}
-				break;
+   			  	CharSequence text = "Please Calibrate Settings Before Use";
+   			  	int duration = Toast.LENGTH_LONG;
+   			  	Toast toast = Toast.makeText(context, text, duration);
+   			  	toast.show();
+				Intent startPedometer=new Intent(getActivity(),Pedometer.class);
+				startActivity(startPedometer);
+			}break;
 
 			case R.id.btn_heartRateMonitor: {
 

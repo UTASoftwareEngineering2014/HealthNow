@@ -70,7 +70,6 @@
     <string name="title_activity_view_recipe">View Recipe</string>
     <string name="title_activity_next">Diet</string>
     <string name="title_activity_preference">Diet Preferences</string>
-    <string name="title_activity_saved_recipes">Saved Recipes</string>
     <string name="title_activity_search_exercise">searchExercise</string>
     <string name="miles">miles</string>
     <string name="steps_per_minute">steps / minute</string>
@@ -159,13 +158,8 @@
     <string name="kilometers">kilometers</string>
     <string name="started">Pedometer started.</string>
     <string name="stopped">Pedometer stopped.</string>
-    <string name="notification_subtitle">Counting your steps</string>
-    <string name="title_activity_mail_sender">MailSenderActivity</string>
-    <string name="title_activity_test">TestActivity</string>
-    <string name="title_activity_alarm">AlarmActivity</string>
-    <string name="recipientEmail">Recipient Email</string>
     <string name="title_reporting_activity">Report</string>
     <string name="title_activity_medication_report">MedicationReportActivity</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="recipientEmail">Recipient Email</string>
 </resources>
