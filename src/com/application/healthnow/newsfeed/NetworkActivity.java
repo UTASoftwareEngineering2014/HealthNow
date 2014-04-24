@@ -106,7 +106,7 @@ public class NetworkActivity extends Activity {
     }
 
     
- // Populates the activity's options menu.
+//  Populates the activity's options menu.
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        MenuInflater inflater = getMenuInflater();
@@ -156,7 +156,7 @@ public class NetworkActivity extends Activity {
     }
     
  // Implementation of AsyncTask used to download XML feed from stackoverflow.com.
-    private class DownloadXmlTask extends AsyncTask<String, Void, String> {
+    public class DownloadXmlTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {

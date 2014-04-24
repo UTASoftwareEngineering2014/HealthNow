@@ -37,11 +37,17 @@ public class MainActivity extends Activity {
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
+	private Fragment mContent = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		if(savedInstanceState != null) {
+			// Restoring the instance of the fragment
+			 mContent = getFragmentManager().getFragment(savedInstanceState, "mContent");
+		}
 
 		mTitle = mDrawerTitle = getTitle();
 
@@ -109,6 +115,13 @@ public class MainActivity extends Activity {
 			// on first time display view for first nav item
 			displayView(0);
 		}
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		
+		getFragmentManager().putFragment(outState, "mContent", mContent);
 	}
 
 	/**

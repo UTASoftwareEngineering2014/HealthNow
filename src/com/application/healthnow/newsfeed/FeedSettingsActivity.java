@@ -16,7 +16,8 @@ public class FeedSettingsActivity extends PreferenceActivity
         implements
             OnSharedPreferenceChangeListener {
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -48,6 +49,6 @@ public class FeedSettingsActivity extends PreferenceActivity
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         // Sets refreshDisplay to true so that when the user returns to the main
         // activity, the display refreshes to reflect the new settings.
-       // NetworkActivity.refreshDisplay = true;
+       NetworkActivity.refreshDisplay = true;
     }
 }

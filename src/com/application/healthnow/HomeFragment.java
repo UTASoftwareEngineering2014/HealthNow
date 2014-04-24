@@ -1,302 +1,158 @@
 package com.application.healthnow;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import org.xmlpull.v1.XmlPullParserException;
-
-import com.application.healthnow.newsfeed.HealthFeedXmlParser;
-import com.application.healthnow.newsfeed.SettingsActivity;
-import com.application.healthnow.newsfeed.HealthFeedXmlParser.Entry;
-import com.application.healthnow.newsfeed.NetworkActivity.NetworkReceiver;
-
+import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class HomeFragment extends Fragment{
-	
-	public static final String WIFI = "Wi-Fi";
-    public static final String ANY = "Any";
-    private static final String URL = "http://www.health.com/health/diet-fitness/feed";
-    
- // Whether there is a Wi-Fi connection.
-    private static boolean wifiConnected = false;
-    // Whether there is a mobile connection.
-    private static boolean mobileConnected = false;
-    // Whether the display should be refreshed.
-    public static boolean refreshDisplay = true;
+public class HomeFragment extends Fragment {
 
-    // The user's current network preference setting.
-    public static String sPref = null;
-    
-    //private NetworkReceiver receiver = new NetworkReceiver();
-    
-	@SuppressWarnings("unused")
-	private List<String> item = new ArrayList<String>();
-	public HomeFragment() { }
-	
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-	{
-		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-		 
+	private WebView mobileWebView;
+	private boolean isWebViewAvailable;
+	private String URL = "http://www.health.com/health/";
 
-		return rootView;
+	/**
+	 * Creates a new fragment which loads the supplied url as soon as it can
+	 * 
+	 * @param url
+	 *            the url to load once initialized
+	 */
+	public HomeFragment() {
 	}
-//	
-//	@Override
-//	public void onStart() {
-//        super.onStart();
-//
-//        // Gets the user's network preference settings
-//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//
-//        // Retrieves a string value for the preferences. The second parameter
-//        // is the default value to use if a preference value is not found.
-//        sPref = sharedPrefs.getString("listPref", "Wi-Fi");
-//
-//        updateConnectedFlags();
-//
-//        // Only loads the page if refreshDisplay is true. Otherwise, keeps previous
-//        // display. For example, if the user has set "Wi-Fi only" in prefs and the
-//        // device loses its Wi-Fi connection midway through the user using the app,
-//        // you don't want to refresh the display--this would force the display of
-//        // an error page instead of stackoverflow.com content.
-//        if (refreshDisplay) {
-//            loadPage();
-//        }
-//    }
-//	
-//	@Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        if (receiver != null) {
-//            getActivity().unregisterReceiver(receiver);
-//        }
-//    }
-//    
-// // Handles the user's menu selection.
-////    @Override
-////    public boolean onOptionsItemSelected(MenuItem item) {
-////        switch (item.getItemId()) {
-////        case R.id.feedSettings:
-////                Intent settingsActivity = new Intent(getBaseContext(), SettingsActivity.class);
-////                startActivity(settingsActivity);
-////                return true;
-////        case R.id.feedRefresh:
-////                loadPage();
-////                return true;
-////        default:
-////                return super.onOptionsItemSelected(item);
-////        }
-////    }
-//
-//    
-// // Populates the activity's options menu.
-////    public boolean onCreateOptionsMenu(Menu menu) {
-////    	setHasOptionsMenu(true);
-////        MenuInflater inflater = getMenuInflater();
-////        inflater.inflate(R.menu.feed_menu, menu);
-////        return true;
-////    }
-//    
-// // Displays an error if the app is unable to load content.
-//    private void showErrorPage() {
-//    	LayoutInflater inflater = null;
-//		ViewGroup container = null;
-//		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-//
-//        // The specified network connection is not available. Displays error message.
-//        WebView myWebView = (WebView) rootView.findViewById(R.id.wv_newsFeed);
-//        myWebView.loadData(getResources().getString(R.string.connection_error),
-//                "text/html", null);
-//    }
-//    
-//    
-// // Uses AsyncTask subclass to download the XML feed from stackoverflow.com.
-//    // This avoids UI lock up. To prevent network operations from
-//    // causing a delay that results in a poor user experience, always perform
-//    // network operations on a separate thread from the UI.
-//    private void loadPage() {
-//        if (((sPref.equals(ANY)) && (wifiConnected || mobileConnected))
-//                || ((sPref.equals(WIFI)) && (wifiConnected))) {
-//            // AsyncTask subclass
-//            new DownloadXmlTask().execute(URL);
-//        } else {
-//            showErrorPage();
-//        }
-//    }
-//
-// // Checks the network connection and sets the wifiConnected and mobileConnected
-//    // variables accordingly.
-//    private void updateConnectedFlags() {
-//        ConnectivityManager connMgr =
-//                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//        NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
-//        if (activeInfo != null && activeInfo.isConnected()) {
-//            wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
-//            mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
-//        } else {
-//            wifiConnected = false;
-//            mobileConnected = false;
-//        }
-//    }
-//    
-// // Implementation of AsyncTask used to download XML feed from stackoverflow.com.
-//    private class DownloadXmlTask extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... urls) {
-//            try {
-//                return loadXmlFromNetwork(urls[0]);
-//            } catch (IOException e) {
-//                return getResources().getString(R.string.connection_error);
-//            } catch (XmlPullParserException e) {
-//                return getResources().getString(R.string.xml_error);
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//        	LayoutInflater inflater = null;
-//    		ViewGroup container = null;
-//    		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-//            // setContentView(R.layout.fragment_home);
-//            // Displays the HTML string in the UI via a WebView
-//            WebView myWebView = (WebView) rootView.findViewById(R.id.wv_newsFeed);
-//            myWebView.loadData(result, "text/html", null);
-//        }
-//    }
-//    
-// // Uploads XML from stackoverflow.com, parses it, and combines it with
-//    // HTML markup. Returns HTML string.
-//    private String loadXmlFromNetwork(String urlString) throws XmlPullParserException, IOException {
-//        InputStream stream = null;
-//        HealthFeedXmlParser stackOverflowXmlParser = new HealthFeedXmlParser();
-//        List<Entry> entries = null;
-//        String title = null;
-//        String url = null;
-//        String summary = null;
-//        Calendar rightNow = Calendar.getInstance();
-//        DateFormat formatter = new SimpleDateFormat("MMM dd h:mmaa");
-//
-//        // Checks whether the user set the preference to include summary text
-//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        boolean pref = sharedPrefs.getBoolean("summaryPref", false);
-//
-//        StringBuilder htmlString = new StringBuilder();
-//        htmlString.append("<h3>" + getResources().getString(R.string.page_title) + "</h3>");
-//        htmlString.append("<em>" + getResources().getString(R.string.updated) + " " +
-//                formatter.format(rightNow.getTime()) + "</em>");
-//
-//        try {
-//            stream = downloadUrl(urlString);
-//            entries = stackOverflowXmlParser.parse(stream);
-//        // Makes sure that the InputStream is closed after the app is
-//        // finished using it.
-//        } finally {
-//            if (stream != null) {
-//                stream.close();
-//            }
-//        }
-//
-//        // StackOverflowXmlParser returns a List (called "entries") of Entry objects.
-//        // Each Entry object represents a single post in the XML feed.
-//        // This section processes the entries list to combine each entry with HTML markup.
-//        // Each entry is displayed in the UI as a link that optionally includes
-//        // a text summary.
-//        for (Entry entry : entries) {
-//            htmlString.append("<p><a href='");
-//            htmlString.append(entry.link);
-//            htmlString.append("'>" + entry.title + "</a></p>");
-//            // If the user set the preference to include summary text,
-//            // adds it to the display.
-//            if (pref) {
-//                htmlString.append(entry.summary);
-//            }
-//        }
-//        return htmlString.toString();
-//    }
-//    
-// // Given a string representation of a URL, sets up a connection and gets
-//    // an input stream.
-//    private InputStream downloadUrl(String urlString) throws IOException {
-//        URL url = new URL(urlString);
-//        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//        conn.setReadTimeout(10000 /* milliseconds */);
-//        conn.setConnectTimeout(15000 /* milliseconds */);
-//        conn.setRequestMethod("GET");
-//        conn.setDoInput(true);
-//        // Starts the query
-//        conn.connect();
-//        InputStream stream = conn.getInputStream();
-//        return stream;
-//    }
-//
-//	/**
-//    *
-//    * This BroadcastReceiver intercepts the android.net.ConnectivityManager.CONNECTIVITY_ACTION,
-//    * which indicates a connection change. It checks whether the type is TYPE_WIFI.
-//    * If it is, it checks whether Wi-Fi is connected and sets the wifiConnected flag in the
-//    * main activity accordingly.
-//    *
-//    */
-//   public class NetworkReceiver extends BroadcastReceiver {
-//
-//       @Override
-//       public void onReceive(Context context, Intent intent) {
-//           ConnectivityManager connMgr =
-//                   (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//           NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-//
-//           // Checks the user prefs and the network connection. Based on the result, decides
-//           // whether
-//           // to refresh the display or keep the current display.
-//           // If the userpref is Wi-Fi only, checks to see if the device has a Wi-Fi connection.
-//           if (WIFI.equals(sPref) && networkInfo != null
-//                   && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-//               // If device has its Wi-Fi connection, sets refreshDisplay
-//               // to true. This causes the display to be refreshed when the user
-//               // returns to the app.
-//               refreshDisplay = true;
-//               Toast.makeText(context, R.string.wifi_connected, Toast.LENGTH_SHORT).show();
-//
-//               // If the setting is ANY network and there is a network connection
-//               // (which by process of elimination would be mobile), sets refreshDisplay to true.
-//           } else if (ANY.equals(sPref) && networkInfo != null) {
-//               refreshDisplay = true;
-//
-//               // Otherwise, the app can't download content--either because there is no network
-//               // connection (mobile or Wi-Fi), or because the pref setting is WIFI, and there
-//               // is no Wi-Fi connection.
-//               // Sets refreshDisplay to false.
-//           } else {
-//               refreshDisplay = false;
-//               Toast.makeText(context, R.string.lost_connection, Toast.LENGTH_SHORT).show();
-//           }
-//       }
-//   }
+	
+
+	/**
+	 * Called to instantiate the view. Creates and returns the WebView.
+	 */
+	@SuppressLint("SetJavaScriptEnabled")
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		if (mobileWebView != null) {
+			mobileWebView.destroy();
+		}
+		mobileWebView = new WebView(getActivity());
+		mobileWebView.setOnKeyListener(new OnKeyListener() {
+
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if ((keyCode == KeyEvent.KEYCODE_BACK)
+						&& mobileWebView.canGoBack()) {
+					mobileWebView.goBack();
+					return true;
+				}
+				return false;
+			}
+
+		});
+		mobileWebView.setWebViewClient(new InnerWebViewClient()); // forces it
+																	// to open
+																	// in app
+		mobileWebView.loadUrl(URL);
+		isWebViewAvailable = true;
+		WebSettings settings = mobileWebView.getSettings();
+		settings.setJavaScriptEnabled(true);
+		return mobileWebView;
+	}
+
+	/**
+	 * Convenience method for loading a url. Will fail if {@link View} is not
+	 * initialized (but won't throw an {@link Exception})
+	 * 
+	 * @param url
+	 */
+	public void loadUrl(String url) {
+		if (isWebViewAvailable)
+			getWebView().loadUrl(URL = url);
+		else
+			Log.w("ImprovedWebViewFragment",
+					"WebView cannot be found. Check the view and fragment have been loaded.");
+	}
+
+	/**
+	 * Called when the fragment is visible to the user and actively running.
+	 * Resumes the WebView.
+	 */
+	@Override
+	public void onPause() {
+		super.onPause();
+		mobileWebView.onPause();
+		Bundle webViewBundle =  new Bundle();
+//		webViewBundle
+	}
+
+	/**
+	 * Called when the fragment is no longer resumed. Pauses the WebView.
+	 */
+	@Override
+	public void onResume() {
+		mobileWebView.onResume();
+		super.onResume();
+	}
+
+	/**
+	 * Called when the WebView has been detached from the fragment. The WebView
+	 * is no longer available after this time.
+	 */
+	@Override
+	public void onDestroyView() {
+		isWebViewAvailable = false;
+		super.onDestroyView();
+	}
+
+	/**
+	 * Called when the fragment is no longer in use. Destroys the internal state
+	 * of the WebView.
+	 */
+	@Override
+	public void onDestroy() {
+		if (mobileWebView != null) {
+			mobileWebView.destroy();
+			mobileWebView = null;
+		}
+		super.onDestroy();
+	}
+
+	/**
+	 * Gets the WebView.
+	 */
+	public WebView getWebView() {
+		return isWebViewAvailable ? mobileWebView : null;
+	}
+
+	/**
+	 * 
+	 * Saving the state of the Health WebView so it does not have to reload the
+	 * page every time the fragment gets clicked.
+	 * 
+	 */
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+	}
+
+	/* To ensure links open within the application */
+	private class InnerWebViewClient extends WebViewClient {
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			view.loadUrl(url);
+			return true;
+		}
+
+		@Override
+		public void onPageFinished(WebView view, String url) {
+			Toast toast = Toast.makeText(getActivity(),
+					"Health magazine has finished loading", Toast.LENGTH_SHORT);
+			toast.show();
+		}
+	}
 }

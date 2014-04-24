@@ -24,8 +24,12 @@
         <activity
             android:name="com.application.healthnow.MainActivity"
             android:label="@string/app_name" >
-        
-        </activity>
+	        <intent-filter>
+	                <action android:name="android.intent.action.MAIN" />
+	
+	                <category android:name="android.intent.category.LAUNCHER" />
+	            </intent-filter>
+	        </activity>
         <activity
             android:name="com.application.healthnow.communication.MailSenderActivity"
             android:label="@string/title_activity_mail_sender"
@@ -47,11 +51,7 @@
         <activity
             android:name="com.application.healthnow.newsfeed.NetworkActivity"
             android:label="@string/title_activity_saved_recipes" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
         <activity
             android:name="com.application.healthnow.diet.SavedRecipesActivity"
