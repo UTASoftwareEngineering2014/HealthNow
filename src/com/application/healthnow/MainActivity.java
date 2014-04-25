@@ -37,17 +37,10 @@ public class MainActivity extends Activity {
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
-	private Fragment mContent = null;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		if(savedInstanceState != null) {
-			// Restoring the instance of the fragment
-			 mContent = getFragmentManager().getFragment(savedInstanceState, "mContent");
-		}
 
 		mTitle = mDrawerTitle = getTitle();
 
@@ -116,7 +109,7 @@ public class MainActivity extends Activity {
 			displayView(0);
 		}
 	}
-	
+
 	/**
 	 * Slide menu item click listener
 	 * */
