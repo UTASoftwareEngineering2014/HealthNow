@@ -67,17 +67,18 @@ public class WebViewActivity extends Activity {
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 					
 					@Override
-					public void onClick(DialogInterface dialog, int id) {
+					public void onClick(DialogInterface dialog, int id) 
+					{
 						if(page == null)
 						{
-							page = userInput.getText().toString() + "\n";
+							page = (userInput.getText().toString().replace("\n", "")) + "\n";
 						}
 						else 
 						{
-							page = page + userInput.getText().toString() + "\n";
+							page = page +"\n"+ (userInput.getText().toString().replace("\n", "")) + "\n";
 						}
 						
-						page = page + webView.getUrl() + "\n";
+						page = page + webView.getUrl() ;
 					}
 				}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 					

@@ -169,13 +169,15 @@ public class Saved_Exercise extends Activity{
 							for(int i=0;i<names.size();i++)
 							{
 								if(i==0)page=page+(names.get(i)).toString()+"\n";
-								else page="\n"+page+(names.get(i)).toString()+"\n";
+								else page=page+"\n"+(names.get(i)).toString()+"\n";
 								page=page+(url.get(i).toString());
 								
 							}
 
 	         		  
 							if(page.equals(""))page=null;
+							
+							if(page!=null)Log.d("beforecommit", page);
 							SharedPreferences.Editor editor = settings.edit();
 							editor.putString("urlsaveExercise", page);
 							editor.commit();

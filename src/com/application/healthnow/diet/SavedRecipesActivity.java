@@ -38,7 +38,7 @@ public class SavedRecipesActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setTitle("Saved Recipies");
+		setTitle("Saved Recipes");
 		setContentView(R.layout.activity_saved_recipes);
 		listview = (ListView) findViewById(R.id.lv_SavedRecipes);
 		//final Context context = getApplicationContext();
@@ -55,6 +55,7 @@ public class SavedRecipesActivity extends Activity{
 		
 		
 		page = settings.getString("url", null);
+		//if(page!=null)Log.d("pageoncreate",page);
 		if (page != null) {
 			String[] pageUrlMapping = page.split("\n");
 			names = new ArrayList<String>();
@@ -137,7 +138,7 @@ public class SavedRecipesActivity extends Activity{
 				         
 				        
 				            int id=arg2;
-							Log.d("se", "id:"+id);
+							//Log.d("se", "id:"+id);
 							nametoremove=(names.get(id)).toString();
 							URLtoremove=(url.get(id)).toString();
 							names.remove(id);
@@ -166,16 +167,19 @@ public class SavedRecipesActivity extends Activity{
 							SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 							Log.d("page=", page);
 							page="";
+							//Log.d("names0:", names.get(0));
 							for(int i=0;i<names.size();i++)
 							{
-								if(i==0)page=page+(names.get(i)).toString()+"\n";
-								else page="\n"+page+(names.get(i)).toString()+"\n";
+								if(i==0)page=(names.get(i)).toString()+"\n";
+								else page=page+"\n"+(names.get(i)).toString()+"\n";
 								page=page+(url.get(i).toString());
 								
 							}
 
 	         		  
 							if(page.equals(""))page=null;
+							
+							if(page!=null)Log.d("beforecommit", page);
 							SharedPreferences.Editor editor = settings.edit();
 							editor.putString("url", page);
 							editor.commit();
