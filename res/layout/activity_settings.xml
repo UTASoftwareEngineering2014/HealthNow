@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:fillViewport="true">
+  <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:background="#ffffff">
+ 
+        <!--  Header  Starts-->
+        <LinearLayout android:id="@+id/header"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dip"
+                android:paddingBottom="5dip">
+                <!-- Logo Start-->
+                <ImageView  android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"/>
+                <!-- Logo Ends -->
+
+        </LinearLayout>
+        <!--  Header Ends -->
+        <!-- Footer Start -->
+        <!-- Footer Ends -->
+ 
+        <!-- Login Form -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/header"
+            android:orientation="vertical"
+            android:padding="10dip" >
+			
+            <ListView
+                android:id="@+id/settings_listview"
+                android:layout_width="match_parent"
+                android:layout_height="213dp" >
+
+            </ListView>
+            
+            <Button
+                android:id="@+id/settings_button_pin"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change Pin" />
+
+            <Button
+                android:id="@+id/settings_button_email"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_text_email" />
+
+            <EditText
+                android:id="@+id/settings_text_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/settings_text_firstname"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/settings_text_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/settings_text_lastname"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/settings_text_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/settings_text_weight"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/settings_text_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/settings_text_height"
+                android:inputType="number" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom" >
+
+                <Button
+                    android:id="@+id/settings_button_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/settings_button_info" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- Login Form Ends -->
+  </RelativeLayout>
+</ScrollView>
+

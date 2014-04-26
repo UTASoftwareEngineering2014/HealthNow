@@ -54,4 +54,15 @@
     <string name="pref_ringtone_silent">Silent</string>
     <string name="pref_title_vibrate">Vibrate</string>
 
+    <!-- Strings related to Settings -->
+
+    <string name="settings_text_firstname">Change First Name</string>
+    <string name="settings_text_lastname">Change Last Name</string>
+    <string name="settings_text_weight">Change Weight</string>
+    <string name="settings_text_height">Change Height</string>
+    <string name="settings_text_pin">Change Pin</string>
+    <string name="settings_button_info">Save</string>
+    <string name="settings_text_email">Change Email</string>
+    
+
 </resources>
