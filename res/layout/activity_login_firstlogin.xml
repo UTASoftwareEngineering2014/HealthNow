@@ -8,10 +8,6 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:gravity="top|center"
         android:text="@string/login_firstlogin_text_message"
         android:textAppearance="?android:attr/textAppearanceLarge" />

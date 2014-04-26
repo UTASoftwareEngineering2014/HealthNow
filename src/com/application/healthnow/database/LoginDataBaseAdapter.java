@@ -91,21 +91,53 @@ public class LoginDataBaseAdapter {
 			 String height = c.getString(c.getColumnIndex(DBAdapter.INFO_COLUMN_HEIGHT));
 			 String email = c.getString(c.getColumnIndex(DBAdapter.LOGIN_COLUMN_EMAIL));
 			 
-			 if(!firstName.equals(""))
+			 if(firstName == null)
 			 {
-				 mylist.add("NAME: " + firstName + " " + lastName);
+				 mylist.add("NAME: ");
 			 }
-			 if(!weight.equals(""))
+			 else
 			 {
-				 mylist.add("WEIGHT: " + weight);
+				 if(!firstName.equals("") )
+				 {
+					 if(lastName == null)
+					 {
+						 lastName = "";
+					 }
+					 mylist.add("NAME: " + firstName + " " + lastName);
+				 }
 			 }
-			 if(!height.equals(""))
+			 if(weight == null)
 			 {
-				 mylist.add("HEIGHT: " + height);
+				 mylist.add("WEIGHT: ");
 			 }
-			 if(!email.equals(""))
+			 else
 			 {
-				 mylist.add("EMAIL \n" + email);
+				 if(!weight.equals(""))
+				 {
+					 mylist.add("WEIGHT: " + weight);
+				 }
+			 }
+			 if(height == null)
+			 {
+				 mylist.add("HEIGHT: ");
+			 }
+			 else
+			 {
+				 if(!height.equals(""))
+				 {
+					 mylist.add("HEIGHT: " + height);
+				 }
+			 }
+			 if(email == null)
+			 {
+				 mylist.add("EMAIL \n: ");
+			 }
+			 else
+			 {
+				 if(!email.equals(""))
+				 {
+					 mylist.add("EMAIL \n" + email);
+				 }
 			 }
 			 
 			 c.moveToNext();

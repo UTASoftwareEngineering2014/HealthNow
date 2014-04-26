@@ -1,6 +1,5 @@
 package com.application.healthnow;
 
-
 import com.application.healthnow.database.LoginDataBaseAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,15 +26,15 @@ public class LoginSuccessActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_popup);
-		
+
 		final String userName = GlobalVariables.userName;
-		
+
 		// Initilize the database
 		DB = new LoginDataBaseAdapter(this);
 
 		// Hide softKeyboard ---- FIX
 		InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		keyboard.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0);
+		keyboard.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
 		// Start of Dialog box
 		LayoutInflater inflater = (LayoutInflater) mContext
@@ -104,9 +103,12 @@ public class LoginSuccessActivity extends Activity {
 								} else {
 									DB.InsertFirstLogin(userName, firstName,
 											lastName, weight, height);
-									Toast.makeText(getApplicationContext(),
-											"LgnSuccss Save", Toast.LENGTH_LONG)
-											.show();
+
+									// Hide softKeyboard ---- FIX
+									InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+									keyboard.toggleSoftInput(
+											InputMethodManager.HIDE_IMPLICIT_ONLY,
+											0);
 
 									setContentView(R.layout.activity_login_popup);
 									LayoutInflater inflater = (LayoutInflater) mContext
@@ -150,9 +152,18 @@ public class LoginSuccessActivity extends Activity {
 																DB.insertPin(
 																		pin,
 																		userName);
-																Toast.makeText(getApplicationContext(),"LgnSuccss Pin Save",Toast.LENGTH_LONG)
-																		.show();
-																Intent intentStart = new Intent(getApplicationContext(),MainActivity.class);
+
+																// Hide
+																// softKeyboard
+																// ---- FIX
+																InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+																keyboard.toggleSoftInput(
+																		InputMethodManager.HIDE_IMPLICIT_ONLY,
+																		0);
+
+																Intent intentStart = new Intent(
+																		getApplicationContext(),
+																		MainActivity.class);
 																startActivity(intentStart);
 																finish();
 															}
@@ -175,7 +186,8 @@ public class LoginSuccessActivity extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 
 						DB.DismissFirstLogin(userName);
-						Intent intentStart = new Intent(getApplicationContext(), MainActivity.class);
+						Intent intentStart = new Intent(
+								getApplicationContext(), MainActivity.class);
 						startActivity(intentStart);
 						finish();
 
