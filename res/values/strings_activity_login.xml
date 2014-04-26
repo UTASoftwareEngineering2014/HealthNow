@@ -1,8 +1,8 @@
 <resources>
 
-    <string name="title_activity_login">Sign in</string>
+  <string name="title_activity_login">Sign in</string>
 
-    <!-- Strings related to login -->
+    <!-- Strings related to menu\login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in_register"><b>Sign in</b> or register</string>
@@ -13,5 +13,36 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+
+    <!-- Strings related to layout\login -->
+    <string name="login_text_username">Username</string>
+    <string name="login_text_password">Password</string>
+    <string name="login_button_login">Login</string>
+    <string name="login_text_register">Register</string>
+    
+    <!-- Strings related to login_signup -->
+    <string name="login_signup_text_username">Enter Username</string>
+    <string name="login_signup_text_password">Enter Password</string>
+    <string name="login_signup_text_confirmPassword">Confrim Password</string>
+    <string name="login_signup_text_email">Enter Email</string>
+    <string name="login_signup_text_confirmEmail">Confirm Email</string>
+    <string name="login_signup_text_createAccount">Create Account</string>
+    
+    <!-- Strings related to login_firstlogin -->
+    <string name="login_firstlogin_text_message">Welcome to HealthNow. By pressing (CONTINUE) you will be taken to input your personal information
+        										 By choosing (SKIP) you will be taken to the home screen. If you decide to skip, you can enter your 
+        										 personal info through settings</string>
+    <string name="login_firstlogin_button_skip">Skip</string>
+    <string name="login_firstlogin_button_continue">Continue</string>
+    <string name="login_firstlogin_text_messagepin">Please enter a pin this will be used to access personal information and add or delete medication</string>
+    
+    <!-- Strings related to layout\login -->
+    <string name="login_success_text_firstname">Enter First Name</string>
+    <string name="login_success_text_lastname">Enter Last Name</string>
+    <string name="login_success_text_weight">Enter Weight</string>
+    <string name="login_success_text_height">Enter Height</string>
+    <string name="login_success_text_pin">Enter Pin</string>
+    <string name="login_success_button_info">Save</string>
+    <string name="login_success_button_pin">Save</string>
 
 </resources>
