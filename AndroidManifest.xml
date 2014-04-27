@@ -10,7 +10,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.flash" />
 
@@ -22,15 +23,23 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".SearchResultsActivity" />
+
         <activity
             android:name="com.application.healthnow.LoginActivity"
             android:label="@string/app_name" >
-	        <intent-filter>
-	                <action android:name="android.intent.action.MAIN" />
-	
-	                <category android:name="android.intent.category.LAUNCHER" />
-	            </intent-filter>
-	        </activity>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.application.healthnow.communication.MailSenderActivity"
             android:label="Mail Sender"
@@ -53,11 +62,12 @@
         </activity>
         <activity android:name="com.application.healthnow.LoginSuccessActivity" >
         </activity>
-        <activity android:name="com.application.healthnow.SettingsActivity" 
-            	  android:label="SETTINGS" >
+        <activity
+            android:name="com.application.healthnow.SettingsActivity"
+            android:label="SETTINGS" >
         </activity>
         <activity android:name="com.application.healthnow.medication.MedicationActivity" >
-        </activity>        
+        </activity>
         <activity
             android:name="com.application.healthnow.diet.PreferencesActivity"
             android:label="@string/title_activity_preference" >
@@ -65,7 +75,6 @@
         <activity
             android:name="com.application.healthnow.newsfeed.NetworkActivity"
             android:label="NetworkActivity" >
-            
         </activity>
         <activity
             android:name="com.application.healthnow.diet.SavedRecipesActivity"
@@ -106,7 +115,6 @@
             </intent-filter>
         </activity>
 
- 
         <service android:name="name.bagi.levente.pedometer.StepService" />
 
         <activity
@@ -118,6 +126,20 @@
             android:name="com.application.healthnow.reporting.MedicationReportActivity"
             android:label="@string/title_activity_medication_report" >
         </activity>
-    </application>
-</manifest>
+        <activity android:name="com.application.healthnow.SearchResultsActivity" >
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
 
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.application.healthnow.search.WebViewResult"
+            android:configChanges="orientation"
+            android:label="@string/app_name" >
+        </activity>
+    </application>
+
+</manifest>

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -20,11 +22,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
+	private Fragment mContent = null;
 	
 	// nav drawer title
 	private CharSequence mDrawerTitle;
@@ -128,6 +132,13 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
+		 // Associate searchable configuration with the SearchView 
+ 			    SearchManager searchManager = 
+ 			           (SearchManager) getSystemService(Context.SEARCH_SERVICE); 
+ 				    SearchView searchView = 
+ 			            (SearchView) menu.findItem(R.id.search).getActionView(); 
+ 			    searchView.setSearchableInfo( 
+ 			            searchManager.getSearchableInfo(getComponentName())); 
 		return true;
 	}
 
