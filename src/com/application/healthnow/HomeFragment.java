@@ -150,9 +150,9 @@ public class HomeFragment extends Fragment {
 
 		@Override
 		public void onPageFinished(WebView view, String url) {
-			Toast toast = Toast.makeText(getActivity(),
-					"Health magazine has finished loading", Toast.LENGTH_SHORT);
-			toast.show();
+			//Toast toast = Toast.makeText(getActivity(),
+				//	"Health magazine has finished loading", Toast.LENGTH_SHORT);
+			//toast.show();
 		}
 	}
 }

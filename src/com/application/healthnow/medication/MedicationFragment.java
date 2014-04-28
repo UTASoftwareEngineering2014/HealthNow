@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MedicationFragment extends Fragment{
 	
@@ -40,7 +41,11 @@ public class MedicationFragment extends Fragment{
 				{
 					Intent intent = new Intent(getActivity(), MedicationActivity.class);
 					startActivity(intent);
-				}				
+				}		
+				else
+				{
+					Toast.makeText(getActivity(), "Wrong Pin", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});		
 		return rootView;

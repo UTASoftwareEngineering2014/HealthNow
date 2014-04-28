@@ -19,30 +19,42 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/tv_medicationtotake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Large Text"
+                android:text="Medication Name"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/medication_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10" />
-
-            <TimePicker
-                android:id="@+id/timePicker1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/medication_button_alarm_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:text="Add Alarm" />
+
+        <TimePicker
+            android:id="@+id/timePicker1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
 
         <LinearLayout
             android:id="@+id/LinearLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/linearLayout1" >
+            android:layout_below="@+id/timePicker1" >
 
             <ToggleButton
                 android:id="@+id/toggle_sunday"
@@ -50,8 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="ToggleButton"
-                android:textOff="S"
-                android:textOn="S" />
+                android:textOff="Su"
+                android:textOn="Su" />
 
             <ToggleButton
                 android:id="@+id/toggle_monday"
@@ -106,18 +118,19 @@
                 android:text="ToggleButton"
                 android:textOff="S"
                 android:textOn="S" />
-
         </LinearLayout>
 
-        <Button
-            android:id="@+id/medication_button_alarm_save"
+        <TextView
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/timePicker1"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_weight="1"
-            android:text="Button" />
+            android:layout_marginBottom="25dp"
+            android:text="Add Alarm"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
     </RelativeLayout>
 
 </ScrollView>
