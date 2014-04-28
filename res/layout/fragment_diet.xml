@@ -46,7 +46,8 @@
                     android:gravity="top"
                     android:text="@string/string_calorie_counter"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@android:color/background_dark" />
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="30sp" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -145,38 +146,6 @@
     <!-- android:textColor="@android:color/background_dark" -->
     <!-- android:textSize="15sp" /> -->
 
-    <EditText
-        android:id="@+id/et_height"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tv_weight"
-        android:layout_alignBottom="@+id/tv_weight"
-        android:layout_alignParentRight="true"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="@string/string_height_counter"
-        android:textColor="@android:color/background_dark" />
-
-    <ImageButton
-        android:id="@+id/imgBtn_menu_preferences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:contentDescription="@string/description"
-        android:src="@android:drawable/ic_menu_preferences" />
-
-    <EditText
-        android:id="@+id/et_weight"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_weight"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="@string/string_weight_counter"
-        android:textColor="@android:color/background_dark" />
-
     <Button
         android:id="@+id/btn_SaveCalories"
         android:layout_width="match_parent"
@@ -187,22 +156,10 @@
         android:textColor="@android:color/background_dark"
         android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/tv_BMI_Counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/tv_BMI"
-        android:layout_below="@+id/et_height"
-        android:layout_marginTop="32dp"
-        android:text="@string/string_BMI_counter"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/background_dark"
-        android:textSize="15sp" />
-
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/et_weight"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/btn_SaveCalories"
@@ -223,12 +180,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content" >
 
             <Button
                 android:id="@+id/btn_Search_Recipes"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/string_search_recipes" />
 
             <Button
@@ -237,31 +194,110 @@
                 android:layout_weight="1"
                 android:text="Saved Recipies"
                 android:textSize="15dp" />
-
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout2"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/tv_BMI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/string_BMI"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/background_dark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp" >
+
+                <TextView
+                    android:id="@+id/tv_BMI_Counter"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/string_BMI_counter"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <EditText
+                android:id="@+id/et_weight"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:text="@string/string_weight_counter"
+                android:textColor="@android:color/background_dark" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/et_weight"
+                android:layout_alignParentLeft="true"
+                android:text="@string/string_weight"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/et_height"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:text="@string/string_height_counter"
+                android:textColor="@android:color/background_dark" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_weight"
+    <ImageButton
+        android:id="@+id/imgBtn_menu_preferences"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/imgBtn_menu_preferences"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="28dp"
-        android:text="@string/string_height"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/background_dark"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/tv_BMI"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_height"
-        android:layout_toRightOf="@+id/tv_weight"
-        android:text="@string/string_BMI"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/background_dark" />
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/description"
+        android:src="@android:drawable/ic_menu_preferences" />
 
 </RelativeLayout>
