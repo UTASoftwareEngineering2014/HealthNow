@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DBAdapter {
 	static final String DATABASE_NAME = "HealthNow.db";
-	static final int DATABASE_VERSION = 1;
+	static final int DATABASE_VERSION = 2;
 	
 	public static final String TABLE_LOGIN = "LOGIN";
 	public static final String TABLE_MEDIACTION = "MEDICATION";
@@ -71,7 +71,8 @@ public class DBAdapter {
     static final String CREATE_TABLE_MEDICATION = " create table " 
     		+ TABLE_MEDIACTION + "("
     		+ MEDICATION_COLUMN_ID + " integer primary key autoincrement, " 
-    		+ MEDICATION_COLUMN_MEDICATION_NAME + " text, );";
+    		+ MEDICATION_COLUMN_MEDICATION_NAME + " text, "
+    		+ MEDICATION_COLUMN_INTENT + " integer);";
 	
 	// Variable to hold the database instance
 	public SQLiteDatabase db;

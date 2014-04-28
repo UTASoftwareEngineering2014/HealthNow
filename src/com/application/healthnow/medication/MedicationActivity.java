@@ -1,24 +1,37 @@
 package com.application.healthnow.medication;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 import com.application.healthnow.R;
 import com.application.healthnow.database.LoginDataBaseAdapter;
+import com.application.healthnow.database.MedicationDataBaseAdapter;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -39,10 +52,18 @@ public class MedicationActivity extends Activity
 	Integer hour;Integer minute;Context context;
 	int idmon=2,idtue=3,idwed=4,idthu=5,idfri=6,idsat=7,idsun=1;
 	PendingIntent pISender;
+	MedicationDataBaseAdapter MED_DB;
+	EditText medname;int uid;
+	ListView med;ArrayAdapter<String> adapter;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_medication);
+		
+		MED_DB = new MedicationDataBaseAdapter(this);
+		
+		
 		
 		//alarmMgr = (AlarmManager) getSystemService(Activity.ALARM_SERVICE);
 		//Intent intent = new Intent(this, AlarmReceiver.class);
@@ -59,9 +80,153 @@ public class MedicationActivity extends Activity
 		addMedication = (Button) findViewById(R.id.medication_button_addmedication);
 		removeMedication = (Button) findViewById(R.id.medication_button_removemedication);
 		
+		med=(ListView)findViewById(R.id.listview_medication);
+		adapter = new ArrayAdapter<String>(this,
+	              android.R.layout.simple_list_item_1, android.R.id.text1,MED_DB.GetAllMedication());
+		med.setAdapter(adapter);
+		med.setOnItemClickListener(new OnItemClickListener() 
+		{
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) 
+			{
+				// TODO Auto-generated method stub
+				final String  itemValue    = (String) med.getItemAtPosition(position);
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+			    builder.setTitle("Confirm");
+			    builder.setMessage("Are you sure you want to delete "+itemValue+"?");
+
+			    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+			        public void onClick(DialogInterface dialog, int which) 
+			        {
+			            // Do nothing but close the dialog
+			        	int uid=MED_DB.GetIntentId(itemValue);
+			        	try
+						{
+							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							pISender = PendingIntent.getBroadcast(getApplicationContext(), uid, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+		                    am.cancel(pISender);
+		                    pISender.cancel();
+							//pISender.cancel();
+							//displayIntent.cancel();
+						}catch(Exception e)
+						{
+							
+						}
+			        	try
+						{
+							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							pISender = PendingIntent.getBroadcast(getApplicationContext(), uid+1, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+		                    am.cancel(pISender);
+		                    pISender.cancel();
+							//pISender.cancel();
+							//displayIntent.cancel();
+						}catch(Exception e)
+						{
+						}
+			        	try
+						{
+							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							pISender = PendingIntent.getBroadcast(getApplicationContext(), uid+2, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+		                    am.cancel(pISender);
+		                    pISender.cancel();
+							//pISender.cancel();
+							//displayIntent.cancel();
+						}catch(Exception e)
+						{
+						}
+			        	try
+						{
+							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							pISender = PendingIntent.getBroadcast(getApplicationContext(), uid+3, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+		                    am.cancel(pISender);
+		                    pISender.cancel();
+							//pISender.cancel();
+							//displayIntent.cancel();
+						}catch(Exception e)
+						{
+						}
+			        	try
+						{
+							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							pISender = PendingIntent.getBroadcast(getApplicationContext(), uid+4, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+		                    am.cancel(pISender);
+		                    pISender.cancel();
+							//pISender.cancel();
+							//displayIntent.cancel();
+						}catch(Exception e)
+						{
+						}
+			        	try
+						{
+							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							pISender = PendingIntent.getBroadcast(getApplicationContext(), uid+5, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+		                    am.cancel(pISender);
+		                    pISender.cancel();
+							//pISender.cancel();
+							//displayIntent.cancel();
+						}catch(Exception e)
+						{
+						}
+			        	try
+						{
+							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							pISender = PendingIntent.getBroadcast(getApplicationContext(), uid+6, i, PendingIntent.FLAG_UPDATE_CURRENT);
+							AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+		                    am.cancel(pISender);
+		                    pISender.cancel();
+							//pISender.cancel();
+							//displayIntent.cancel();
+						}catch(Exception e)
+						{
+						}
+			        	MED_DB.DeleteMedication(itemValue);
+			        	med=(ListView)findViewById(R.id.listview_medication);
+			    		adapter = new ArrayAdapter<String>(context,
+			    	              android.R.layout.simple_list_item_1, android.R.id.text1,MED_DB.GetAllMedication());
+			    		med.setAdapter(adapter);
+			         
+			        
+			        }
+			    });
+
+			    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+			        @Override
+			        public void onClick(DialogInterface dialog, int which) {
+			            // Do nothing
+			            dialog.dismiss();
+			        }
+			    });
+
+			    AlertDialog alert = builder.create();
+			    alert.show();
+				
+			}
+		});
+		
+		
+		
 		addMedication.setOnClickListener(new View.OnClickListener() 
 		{
-			public void onClick(View v) {	
+			public void onClick(View v) 
+			{	
 				setContentView(R.layout.fragment_medication_add);
 				timePicker = (TimePicker) findViewById(R.id.timePicker1);				
 				saveAlarm = (Button) findViewById(R.id.medication_button_alarm_save);
@@ -72,8 +237,13 @@ public class MedicationActivity extends Activity
 				thuToggle = (ToggleButton) findViewById(R.id.toggle_thursday);
 				friToggle = (ToggleButton) findViewById(R.id.toggle_friday);
 				satToggle = (ToggleButton) findViewById(R.id.toggle_saturday);
-				
-				saveAlarm.setOnClickListener(new View.OnClickListener() {
+				medname=(EditText)findViewById(R.id.medication_name);
+				String medication=medname.getText().toString();
+				uid=hash(medication);
+				idsun=uid;idmon=uid+1;idtue=uid+2;idwed=uid+3;idthu=uid+4;idfri=uid+5;idsat=uid+6;
+				MED_DB.InsertMedication(medication,uid );
+				saveAlarm.setOnClickListener(new View.OnClickListener() 
+				{
 					@SuppressLint("NewApi")
 					public void onClick(View v) {	
 						Time time = new Time();
@@ -86,7 +256,7 @@ public class MedicationActivity extends Activity
 					
 						if(sunToggle.isChecked())
 						{
-							idsun=1;
+							
 							calendar.setTimeInMillis(System.currentTimeMillis());
 							calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -99,7 +269,7 @@ public class MedicationActivity extends Activity
 							//idsun=pendingIntentsun.getCreatorUid();
 							
 						}
-						else
+						/*else
 						{
 							try
 							{
@@ -114,10 +284,10 @@ public class MedicationActivity extends Activity
 							}catch(Exception e){
 								
 							}
-						}
+						}*/
 						if(monToggle.isChecked())
 						{
-							idmon=2;
+							
 							calendar.setTimeInMillis(System.currentTimeMillis());
 							calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -130,7 +300,7 @@ public class MedicationActivity extends Activity
 							
 							
 						}
-						else
+						/*else
 						{
 							try
 							{
@@ -145,10 +315,10 @@ public class MedicationActivity extends Activity
 							}catch(Exception e){
 								
 							}
-						}
+						}*/
 						if(tueToggle.isChecked())
 						{
-							idtue=3;
+							
 							calendar.setTimeInMillis(System.currentTimeMillis());
 							calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -163,7 +333,7 @@ public class MedicationActivity extends Activity
 							
 							
 						}
-						else
+						/*else
 						{
 							try
 							{
@@ -178,10 +348,10 @@ public class MedicationActivity extends Activity
 							}catch(Exception e){
 								
 							}
-						}
+						}*/
 						if(wedToggle.isChecked())
 						{
-							idwed=4;
+							
 							calendar.setTimeInMillis(System.currentTimeMillis());
 							calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -195,7 +365,7 @@ public class MedicationActivity extends Activity
 							
 							
 						}
-						else
+						/*else
 						{
 							try
 							{
@@ -210,10 +380,10 @@ public class MedicationActivity extends Activity
 							}catch(Exception e){
 								
 							}
-						}
+						}*/
 						if(thuToggle.isChecked())
 						{
-							idthu=5;
+							
 							calendar.setTimeInMillis(System.currentTimeMillis());
 							calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -227,7 +397,7 @@ public class MedicationActivity extends Activity
 							
 							
 						}
-						else
+						/*else
 						{
 							try
 							{
@@ -242,10 +412,10 @@ public class MedicationActivity extends Activity
 							}catch(Exception e){
 								
 							}
-						}
+						}*/
 						if(friToggle.isChecked())
 						{
-							idfri=6;
+							
 							/*Intent i = new Intent("com.application.healthnow.medication.alarm");
 							PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), x, i, PendingIntent.FLAG_NO_CREATE);
 							displayIntent.cancel();*/
@@ -264,7 +434,7 @@ public class MedicationActivity extends Activity
 							
 							
 						}	
-						else
+						/*else
 						{
 							try
 							{
@@ -279,10 +449,10 @@ public class MedicationActivity extends Activity
 							}catch(Exception e){
 								
 							}
-						}
+						}*/
 						if(satToggle.isChecked())
 						{
-							idsat=7;
+							
 							Toast.makeText(context, "sat", Toast.LENGTH_SHORT).show();
 							//RegisterAlarmBroadcast(7);
 				        	//alarmManagersat.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000,5000 , pendingIntentsat); 
@@ -303,13 +473,13 @@ public class MedicationActivity extends Activity
 				        	
 				        	//7days=1000*60*60*24*7milliseconds
 						}
-						else
+						/*else
 						{
-							/*
-							if(alarmManagersat!=null)
-							{
-								alarmManagersat.cancel(pendingIntentsat);
-							}*/
+//							
+//							if(alarmManagersat!=null)
+//							{
+//								alarmManagersat.cancel(pendingIntentsat);
+//							}
 
 								try
 								{
@@ -325,7 +495,7 @@ public class MedicationActivity extends Activity
 									
 								}
 							
-						}
+						}*/
 						
 						
 						
@@ -406,8 +576,39 @@ public class MedicationActivity extends Activity
 	}*/
 	
 	
+	
+	public int hash(String name)
+	{
+		Random rand = new Random(); 
+		int value = rand.nextInt(Integer.MAX_VALUE);
+		int sum=0;
+		for(int i=0;i<name.length();i++)
+		{
+			sum=sum+name.charAt(i);
+		}
+		return (value/sum);
+	}
+	
+	
+	
+	
 }
 
+
+
+class StableArrayAdapter extends ArrayAdapter<String> 
+{
+
+	HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+
+	public StableArrayAdapter(Context context, int textViewResourceId,
+			List<String> objects) {
+		super(context, textViewResourceId, objects);
+		for (int i = 0; i < objects.size(); ++i) {
+			mIdMap.put(objects.get(i), i);
+		}
+	}
+}
 
 
 
