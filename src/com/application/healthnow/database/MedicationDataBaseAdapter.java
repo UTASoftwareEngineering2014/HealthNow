@@ -31,7 +31,7 @@ public class MedicationDataBaseAdapter
 		newValues.put(DBAdapter.MEDICATION_COLUMN_INTENT, intent
 				);
 
-		long status = db.insert(DBAdapter.TABLE_MEDIACTION, null, newValues);
+		long status = db.insert(DBAdapter.TABLE_MEDICATION, null, newValues);
 
 		if (status == -1) {
 			Toast.makeText(instance.context, "Not Inserted medication",
@@ -44,7 +44,7 @@ public class MedicationDataBaseAdapter
 	public void DeleteMedication(String medicationName)
 	{
 			String where = "USERNAME=?";
-			int numberOFEntriesDeleted = db.delete(DBAdapter.TABLE_MEDIACTION, where,
+			int numberOFEntriesDeleted = db.delete(DBAdapter.TABLE_MEDICATION, where,
 					new String[] { medicationName });	
 	}
 	
@@ -52,7 +52,7 @@ public class MedicationDataBaseAdapter
 	{
 		String where = null;
 		String[] medicationNames=null;
-		Cursor c = db.query(true, DBAdapter.TABLE_MEDIACTION, DBAdapter.MEDICATION_ALLCOLUMNS,
+		Cursor c = db.query(true, DBAdapter.TABLE_MEDICATION, DBAdapter.MEDICATION_ALLCOLUMNS,
 						where, null, null, null, null, null);
 		if (c != null) {
 			c.moveToFirst();
@@ -74,7 +74,7 @@ public class MedicationDataBaseAdapter
 	public int GetIntentId(String medicationName)
 	{
 		int intentId;
-		Cursor cursor = db.query(DBAdapter.TABLE_MEDIACTION, null, " USERNAME=?",
+		Cursor cursor = db.query(DBAdapter.TABLE_MEDICATION, null, " USERNAME=?",
 				new String[] { medicationName }, null, null, null);
 		if (cursor.getCount() < 1) // UserName Not Exist
 		{

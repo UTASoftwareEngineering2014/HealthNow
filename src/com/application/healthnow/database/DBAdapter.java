@@ -9,7 +9,7 @@ public class DBAdapter {
 	static final int DATABASE_VERSION = 2;
 	
 	public static final String TABLE_LOGIN = "LOGIN";
-	public static final String TABLE_MEDIACTION = "MEDICATION";
+	public static final String TABLE_MEDICATION = "MEDICATION";
 	public static final String TABLE_VITALSIGNS = "VITALSIGNS";
 	
 	//Login table columns
@@ -69,10 +69,10 @@ public class DBAdapter {
     		+ VITALSIGNS_COLUMN_DATE + " date );";
     
     static final String CREATE_TABLE_MEDICATION = " create table " 
-    		+ TABLE_MEDIACTION + "("
+    		+ TABLE_MEDICATION + "("
     		+ MEDICATION_COLUMN_ID + " integer primary key autoincrement, " 
     		+ MEDICATION_COLUMN_MEDICATION_NAME + " text, "
-    		+ MEDICATION_COLUMN_INTENT + " integer);";
+    		+ MEDICATION_COLUMN_INTENT + " integer );";
 	
 	// Variable to hold the database instance
 	public SQLiteDatabase db;
