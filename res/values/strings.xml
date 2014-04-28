@@ -57,7 +57,7 @@
     <string name="string_lunch_counter">0</string>
     <string name="string_dinner_counter">0</string>
     <string name="string_dinner">Dinner</string>
-    <string name="string_calories">Calories</string>
+    <string name="string_calories">CALORIES</string>
     <string name="string_breakfast">Breakfast</string>
     <string name="string_lunch">Lunch</string>
     <string name="string_BMI">BMI</string>
