@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.healthnow.database.LoginDataBaseAdapter;
 import com.application.healthnow.diet.PreferencesActivity;
 import com.application.healthnow.diet.WebViewActivity;
 import com.application.healthnow.diet.SavedRecipesActivity;
@@ -33,6 +34,7 @@ public class DietFragment extends Fragment{
 	int storedDay;
 	int breakfast, lunch, dinner;
 	private static final String PREFS_NAME = "MyPrefsFile";
+	LoginDataBaseAdapter DB;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -43,6 +45,7 @@ public class DietFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
+		DB = new LoginDataBaseAdapter(getActivity());
 		final View rootView = inflater.inflate(R.layout.fragment_diet, container, false);
 		Button btnSearchRecipe = (Button) rootView.findViewById(R.id.btn_Search_Recipes);
 		Button btnSavedRecipe = (Button) rootView.findViewById(R.id.btn_Saved_Recipes);
