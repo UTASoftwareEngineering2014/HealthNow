@@ -1,7 +1,9 @@
 package com.application.healthnow.diet;
 
+import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 
@@ -22,6 +24,8 @@ public class PreferencesActivity extends PreferenceActivity{
 		{
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.pref_daily_calorie_goal);
+			Preference f=findPreference("cal");
+			f.setKey("cal"+GlobalVariables.userName);
 		}
 	}
 
