@@ -276,10 +276,11 @@ public class MedicationActivity extends Activity
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
 							calendar.set(Calendar.MINUTE,minute);
 							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							i.putExtra("medname", medication);
 							//pendingIntentsun = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
 							pendingIntentsun=PendingIntent.getBroadcast(getApplicationContext(),idsun, i,PendingIntent.FLAG_UPDATE_CURRENT);
 							alarmManagersun = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagersun.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),5000, pendingIntentsun);
+							alarmManagersun.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentsun);
 							//idsun=pendingIntentsun.getCreatorUid();
 							
 						}
@@ -307,10 +308,11 @@ public class MedicationActivity extends Activity
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
 							calendar.set(Calendar.MINUTE,minute);
 							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							i.putExtra("medname", medication);
 							//pendingIntentmon = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-							pendingIntentmon=PendingIntent.getBroadcast(getApplicationContext(),idmon, i,PendingIntent.FLAG_UPDATE_CURRENT);
+							pendingIntentmon=PendingIntent.getBroadcast(getApplicationContext(),idmon, i,PendingIntent.FLAG_CANCEL_CURRENT);
 							alarmManagermon = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagermon.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),10000, pendingIntentmon);
+							alarmManagermon.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentmon);
 							
 							
 						}
@@ -338,11 +340,12 @@ public class MedicationActivity extends Activity
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
 							calendar.set(Calendar.MINUTE,minute);
 							//Intent i = new Intent("com.application.healthnow.medication.alarm");
-							Intent i = new Intent("com.application.healthnow.medication.PlayAlert");
+							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							i.putExtra("medname", medication);
 							//pendingIntenttue = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
 							pendingIntenttue=PendingIntent.getBroadcast(getApplicationContext(),idtue, i,PendingIntent.FLAG_UPDATE_CURRENT);
 							alarmManagertue = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagertue.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),10000, pendingIntenttue);
+							alarmManagertue.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntenttue);
 							//idtue=pendingIntenttue.getCreatorUid();
 							
 							
@@ -371,10 +374,11 @@ public class MedicationActivity extends Activity
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
 							calendar.set(Calendar.MINUTE,minute);
 							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							i.putExtra("medname", medication);
 							//pendingIntentwed = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
 							pendingIntentwed=PendingIntent.getBroadcast(getApplicationContext(),idwed, i,PendingIntent.FLAG_UPDATE_CURRENT);
 							alarmManagerwed = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagerwed.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),10000, pendingIntentwed);
+							alarmManagerwed.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentwed);
 							//idwed=pendingIntentwed.getCreatorUid();
 							
 							
@@ -403,10 +407,11 @@ public class MedicationActivity extends Activity
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
 							calendar.set(Calendar.MINUTE,minute);
 							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							i.putExtra("medname", medication);
 							//pendingIntentthu = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
 							pendingIntentthu=PendingIntent.getBroadcast(getApplicationContext(),idthu, i,PendingIntent.FLAG_UPDATE_CURRENT);
 							alarmManagerthu = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagerthu.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),10000, pendingIntentthu);
+							alarmManagerthu.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentthu);
 							//idthu=pendingIntentthu.getCreatorUid();
 							
 							
@@ -438,10 +443,11 @@ public class MedicationActivity extends Activity
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
 							calendar.set(Calendar.MINUTE,minute);
 							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							i.putExtra("medname", medication);
 							//pendingIntentfri = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
 							pendingIntentfri=PendingIntent.getBroadcast(getApplicationContext(),idfri, i,PendingIntent.FLAG_UPDATE_CURRENT);
 							alarmManagerfri = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagerfri.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),10000, pendingIntentfri);
+							alarmManagerfri.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentfri);
 							//idfri=pendingIntentfri.getCreatorUid();
 							
 							
@@ -479,6 +485,7 @@ public class MedicationActivity extends Activity
 							calendar.set(Calendar.HOUR_OF_DAY, hour);
 							calendar.set(Calendar.MINUTE,minute);
 							Intent i = new Intent("com.application.healthnow.medication.alarm");
+							i.putExtra("medname", medication);
 							//pendingIntentsat = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
 							pendingIntentsat=PendingIntent.getBroadcast(getApplicationContext(),idsat, i,PendingIntent.FLAG_UPDATE_CURRENT);
 							alarmManagersat = (AlarmManager)getSystemService(Context.ALARM_SERVICE);

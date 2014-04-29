@@ -31,7 +31,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver
     
     
     
-    
+	String med=intent.getExtras().getString("medname");
     PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
     wakeLock = pm.newWakeLock((PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");
     wakeLock.acquire();
@@ -41,6 +41,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver
    // context.startService(new Intent(context,TestService.class));
     
     Intent i=new Intent(context,PlayAlert.class);
+    i.putExtra("medname", med);
     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     context.startActivity(i);
     /*Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);

@@ -4,6 +4,7 @@ import com.application.healthnow.R;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class PlayAlert extends Activity
 {
@@ -25,11 +27,15 @@ public class PlayAlert extends Activity
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_alert);
+		//context.getResources().getColor(android.R.color.background_dark);
 		Window window = this.getWindow();
         window.addFlags(LayoutParams.FLAG_DISMISS_KEYGUARD);
         window.addFlags(LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         window.addFlags(LayoutParams.FLAG_TURN_SCREEN_ON);
-		
+		Intent i=getIntent();
+		String med=i.getExtras().getString("medname");
+		TextView med_totake=(TextView)findViewById(R.id.tv_medicationtotake);
+		med_totake.setText("Time to take "+med+"!");
 		
 		
 		context=getApplicationContext();
