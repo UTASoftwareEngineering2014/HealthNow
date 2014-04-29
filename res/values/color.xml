@@ -6,4 +6,7 @@
     <color name="list_divider">#272727</color>
     <color name="counter_text_bg">#626262</color>
     <color name="counter_text_color">#c5c4c4</color><color name="screen_background">#333</color><color name="display_background">#000</color>
+    <color name="poor">#FF0000</color>
+    <color name="good">#00FF00</color>
+    <color name="fair">#FFFF00</color>
 </resources>

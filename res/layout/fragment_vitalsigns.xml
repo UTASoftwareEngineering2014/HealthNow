@@ -2,19 +2,137 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-     
+
     <TextView
-        android:id="@+id/txtLabel"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="16dp"
-        android:text="Vital Signs View"/>
-     
-    <ImageView android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="28dp"
+        android:text="@string/string_heart_rate"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/et_heartrate"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtLabel"
-        android:src="@drawable/ic_launcher"
+        android:layout_alignLeft="@+id/et_bloodpressure"
+        android:layout_alignTop="@+id/textView2"
+        android:ems="10"
+        android:inputType="number" 
+        android:text="@string/string_heart_rate_count"
+        android:textColor="@android:color/background_dark"/>
+    	
+
+    <EditText
+        android:id="@+id/et_glucoselevel"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/et_heartrate"
+        android:layout_alignTop="@+id/textView3"
+        android:ems="10"
+        android:inputType="number" 
+        android:text="@string/string_glucose_level_count"
+        android:textColor="@android:color/background_dark"/>
+
+    <EditText
+        android:id="@+id/et_cholesterol"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/et_glucoselevel"
+        android:layout_alignTop="@+id/textView4"
+        android:ems="10"
+        android:inputType="number"
+        android:text="@string/string_cholesterol_count"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="57dp"
+        android:text="@string/string_blood_pressure"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/et_glucoselevel"
+        android:layout_marginTop="21dp"
+        android:text="Cholesterol"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/et_heartrate"
+        android:layout_marginTop="23dp"
+        android:text="@string/string_glucose_level"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+       android:id="@+id/btn_vital_heartrate_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginBottom="104dp"
+        android:text="@string/start_heartrate_monitor"/>
+
+    <TextView
+        android:id="@+id/tv_hrstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/et_heartrate"
+        android:layout_toRightOf="@+id/et_heartrate"
+        android:text="N/A"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tv_glstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tv_hrstatus"
+        android:layout_alignTop="@+id/et_glucoselevel"
+        android:text="N/A"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <TextView
+        android:id="@+id/tv_clstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_glstatus"
+        android:layout_alignTop="@+id/et_cholesterol"
+        android:text="N/A"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tv_bpstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/et_bloodpressure"
+        android:layout_alignBottom="@+id/et_bloodpressure"
+        android:layout_alignLeft="@+id/tv_hrstatus"
+        android:text="N/A"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <EditText
+        android:id="@+id/et_bloodpressure"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_marginLeft="17dp"
+        android:layout_toRightOf="@+id/textView1"
+        android:ems="10"
+        android:inputType="number"
+        android:text="@string/string_blood_pressure_count"
+        android:textColor="@android:color/background_dark" />
+
 </RelativeLayout>
