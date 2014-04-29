@@ -1,5 +1,7 @@
 package com.application.healthnow;
 
+import com.application.healthnow.database.DoctorDataBaseAdapter;
+import com.application.healthnow.database.LoginDataBaseAdapter;
 import com.application.healthnow.diet.PreferencesActivity;
 
 import android.app.Activity;
@@ -20,6 +22,9 @@ public class DoctorsActivity extends Activity{
 	Context mContext = this;
 	AlertDialog.Builder builder;
 	AlertDialog alertDialog;
+	EditText editName, editPhone, editEmail, editOffice;
+	LoginDataBaseAdapter LG_DB;
+	DoctorDataBaseAdapter DC_DB;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +32,13 @@ public class DoctorsActivity extends Activity{
 		setContentView(R.layout.activity_doctors);
 		this.invalidateOptionsMenu();		
 		
+		LG_DB = new LoginDataBaseAdapter(this);
+		DC_DB = new DoctorDataBaseAdapter(this);
 	}
 	
 	private void AddDoctor()
 	{
+		
 		
 		LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -43,7 +51,18 @@ public class DoctorsActivity extends Activity{
 
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
+						editName = (EditText) layout.findViewById(R.id.add_doctor_text_name);
+						editPhone = (EditText) layout.findViewById(R.id.add_doctor_text_phone);
+						editEmail = (EditText) layout.findViewById(R.id.add_doctor_text_email);
+						editOffice = (EditText) layout.findViewById(R.id.add_doctor_text_office);
 						
+						int userId = LG_DB.GetUserId(); 
+						String name = editName.getText().toString();
+						String phone = editPhone.getText().toString();
+						String email = editEmail.getText().toString();
+						String office = editOffice.getText().toString();
+						
+						DC_DB.InsertDoctor(name, phone, email, office, userId);
 					}
 				});
 		builder.setNegativeButton("Cancel",

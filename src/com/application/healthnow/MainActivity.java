@@ -47,11 +47,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		// Hide softKeyboard ---- FIX
-		InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		keyboard.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+		setContentView(R.layout.activity_main);		
 		
 		mTitle = mDrawerTitle = getTitle();
 
@@ -81,7 +77,10 @@ public class MainActivity extends Activity {
 		// Reports, We  will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
 		
-
+		// Hide softKeyboard ---- FIX
+		InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		keyboard.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+		
 		// Recycle the typed array
 		navMenuIcons.recycle();
 
