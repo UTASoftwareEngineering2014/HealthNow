@@ -51,12 +51,11 @@ public class MedicationDataBaseAdapter
 	public ArrayList<String> GetAllMedication()
 	{
 		String where = null;
-<<<<<<< HEAD
+
 		String[] medicationNames = null;
-=======
-		ArrayList<String> medicationNames = new ArrayList<String>();
+
+		ArrayList<String> medication = new ArrayList<String>();
 		
->>>>>>> c5f71fd37b42fea83eec5da04499c8c985a4e535
 		Cursor c = db.query(true, DBAdapter.TABLE_MEDICATION, DBAdapter.MEDICATION_ALLCOLUMNS,
 						where, null, null, null, null, null);
 		if (c != null) {
@@ -66,7 +65,7 @@ public class MedicationDataBaseAdapter
 		
 		 while(c.isAfterLast() == false)
 		 {
-			medicationNames.add(c.getString(c.getColumnIndex(DBAdapter.MEDICATION_COLUMN_MEDICATION_NAME)));
+			medication.add(c.getString(c.getColumnIndex(DBAdapter.MEDICATION_COLUMN_MEDICATION_NAME)));
 			 
 			i++;
 			c.moveToNext();
@@ -78,7 +77,7 @@ public class MedicationDataBaseAdapter
 			 medicationString[j]=medicationNames.get(j).toString();
 		 }*/
 		 
-		 return medicationNames;
+		 return medication;
 	 
 	}
 	
