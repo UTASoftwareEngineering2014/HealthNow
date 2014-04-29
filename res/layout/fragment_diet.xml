@@ -44,7 +44,7 @@
 
                     <TextView
                         android:id="@+id/tv_calorie_counter"
-                        android:layout_width="50dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
@@ -287,7 +287,7 @@
 
                     <TextView
                         android:id="@+id/tv_BMI_Counter"
-                        android:layout_width="50dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
