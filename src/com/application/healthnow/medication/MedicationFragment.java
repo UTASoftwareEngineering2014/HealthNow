@@ -39,6 +39,7 @@ public class MedicationFragment extends Fragment{
 				
 				if(ApplicationPin.equals(pin))
 				{
+					EditTextPin.setText("");
 					Intent intent = new Intent(getActivity(), MedicationActivity.class);
 					startActivity(intent);
 				}		

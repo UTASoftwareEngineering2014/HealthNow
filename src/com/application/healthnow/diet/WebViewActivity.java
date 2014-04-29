@@ -1,5 +1,6 @@
 package com.application.healthnow.diet;
 
+import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -23,6 +24,7 @@ public class WebViewActivity extends Activity {
 	String page=null;
 	final Context context = this;
 	public static final String PREFS_NAME = "MyPrefsFile";
+	//public static final String PREFS_NAME = GlobalVariables.userName;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +110,7 @@ public class WebViewActivity extends Activity {
 		super.onPause();
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putString("url", page);
+		editor.putString("url"+GlobalVariables.userName, page);
 		editor.commit();
 	}
 }

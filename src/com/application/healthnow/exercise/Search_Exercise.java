@@ -1,5 +1,6 @@
 package com.application.healthnow.exercise;
 
+import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -25,6 +26,7 @@ public class Search_Exercise extends Activity
 	private EditText result;
 	final Context context = this;
 	public static final String PREFS_NAME = "MyPrefsFile";
+	//public static final String PREFS_NAME = GlobalVariables.userName;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +111,7 @@ public class Search_Exercise extends Activity
 		super.onPause();
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putString("urlsaveExercise", page);
+		editor.putString("urlsaveExercise"+GlobalVariables.userName, page);
 		editor.commit();
 	}
 }

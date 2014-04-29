@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings.Global;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -24,10 +25,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
 
 public class SavedRecipesActivity extends Activity{
 	public static final String PREFS_NAME = "MyPrefsFile";
+	//public static final String PREFS_NAME = GlobalVariables.userName;
 	String page = null;
 	StableArrayAdapter adapter;ArrayList<String> names; ArrayList<String> url;
 	ArrayList<String> namescopy;
@@ -40,6 +43,7 @@ public class SavedRecipesActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setTitle("Saved Recipes");
 		setContentView(R.layout.activity_saved_recipes);
+		Log.d("username:", GlobalVariables.userName);
 		listview = (ListView) findViewById(R.id.lv_SavedRecipes);
 		//final Context context = getApplicationContext();
 		final Context context = SavedRecipesActivity.this;
@@ -54,7 +58,7 @@ public class SavedRecipesActivity extends Activity{
 		
 		
 		
-		page = settings.getString("url", null);
+		page = settings.getString("url"+GlobalVariables.userName, null);
 		//if(page!=null)Log.d("pageoncreate",page);
 		if (page != null) {
 			String[] pageUrlMapping = page.split("\n");
@@ -182,7 +186,7 @@ public class SavedRecipesActivity extends Activity{
 							
 							if(page!=null)Log.d("beforecommit", page);
 							SharedPreferences.Editor editor = settings.edit();
-							editor.putString("url", page);
+							editor.putString("url"+GlobalVariables.userName, page);
 							editor.commit();
 				        }
 
@@ -371,7 +375,7 @@ public class SavedRecipesActivity extends Activity{
  		  
  		  
  		 SharedPreferences.Editor editor = settings.edit();
- 		 editor.putString("url", page);
+ 		 editor.putString("url"+GlobalVariables.userName, page);
  		 editor.commit();
 	   }
 	   return super.onFling(e1, e2, velocityX, velocityY);

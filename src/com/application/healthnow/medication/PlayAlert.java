@@ -27,6 +27,7 @@ public class PlayAlert extends Activity
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_alert);
+		setTitle("Medication Alarm");
 		//context.getResources().getColor(android.R.color.background_dark);
 		Window window = this.getWindow();
         window.addFlags(LayoutParams.FLAG_DISMISS_KEYGUARD);

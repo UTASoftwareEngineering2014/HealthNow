@@ -1,10 +1,12 @@
 package com.application.healthnow.medication;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
 import com.application.healthnow.database.LoginDataBaseAdapter;
 import com.application.healthnow.database.MedicationDataBaseAdapter;
@@ -53,6 +55,7 @@ public class MedicationActivity extends Activity
 	int idmon=2,idtue=3,idwed=4,idthu=5,idfri=6,idsat=7,idsun=1;
 	PendingIntent pISender;
 	MedicationDataBaseAdapter MED_DB;
+	LoginDataBaseAdapter LG_DB;
 	EditText medname;int uid;
 	ListView med;StableArrayAdapter adapter;
 	@Override
@@ -62,6 +65,7 @@ public class MedicationActivity extends Activity
 		setContentView(R.layout.fragment_medication);
 		
 		MED_DB = new MedicationDataBaseAdapter(this);
+		LG_DB = new LoginDataBaseAdapter(this);
 		
 		
 		
@@ -78,13 +82,23 @@ public class MedicationActivity extends Activity
 		context=getApplicationContext();
 		
 		addMedication = (Button) findViewById(R.id.medication_button_addmedication);
-		removeMedication = (Button) findViewById(R.id.medication_button_removemedication);
 		
 		med=(ListView)findViewById(R.id.listview_medication);
 		if(MED_DB.GetAllMedication()!=null)
 			{
+					ArrayList<String> a=new ArrayList<String>();
+					ArrayList<String> b=new ArrayList<String>();
+					a=MED_DB.GetAllMedication();String ad;
+        			for(int i=0;i<a.size();i++)
+        			{
+        				ad=a.get(i).toString();
+        				if(ad.contains(""+LG_DB.GetUserId()))
+        				{
+        					b.add(ad.replace(""+LG_DB.GetUserId(), ""));
+        				}
+        			}
 					adapter = new StableArrayAdapter(this,
-							android.R.layout.simple_list_item_1, MED_DB.GetAllMedication());
+							android.R.layout.simple_list_item_1, b);
 					med.setAdapter(adapter);
 			}
 		med.setOnItemClickListener(new OnItemClickListener() 
@@ -109,7 +123,7 @@ public class MedicationActivity extends Activity
 			        	
 			        	Log.d("fromlist", "1"+itemValue+"1");
 			            // Do nothing but close the dialog
-			        	int uid=MED_DB.GetIntentId(itemValue);
+			        	int uid=MED_DB.GetIntentId(itemValue+LG_DB.GetUserId());
 			        	try
 						{
 							Intent i = new Intent("com.application.healthnow.medication.alarm");
@@ -202,12 +216,28 @@ public class MedicationActivity extends Activity
 						}catch(Exception e)
 						{
 						}
-			        	MED_DB.DeleteMedication(itemValue);
+			        	MED_DB.DeleteMedication(itemValue+LG_DB.GetUserId());
 			        	if(MED_DB.GetAllMedication()!=null)
 						{
-								adapter = new StableArrayAdapter(context,
+								/*adapter = new StableArrayAdapter(context,
 										android.R.layout.simple_list_item_1, MED_DB.GetAllMedication());
-								med.setAdapter(adapter);
+								med.setAdapter(adapter);*/
+			        			adapter.clear();
+			        			ArrayList<String> a=new ArrayList<String>();
+			        			ArrayList<String> b=new ArrayList<String>();
+			        			a=MED_DB.GetAllMedication();String ad;
+			        			for(int i=0;i<a.size();i++)
+			        			{
+			        				ad=a.get(i).toString();
+			        				if(ad.contains(""+LG_DB.GetUserId()))
+			        				{
+			        					b.add(ad.replace(""+LG_DB.GetUserId(), ""));
+			        				}
+			        			}
+			        			adapter.addAll(b);
+			        			adapter.notifyDataSetChanged();
+			        			med.invalidateViews();
+			        			med.refreshDrawableState();
 						}
 			         
 			        
@@ -255,288 +285,289 @@ public class MedicationActivity extends Activity
 					@SuppressLint("NewApi")
 					public void onClick(View v) 
 					{
+						int count=0;
 						String medication=medname.getText().toString();
-						Log.d("whenstored","1"+medication+"1");
-						uid=hash(medication);
-						idsun=uid;idmon=uid+1;idtue=uid+2;idwed=uid+3;idthu=uid+4;idfri=uid+5;idsat=uid+6;
-						MED_DB.InsertMedication(medication,uid );
-						Time time = new Time();
-						
-						timePicker.clearFocus();
-						time.hour = timePicker.getCurrentHour();
-						time.minute = timePicker.getCurrentMinute();
-						hour = time.hour;
-						minute = time.minute;
-					
-						if(sunToggle.isChecked())
+						if(medication.length()==0)
 						{
-							
-							calendar.setTimeInMillis(System.currentTimeMillis());
-							calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-							calendar.set(Calendar.HOUR_OF_DAY, hour);
-							calendar.set(Calendar.MINUTE,minute);
-							Intent i = new Intent("com.application.healthnow.medication.alarm");
-							i.putExtra("medname", medication);
-							//pendingIntentsun = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-							pendingIntentsun=PendingIntent.getBroadcast(getApplicationContext(),idsun, i,PendingIntent.FLAG_UPDATE_CURRENT);
-							alarmManagersun = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagersun.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentsun);
-							//idsun=pendingIntentsun.getCreatorUid();
-							
+							Toast.makeText(context, "Medication name cannot be blank", Toast.LENGTH_SHORT).show();
+							count=1;
 						}
-						/*else
+						if(count==0)
 						{
-							try
-							{
-								Intent i = new Intent("com.application.healthnow.medication.alarm");
-								//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								pISender = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-			                    am.cancel(pISender);
-			                    pISender.cancel();
-								//pISender.cancel();
-								//displayIntent.cancel();
-							}catch(Exception e){
-								
-							}
-						}*/
-						if(monToggle.isChecked())
-						{
-							
-							calendar.setTimeInMillis(System.currentTimeMillis());
-							calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-							calendar.set(Calendar.HOUR_OF_DAY, hour);
-							calendar.set(Calendar.MINUTE,minute);
-							Intent i = new Intent("com.application.healthnow.medication.alarm");
-							i.putExtra("medname", medication);
-							//pendingIntentmon = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-							pendingIntentmon=PendingIntent.getBroadcast(getApplicationContext(),idmon, i,PendingIntent.FLAG_CANCEL_CURRENT);
-							alarmManagermon = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagermon.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentmon);
-							
-							
-						}
-						/*else
-						{
-							try
-							{
-								Intent i = new Intent("com.application.healthnow.medication.alarm");
-								//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								pISender = PendingIntent.getBroadcast(getApplicationContext(), idmon, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-			                    am.cancel(pISender);
-			                    pISender.cancel();
-								//pISender.cancel();
-								//displayIntent.cancel();
-							}catch(Exception e){
-								
-							}
-						}*/
-						if(tueToggle.isChecked())
-						{
-							
-							calendar.setTimeInMillis(System.currentTimeMillis());
-							calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-							calendar.set(Calendar.HOUR_OF_DAY, hour);
-							calendar.set(Calendar.MINUTE,minute);
-							//Intent i = new Intent("com.application.healthnow.medication.alarm");
-							Intent i = new Intent("com.application.healthnow.medication.alarm");
-							i.putExtra("medname", medication);
-							//pendingIntenttue = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-							pendingIntenttue=PendingIntent.getBroadcast(getApplicationContext(),idtue, i,PendingIntent.FLAG_UPDATE_CURRENT);
-							alarmManagertue = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagertue.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntenttue);
-							//idtue=pendingIntenttue.getCreatorUid();
-							
-							
-						}
-						/*else
-						{
-							try
-							{
-								Intent i = new Intent("com.application.healthnow.medication.alarm");
-								//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								pISender = PendingIntent.getBroadcast(getApplicationContext(), idtue, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-			                    am.cancel(pISender);
-			                    pISender.cancel();
-								//pISender.cancel();
-								//displayIntent.cancel();
-							}catch(Exception e){
-								
-							}
-						}*/
-						if(wedToggle.isChecked())
-						{
-							
-							calendar.setTimeInMillis(System.currentTimeMillis());
-							calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-							calendar.set(Calendar.HOUR_OF_DAY, hour);
-							calendar.set(Calendar.MINUTE,minute);
-							Intent i = new Intent("com.application.healthnow.medication.alarm");
-							i.putExtra("medname", medication);
-							//pendingIntentwed = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-							pendingIntentwed=PendingIntent.getBroadcast(getApplicationContext(),idwed, i,PendingIntent.FLAG_UPDATE_CURRENT);
-							alarmManagerwed = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagerwed.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentwed);
-							//idwed=pendingIntentwed.getCreatorUid();
-							
-							
-						}
-						/*else
-						{
-							try
-							{
-								Intent i = new Intent("com.application.healthnow.medication.alarm");
-								//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								pISender = PendingIntent.getBroadcast(getApplicationContext(), idwed, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-			                    am.cancel(pISender);
-			                    pISender.cancel();
-								//pISender.cancel();
-								//displayIntent.cancel();
-							}catch(Exception e){
-								
-							}
-						}*/
-						if(thuToggle.isChecked())
-						{
-							
-							calendar.setTimeInMillis(System.currentTimeMillis());
-							calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-							calendar.set(Calendar.HOUR_OF_DAY, hour);
-							calendar.set(Calendar.MINUTE,minute);
-							Intent i = new Intent("com.application.healthnow.medication.alarm");
-							i.putExtra("medname", medication);
-							//pendingIntentthu = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-							pendingIntentthu=PendingIntent.getBroadcast(getApplicationContext(),idthu, i,PendingIntent.FLAG_UPDATE_CURRENT);
-							alarmManagerthu = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagerthu.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentthu);
-							//idthu=pendingIntentthu.getCreatorUid();
-							
-							
-						}
-						/*else
-						{
-							try
-							{
-								Intent i = new Intent("com.application.healthnow.medication.alarm");
-								//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								pISender = PendingIntent.getBroadcast(getApplicationContext(), idthu, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-			                    am.cancel(pISender);
-			                    pISender.cancel();
-								//pISender.cancel();
-								//displayIntent.cancel();
-							}catch(Exception e){
-								
-							}
-						}*/
-						if(friToggle.isChecked())
-						{
-							
-							/*Intent i = new Intent("com.application.healthnow.medication.alarm");
-							PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), x, i, PendingIntent.FLAG_NO_CREATE);
-							displayIntent.cancel();*/
-							calendar.setTimeInMillis(System.currentTimeMillis());
-							calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-							calendar.set(Calendar.HOUR_OF_DAY, hour);
-							calendar.set(Calendar.MINUTE,minute);
-							Intent i = new Intent("com.application.healthnow.medication.alarm");
-							i.putExtra("medname", medication);
-							//pendingIntentfri = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-							pendingIntentfri=PendingIntent.getBroadcast(getApplicationContext(),idfri, i,PendingIntent.FLAG_UPDATE_CURRENT);
-							alarmManagerfri = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagerfri.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentfri);
-							//idfri=pendingIntentfri.getCreatorUid();
-							
-							
-							
-							
-						}	
-						/*else
-						{
-							try
-							{
-								Intent i = new Intent("com.application.healthnow.medication.alarm");
-								//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								pISender = PendingIntent.getBroadcast(getApplicationContext(), idfri, i, PendingIntent.FLAG_UPDATE_CURRENT);
-								AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-			                    am.cancel(pISender);
-			                    pISender.cancel();
-								//pISender.cancel();
-								//displayIntent.cancel();
-							}catch(Exception e){
-								
-							}
-						}*/
-						if(satToggle.isChecked())
-						{
-							
-							Toast.makeText(context, "sat", Toast.LENGTH_SHORT).show();
-							//RegisterAlarmBroadcast(7);
-				        	//alarmManagersat.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000,5000 , pendingIntentsat); 
-							//Intent intent = new Intent(MedicationActivity.this, TestService.class);
-							//pendingIntentsat = PendingIntent.getService(MedicationActivity.this, 0, intent, 0);
-							//alarmManagersat = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							//alarmManagersat.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),5*1000, pendingIntentsat);
-							calendar.setTimeInMillis(System.currentTimeMillis());
-							calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-							calendar.set(Calendar.HOUR_OF_DAY, hour);
-							calendar.set(Calendar.MINUTE,minute);
-							Intent i = new Intent("com.application.healthnow.medication.alarm");
-							i.putExtra("medname", medication);
-							//pendingIntentsat = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
-							pendingIntentsat=PendingIntent.getBroadcast(getApplicationContext(),idsat, i,PendingIntent.FLAG_UPDATE_CURRENT);
-							alarmManagersat = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-							alarmManagersat.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentsat);
-				        	//idsat=pendingIntentsat.getCreatorUid();
-				        	
-				        	//7days=1000*60*60*24*7milliseconds
-						}
-						/*else
-						{
-//							
-//							if(alarmManagersat!=null)
-//							{
-//								alarmManagersat.cancel(pendingIntentsat);
-//							}
-
-								try
-								{
-									Intent i = new Intent("com.application.healthnow.medication.alarm");
-									//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-									pISender = PendingIntent.getBroadcast(getApplicationContext(), idsat, i, PendingIntent.FLAG_UPDATE_CURRENT);
-									AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-				                    am.cancel(pISender);
-				                    pISender.cancel();
-									//pISender.cancel();
-									//displayIntent.cancel();
-								}catch(Exception e){
+										uid=hash(medication);
+										idsun=uid;idmon=uid+1;idtue=uid+2;idwed=uid+3;idthu=uid+4;idfri=uid+5;idsat=uid+6;
+										MED_DB.InsertMedication(medication+LG_DB.GetUserId(),uid );
+										Time time = new Time();
+										
+										timePicker.clearFocus();
+										time.hour = timePicker.getCurrentHour();
+										time.minute = timePicker.getCurrentMinute();
+										hour = time.hour;
+										minute = time.minute;
 									
-								}
-							
-						}*/
-						
-						
-						
-						
-						
-						String ntime = hour + " " + minute; 
-						
-						//Toast.makeText(getApplicationContext(), ntime, Toast.LENGTH_LONG).show();
-					}					
+										if(sunToggle.isChecked())
+										{
+											
+											calendar.setTimeInMillis(System.currentTimeMillis());
+											calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+											calendar.set(Calendar.HOUR_OF_DAY, hour);
+											calendar.set(Calendar.MINUTE,minute);
+											Intent i = new Intent("com.application.healthnow.medication.alarm");
+											i.putExtra("medname", medication);
+											//pendingIntentsun = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+											pendingIntentsun=PendingIntent.getBroadcast(getApplicationContext(),idsun, i,PendingIntent.FLAG_UPDATE_CURRENT);
+											alarmManagersun = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+											alarmManagersun.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentsun);
+											//idsun=pendingIntentsun.getCreatorUid();
+											
+										}
+										/*else
+										{
+											try
+											{
+												Intent i = new Intent("com.application.healthnow.medication.alarm");
+												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												pISender = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+							                    am.cancel(pISender);
+							                    pISender.cancel();
+												//pISender.cancel();
+												//displayIntent.cancel();
+											}catch(Exception e){
+												
+											}
+										}*/
+										if(monToggle.isChecked())
+										{
+											
+											calendar.setTimeInMillis(System.currentTimeMillis());
+											calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+											calendar.set(Calendar.HOUR_OF_DAY, hour);
+											calendar.set(Calendar.MINUTE,minute);
+											Intent i = new Intent("com.application.healthnow.medication.alarm");
+											i.putExtra("medname", medication);
+											//pendingIntentmon = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+											pendingIntentmon=PendingIntent.getBroadcast(getApplicationContext(),idmon, i,PendingIntent.FLAG_CANCEL_CURRENT);
+											alarmManagermon = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+											alarmManagermon.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentmon);
+											
+											
+										}
+										/*else
+										{
+											try
+											{
+												Intent i = new Intent("com.application.healthnow.medication.alarm");
+												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												pISender = PendingIntent.getBroadcast(getApplicationContext(), idmon, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+							                    am.cancel(pISender);
+							                    pISender.cancel();
+												//pISender.cancel();
+												//displayIntent.cancel();
+											}catch(Exception e){
+												
+											}
+										}*/
+										if(tueToggle.isChecked())
+										{
+											
+											calendar.setTimeInMillis(System.currentTimeMillis());
+											calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+											calendar.set(Calendar.HOUR_OF_DAY, hour);
+											calendar.set(Calendar.MINUTE,minute);
+											//Intent i = new Intent("com.application.healthnow.medication.alarm");
+											Intent i = new Intent("com.application.healthnow.medication.alarm");
+											i.putExtra("medname", medication);
+											//pendingIntenttue = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+											pendingIntenttue=PendingIntent.getBroadcast(getApplicationContext(),idtue, i,PendingIntent.FLAG_UPDATE_CURRENT);
+											alarmManagertue = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+											alarmManagertue.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntenttue);
+											//idtue=pendingIntenttue.getCreatorUid();
+											
+											
+										}
+										/*else
+										{
+											try
+											{
+												Intent i = new Intent("com.application.healthnow.medication.alarm");
+												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												pISender = PendingIntent.getBroadcast(getApplicationContext(), idtue, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+							                    am.cancel(pISender);
+							                    pISender.cancel();
+												//pISender.cancel();
+												//displayIntent.cancel();
+											}catch(Exception e){
+												
+											}
+										}*/
+										if(wedToggle.isChecked())
+										{
+											
+											calendar.setTimeInMillis(System.currentTimeMillis());
+											calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+											calendar.set(Calendar.HOUR_OF_DAY, hour);
+											calendar.set(Calendar.MINUTE,minute);
+											Intent i = new Intent("com.application.healthnow.medication.alarm");
+											i.putExtra("medname", medication);
+											//pendingIntentwed = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+											pendingIntentwed=PendingIntent.getBroadcast(getApplicationContext(),idwed, i,PendingIntent.FLAG_UPDATE_CURRENT);
+											alarmManagerwed = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+											alarmManagerwed.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentwed);
+											//idwed=pendingIntentwed.getCreatorUid();
+											
+											
+										}
+										/*else
+										{
+											try
+											{
+												Intent i = new Intent("com.application.healthnow.medication.alarm");
+												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												pISender = PendingIntent.getBroadcast(getApplicationContext(), idwed, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+							                    am.cancel(pISender);
+							                    pISender.cancel();
+												//pISender.cancel();
+												//displayIntent.cancel();
+											}catch(Exception e){
+												
+											}
+										}*/
+										if(thuToggle.isChecked())
+										{
+											
+											calendar.setTimeInMillis(System.currentTimeMillis());
+											calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+											calendar.set(Calendar.HOUR_OF_DAY, hour);
+											calendar.set(Calendar.MINUTE,minute);
+											Intent i = new Intent("com.application.healthnow.medication.alarm");
+											i.putExtra("medname", medication);
+											//pendingIntentthu = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+											pendingIntentthu=PendingIntent.getBroadcast(getApplicationContext(),idthu, i,PendingIntent.FLAG_UPDATE_CURRENT);
+											alarmManagerthu = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+											alarmManagerthu.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentthu);
+											//idthu=pendingIntentthu.getCreatorUid();
+											
+											
+										}
+										/*else
+										{
+											try
+											{
+												Intent i = new Intent("com.application.healthnow.medication.alarm");
+												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												pISender = PendingIntent.getBroadcast(getApplicationContext(), idthu, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+							                    am.cancel(pISender);
+							                    pISender.cancel();
+												//pISender.cancel();
+												//displayIntent.cancel();
+											}catch(Exception e){
+												
+											}
+										}*/
+										if(friToggle.isChecked())
+										{
+											
+											/*Intent i = new Intent("com.application.healthnow.medication.alarm");
+											PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), x, i, PendingIntent.FLAG_NO_CREATE);
+											displayIntent.cancel();*/
+											calendar.setTimeInMillis(System.currentTimeMillis());
+											calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+											calendar.set(Calendar.HOUR_OF_DAY, hour);
+											calendar.set(Calendar.MINUTE,minute);
+											Intent i = new Intent("com.application.healthnow.medication.alarm");
+											i.putExtra("medname", medication);
+											//pendingIntentfri = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+											pendingIntentfri=PendingIntent.getBroadcast(getApplicationContext(),idfri, i,PendingIntent.FLAG_UPDATE_CURRENT);
+											alarmManagerfri = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+											alarmManagerfri.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentfri);
+											//idfri=pendingIntentfri.getCreatorUid();
+											
+											
+											
+											
+										}	
+										/*else
+										{
+											try
+											{
+												Intent i = new Intent("com.application.healthnow.medication.alarm");
+												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												pISender = PendingIntent.getBroadcast(getApplicationContext(), idfri, i, PendingIntent.FLAG_UPDATE_CURRENT);
+												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+							                    am.cancel(pISender);
+							                    pISender.cancel();
+												//pISender.cancel();
+												//displayIntent.cancel();
+											}catch(Exception e){
+												
+											}
+										}*/
+										if(satToggle.isChecked())
+										{
+											
+											Toast.makeText(context, "sat", Toast.LENGTH_SHORT).show();
+											//RegisterAlarmBroadcast(7);
+								        	//alarmManagersat.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000,5000 , pendingIntentsat); 
+											//Intent intent = new Intent(MedicationActivity.this, TestService.class);
+											//pendingIntentsat = PendingIntent.getService(MedicationActivity.this, 0, intent, 0);
+											//alarmManagersat = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+											//alarmManagersat.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),5*1000, pendingIntentsat);
+											calendar.setTimeInMillis(System.currentTimeMillis());
+											calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+											calendar.set(Calendar.HOUR_OF_DAY, hour);
+											calendar.set(Calendar.MINUTE,minute);
+											Intent i = new Intent("com.application.healthnow.medication.alarm");
+											i.putExtra("medname", medication);
+											//pendingIntentsat = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+											pendingIntentsat=PendingIntent.getBroadcast(getApplicationContext(),idsat, i,PendingIntent.FLAG_UPDATE_CURRENT);
+											alarmManagersat = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+											alarmManagersat.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),7*AlarmManager.INTERVAL_DAY, pendingIntentsat);
+								        	//idsat=pendingIntentsat.getCreatorUid();
+								        	
+								        	//7days=1000*60*60*24*7milliseconds
+										}
+										/*else
+										{
+				//							
+				//							if(alarmManagersat!=null)
+				//							{
+				//								alarmManagersat.cancel(pendingIntentsat);
+				//							}
+				
+												try
+												{
+													Intent i = new Intent("com.application.healthnow.medication.alarm");
+													//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
+													pISender = PendingIntent.getBroadcast(getApplicationContext(), idsat, i, PendingIntent.FLAG_UPDATE_CURRENT);
+													AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+								                    am.cancel(pISender);
+								                    pISender.cancel();
+													//pISender.cancel();
+													//displayIntent.cancel();
+												}catch(Exception e){
+													
+												}
+											
+										}*/
+										
+										
+										
+										
+										
+										
+										//Toast.makeText(getApplicationContext(), ntime, Toast.LENGTH_LONG).show();
+							}			
+					}
 				});											
 			}
 		});
 		
-		removeMedication.setOnClickListener(new View.OnClickListener() 
-		{
-			public void onClick(View v) 
-			{	
-				
-			}
-		});
+
 	}
 	
 	@Override

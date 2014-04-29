@@ -24,10 +24,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
 
 public class Saved_Exercise extends Activity{
 	public static final String PREFS_NAME = "MyPrefsFile";
+	//public static final String PREFS_NAME = GlobalVariables.userName;
 	String page = null;
 	StableArrayAdapter adapter;ArrayList<String> names; ArrayList<String> url;
 	ArrayList<String> namescopy;
@@ -179,7 +181,7 @@ public class Saved_Exercise extends Activity{
 							
 							if(page!=null)Log.d("beforecommit", page);
 							SharedPreferences.Editor editor = settings.edit();
-							editor.putString("urlsaveExercise", page);
+							editor.putString("urlsaveExercise"+GlobalVariables.userName, page);
 							editor.commit();
 				        }
 
@@ -368,7 +370,7 @@ public class Saved_Exercise extends Activity{
  		  
  		  
  		 SharedPreferences.Editor editor = settings.edit();
- 		 editor.putString("urlsaveExercise", page);
+ 		 editor.putString("urlsaveExercise"+GlobalVariables.userName, page);
  		 editor.commit();
 	   }
 	   return super.onFling(e1, e2, velocityX, velocityY);

@@ -38,10 +38,9 @@ public class LoginDataBaseAdapter {
 					.show();
 		}
 	}
-	
-	public void updateEmail(String email)
-	{
-		
+
+	public void updateEmail(String email) {
+
 		final String userName = GlobalVariables.userName;
 		Cursor cursor = db.query(DBAdapter.TABLE_LOGIN, null, " USERNAME=?",
 				new String[] { userName }, null, null, null);
@@ -50,7 +49,7 @@ public class LoginDataBaseAdapter {
 			cursor.close();
 		}
 		cursor.moveToFirst();
-		
+
 		ContentValues updateValues = new ContentValues();
 		updateValues.put(DBAdapter.LOGIN_COLUMN_EMAIL, email);
 
@@ -58,128 +57,113 @@ public class LoginDataBaseAdapter {
 		String where = " USERNAME=?";
 		long status = db.update(DBAdapter.TABLE_LOGIN, updateValues, where,
 				new String[] { userName });
-		
+
 		if (status == -1) {
 			Toast.makeText(instance.context, "Email not updated",
 					Toast.LENGTH_LONG).show();
 		} else {
-			Toast.makeText(instance.context, "Email Saved Successfully", Toast.LENGTH_LONG)
-					.show();
-		}		
+			Toast.makeText(instance.context, "Email Saved Successfully",
+					Toast.LENGTH_LONG).show();
+		}
 		cursor.close();
 	}
-	
-	
+
 	public ArrayList<String> GetAllMain() {
-		 ArrayList<String> mylist = new ArrayList<String>();
-		 String userName = GlobalVariables.userName;
-		 String where = " USERNAME=?";
-		 Cursor c = db.query(DBAdapter.TABLE_LOGIN, null, where,
-					new String[] { userName }, null, null, null);
+		ArrayList<String> mylist = new ArrayList<String>();
+		String userName = GlobalVariables.userName;
+		String where = " USERNAME=?";
+		Cursor c = db.query(DBAdapter.TABLE_LOGIN, null, where,
+				new String[] { userName }, null, null, null);
 		if (c.getCount() < 1) // UserName Not Exist
 		{
 			c.close();
 		}
 		c.moveToFirst();
 
+		while (c.isAfterLast() == false) {
+			String firstName = c.getString(c
+					.getColumnIndex(DBAdapter.INFO_COLUMN_FIRSTNAME));
+			String lastName = c.getString(c
+					.getColumnIndex(DBAdapter.INFO_COLUMN_LASTNAME));
+			String weight = c.getString(c
+					.getColumnIndex(DBAdapter.INFO_COLUMN_WEIGHT));
+			String height = c.getString(c
+					.getColumnIndex(DBAdapter.INFO_COLUMN_HEIGHT));
+			String email = c.getString(c
+					.getColumnIndex(DBAdapter.LOGIN_COLUMN_EMAIL));
 
-		 while(c.isAfterLast() == false)
-		 {
-			 String firstName = c.getString(c.getColumnIndex(DBAdapter.INFO_COLUMN_FIRSTNAME));
-			 String lastName = c.getString(c.getColumnIndex(DBAdapter.INFO_COLUMN_LASTNAME));
-			 String weight = c.getString(c.getColumnIndex(DBAdapter.INFO_COLUMN_WEIGHT));
-			 String height = c.getString(c.getColumnIndex(DBAdapter.INFO_COLUMN_HEIGHT));
-			 String email = c.getString(c.getColumnIndex(DBAdapter.LOGIN_COLUMN_EMAIL));
-			 
-			 if(firstName == null)
-			 {
-				 mylist.add("NAME: ");
-			 }
-			 else
-			 {
-				 if(!firstName.equals("") )
-				 {
-					 if(lastName == null)
-					 {
-						 lastName = "";
-					 }
-					 mylist.add("NAME: " + firstName + " " + lastName);
-				 }
-			 }
-			 if(weight == null)
-			 {
-				 mylist.add("WEIGHT: ");
-			 }
-			 else
-			 {
-				 if(!weight.equals(""))
-				 {
-					 mylist.add("WEIGHT: " + weight);
-				 }
-			 }
-			 if(height == null)
-			 {
-				 mylist.add("HEIGHT: ");
-			 }
-			 else
-			 {
-				 if(!height.equals(""))
-				 {
-					 mylist.add("HEIGHT: " + height);
-				 }
-			 }
-			 if(email == null)
-			 {
-				 mylist.add("EMAIL \n: ");
-			 }
-			 else
-			 {
-				 if(!email.equals(""))
-				 {
-					 mylist.add("EMAIL \n" + email);
-				 }
-			 }
-			 
-			 c.moveToNext();
-		 }		 
-		 return mylist;
+			if (firstName == null) {
+				mylist.add("NAME: ");
+			} else {
+				if (!firstName.equals("")) {
+					if (lastName == null) {
+						lastName = "";
+					}
+					mylist.add("NAME: " + firstName + " " + lastName);
+				}
+			}
+			if (weight == null) {
+				mylist.add("WEIGHT: ");
+			} else {
+				if (!weight.equals("")) {
+					mylist.add("WEIGHT: " + weight);
+				}
+			}
+			if (height == null) {
+				mylist.add("HEIGHT: ");
+			} else {
+				if (!height.equals("")) {
+					mylist.add("HEIGHT: " + height);
+				}
+			}
+			if (email == null) {
+				mylist.add("EMAIL \n: ");
+			} else {
+				if (!email.equals("")) {
+					mylist.add("EMAIL \n" + email);
+				}
+			}
+
+			c.moveToNext();
+		}
+		return mylist;
 	}
-	
+
 	public String GetWeight() {
-		 String userName = GlobalVariables.userName;
-		 String where = " USERNAME=?";
-		 Cursor c = db.query(DBAdapter.TABLE_LOGIN, null, where,
-					new String[] { userName }, null, null, null);
+		String userName = GlobalVariables.userName;
+		String where = " USERNAME=?";
+		Cursor c = db.query(DBAdapter.TABLE_LOGIN, null, where,
+				new String[] { userName }, null, null, null);
 		if (c.getCount() < 1) // UserName Not Exist
 		{
 			c.close();
 		}
 		c.moveToFirst();
 
-		 String weight = c.getString(c.getColumnIndex(DBAdapter.INFO_COLUMN_WEIGHT));
-		 
-		 return weight;
+		String weight = c.getString(c
+				.getColumnIndex(DBAdapter.INFO_COLUMN_WEIGHT));
+
+		return weight;
 	}
-	
+
 	public String GetHeight() {
-		 String userName = GlobalVariables.userName;
-		 String where = " USERNAME=?";
-		 Cursor c = db.query(DBAdapter.TABLE_LOGIN, null, where,
-					new String[] { userName }, null, null, null);
+		String userName = GlobalVariables.userName;
+		String where = " USERNAME=?";
+		Cursor c = db.query(DBAdapter.TABLE_LOGIN, null, where,
+				new String[] { userName }, null, null, null);
 		if (c.getCount() < 1) // UserName Not Exist
 		{
 			c.close();
 		}
 		c.moveToFirst();
 
-		String height = c.getString(c.getColumnIndex(DBAdapter.INFO_COLUMN_HEIGHT));
-		 
-		 return height;
+		String height = c.getString(c
+				.getColumnIndex(DBAdapter.INFO_COLUMN_HEIGHT));
+
+		return height;
 	}
-		 
-	
-	public void updatePin(String pin)
-	{
+
+	public void updatePin(String pin) {
 		final String userName = GlobalVariables.userName;
 		Cursor cursor = db.query(DBAdapter.TABLE_LOGIN, null, " USERNAME=?",
 				new String[] { userName }, null, null, null);
@@ -188,7 +172,7 @@ public class LoginDataBaseAdapter {
 			cursor.close();
 		}
 		cursor.moveToFirst();
-		
+
 		ContentValues updateValues = new ContentValues();
 		updateValues.put(DBAdapter.INFO_COLUMN_PIN, pin);
 
@@ -196,56 +180,53 @@ public class LoginDataBaseAdapter {
 		String where = " USERNAME=?";
 		long status = db.update(DBAdapter.TABLE_LOGIN, updateValues, where,
 				new String[] { userName });
-		
+
 		if (status == -1) {
 			Toast.makeText(instance.context, "Pin not updated",
 					Toast.LENGTH_LONG).show();
 		} else {
-			Toast.makeText(instance.context, "Pin Saved Successfully", Toast.LENGTH_LONG)
-					.show();
+			Toast.makeText(instance.context, "Pin Saved Successfully",
+					Toast.LENGTH_LONG).show();
 		}
-		
+
 		cursor.close();
 	}
-	
-	public void updateSettingsInfo(String first, String last, String weight, String height)
-	{
+
+	public void updateSettingsInfo(String first, String last, String weight,
+			String height) {
 		ContentValues updateValues = new ContentValues();
 		String userName = GlobalVariables.userName;
 		String where = " USERNAME=?";
 		boolean update = false;
-		
-		if(!first.equals(""))
-		{
+
+		if (!first.equals("")) {
 			updateValues.put(DBAdapter.INFO_COLUMN_FIRSTNAME, first);
 			update = true;
 		}
-		if(!last.equals(""))
-		{
+		if (!last.equals("")) {
 			updateValues.put(DBAdapter.INFO_COLUMN_LASTNAME, last);
 			update = true;
 		}
-		if(!weight.equals(""))
-		{
+		if (!weight.equals("")) {
 			updateValues.put(DBAdapter.INFO_COLUMN_WEIGHT, weight);
 			update = true;
 		}
-		if(!height.equals(""))
-		{
+		if (!height.equals("")) {
 			updateValues.put(DBAdapter.INFO_COLUMN_HEIGHT, height);
 			update = true;
 		}
-		if(update)
-		{
-			long status = db.update(DBAdapter.TABLE_LOGIN, updateValues, where,new String[] { userName });
+		if (update) {
+			long status = db.update(DBAdapter.TABLE_LOGIN, updateValues, where,
+					new String[] { userName });
 
 			if (status == -1) {
 				Toast.makeText(instance.context, "Personal Info not inserted",
 						Toast.LENGTH_LONG).show();
 			} else {
-				Toast.makeText(instance.context, "Personal Info Saved Successfully", Toast.LENGTH_LONG)
+				Toast.makeText(instance.context,
+						"Personal Info Saved Successfully", Toast.LENGTH_LONG)
 						.show();
-			}	
+			}
 		}
 	}
 
@@ -275,15 +256,15 @@ public class LoginDataBaseAdapter {
 				new String[] { userName });
 
 		cursor.close();
-		
-		long status = db.insert(DBAdapter.TABLE_LOGIN, null, updateValues);
 
+		long status = db.insert(DBAdapter.TABLE_LOGIN, null, updateValues);
 
 		if (status == -1) {
 			Toast.makeText(instance.context, "Personal Info not inserted",
 					Toast.LENGTH_LONG).show();
 		} else {
-			Toast.makeText(instance.context, "Personal Info Saved Successfully", Toast.LENGTH_LONG)
+			Toast.makeText(instance.context,
+					"Personal Info Saved Successfully", Toast.LENGTH_LONG)
 					.show();
 		}
 	}
@@ -406,5 +387,23 @@ public class LoginDataBaseAdapter {
 			c.moveToFirst();
 		}
 		return c;
+	}
+
+	public int GetUserId() {
+		final String userName = GlobalVariables.userName;
+
+		String where = " USERNAME=?";
+		Cursor cursor = db.query(DBAdapter.TABLE_LOGIN, null, where,
+				new String[] { userName }, null, null, null);
+
+		if (cursor.getCount() < 1) // UserName Not Exist
+		{
+			cursor.close();
+		}
+		cursor.moveToFirst();
+
+		int uniqueId = cursor.getInt(cursor.getColumnIndex(DBAdapter.LOGIN_COLUMN_ID));
+
+		return uniqueId;
 	}
 }

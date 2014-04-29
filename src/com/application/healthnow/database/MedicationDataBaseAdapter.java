@@ -99,4 +99,23 @@ public class MedicationDataBaseAdapter
 				
 		return intentId;
 	}
+	
+	public int GetUserId(String medicationName)
+	{
+		int intentId;
+		
+		 String where = " MEDICATION_NAME=?";
+		 Cursor cursor = db.query(DBAdapter.TABLE_MEDICATION, null, where,
+					new String[] { medicationName }, null, null, null);
+
+		if (cursor.getCount() < 1) // UserName Not Exist
+		{
+			cursor.close();
+		}
+		cursor.moveToFirst();
+		
+		intentId = cursor.getInt(cursor.getColumnIndex(DBAdapter.MEDICATION_COLUMN_INTENT)); 
+				
+		return intentId;
+	}
 }

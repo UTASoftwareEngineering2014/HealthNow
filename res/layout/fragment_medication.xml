@@ -23,13 +23,6 @@
             android:layout_alignParentLeft="true" >
 
             <Button
-                android:id="@+id/medication_button_removemedication"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="- MEDICATION" />
-
-            <Button
                 android:id="@+id/medication_button_addmedication"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

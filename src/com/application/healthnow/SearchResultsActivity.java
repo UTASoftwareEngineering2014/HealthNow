@@ -119,7 +119,7 @@ public class SearchResultsActivity extends Activity
     {
     	String query = search.getStringExtra(SearchManager.QUERY);
     	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		String page = settings.getString("url", null);
+		String page = settings.getString("url"+GlobalVariables.userName, null);
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
  
@@ -163,7 +163,7 @@ public class SearchResultsActivity extends Activity
 			sizeofdietresult=0;
 			Log.d("no match", "diet");
 		}
-		page = settings.getString("urlsaveExercise", null);
+		page = settings.getString("urlsaveExercise"+GlobalVariables.userName, null);
 		if (page != null) 
 		{
 			String[] pageUrlMapping = page.split("\n");
