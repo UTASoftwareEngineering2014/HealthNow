@@ -56,6 +56,11 @@
             android:label="@string/title_activity_next" >
         </activity>
         <activity
+            android:name="com.application.healthnow.DoctorsActivity"
+            android:noHistory="true"
+            android:label="Doctors" >
+        </activity>
+        <activity
             android:name="com.application.healthnow.RegisterActivity"
             android:label="Register Activity" >
         </activity>
@@ -71,6 +76,7 @@
         </activity>
         <activity
             android:name="com.application.healthnow.diet.PreferencesActivity"
+            android:noHistory="true"
             android:label="@string/title_activity_preference" >
         </activity>
         <activity

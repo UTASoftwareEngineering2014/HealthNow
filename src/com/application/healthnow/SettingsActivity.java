@@ -3,20 +3,24 @@ package com.application.healthnow;
 import java.util.List;
 
 import com.application.healthnow.database.LoginDataBaseAdapter;
+import com.application.healthnow.diet.PreferencesActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 public class SettingsActivity extends Activity {
@@ -34,17 +38,6 @@ public class SettingsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
-
-		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
-		tabHost.setup();
-
-		TabSpec spec1 = tabHost.newTabSpec("Tab 1");
-		spec1.setContent(R.id.tab1);
-		spec1.setIndicator("Tab 1",getResources().getDrawable(R.drawable.ic_diet));
-
-		TabSpec spec2 = tabHost.newTabSpec("Tab 2");
-		spec2.setIndicator("Tab 2",getResources().getDrawable(R.drawable.ic_diet));
-		spec2.setContent(R.id.tab2);
 
 		saveInfo = (Button) findViewById(R.id.settings_button_save);
 		changePin = (Button) findViewById(R.id.settings_button_pin);
@@ -169,6 +162,49 @@ public class SettingsActivity extends Activity {
 			}
 		});
 
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.settings, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// toggle nav drawer on selecting action bar app icon/title
+		int selected = item.getItemId();
+		final int settings = R.id.action_settings;
+		final int doctors = R.id.action_doctors;
+		final int diet = R.id.action_diet;
+		if(selected == settings)
+		{
+			Intent intentStart = new Intent(getApplicationContext(),SettingsActivity.class);
+			startActivity(intentStart);
+			finish();
+			return true;
+		}
+		else if(selected == doctors)
+		{
+			Intent intentStart = new Intent(getApplicationContext(),DoctorsActivity.class);
+			startActivity(intentStart);
+			finish();
+			return true;
+		}
+		else if(selected == diet)
+		{
+			Intent intentStart = new Intent(getApplicationContext(),PreferencesActivity.class);
+			startActivity(intentStart);
+			finish();
+			return true;
+		}
+		// Handle action bar actions click
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	public void UpdateView() {
