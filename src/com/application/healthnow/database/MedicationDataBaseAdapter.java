@@ -43,7 +43,7 @@ public class MedicationDataBaseAdapter
 	
 	public void DeleteMedication(String medicationName)
 	{
-			String where = "USERNAME=?";
+			String where = " MEDICATION_NAME=?";
 			int numberOFEntriesDeleted = db.delete(DBAdapter.TABLE_MEDICATION, where,
 					new String[] { medicationName });	
 	}
@@ -85,7 +85,7 @@ public class MedicationDataBaseAdapter
 	{
 		int intentId;
 		
-		 String where = " USERNAME=?";
+		 String where = " MEDICATION_NAME=?";
 		 Cursor cursor = db.query(DBAdapter.TABLE_MEDICATION, null, where,
 					new String[] { medicationName }, null, null, null);
 
