@@ -29,7 +29,9 @@ public class DietFragment extends Fragment{
 	
 	public DietFragment() { }
 	
+	private EditText editTextHeight;
 	private EditText editText;
+	private EditText editTextWeight;
 	private TextView textView;
 	int storedDay;
 	int breakfast, lunch, dinner;
@@ -141,12 +143,15 @@ public class DietFragment extends Fragment{
 			}
 		});
 		
-		editText = (EditText) rootView.findViewById(R.id.et_weight);
-		editText.setOnClickListener(new View.OnClickListener() {
+		editTextHeight = (EditText) rootView.findViewById(R.id.et_weight);
+		
+		String weight = DB.GetWeight();	
+		editTextHeight.setText(weight);
+		editTextHeight.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				double weight = Double.valueOf(editText.getText().toString());
+				double weight = Double.valueOf(editTextHeight.getText().toString());
 				EditText etHeight = (EditText) rootView.findViewById(R.id.et_height);
 				double height = Double.valueOf(etHeight.getText().toString());
 				if((height == 0) == false)
@@ -158,12 +163,14 @@ public class DietFragment extends Fragment{
 			}
 		});
 		
-		editText = (EditText) rootView.findViewById(R.id.et_height);
-		editText.setOnClickListener(new View.OnClickListener() {
+		editTextWeight = (EditText) rootView.findViewById(R.id.et_height);
+		String height = DB.GetHeight();
+		editTextWeight.setText(height);
+		editTextWeight.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
-				double height = Double.valueOf(editText.getText().toString());
+				double height = Double.valueOf(editTextWeight.getText().toString());
 				EditText etWeight = (EditText) rootView.findViewById(R.id.et_weight);
 				double weight = Double.valueOf(etWeight.getText().toString());
 				if((weight == 0) == false)

@@ -185,12 +185,14 @@
             <Button
                 android:id="@+id/btn_Search_Recipes"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/string_search_recipes" />
 
             <Button
                 android:id="@+id/btn_Saved_Recipes"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:text="Saved Recipies"
                 android:textSize="15dp" />
@@ -228,7 +230,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp" >
+                android:layout_height="wrap_content" >
 
                 <TextView
                     android:id="@+id/tv_BMI_Counter"
@@ -243,61 +245,63 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <EditText
-                android:id="@+id/et_weight"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:text="@string/string_weight_counter"
-                android:textColor="@android:color/background_dark" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/et_weight"
-                android:layout_alignParentLeft="true"
-                android:text="@string/string_weight"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <EditText
-                android:id="@+id/et_height"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:text="@string/string_height_counter"
-                android:textColor="@android:color/background_dark" />
-
-        </RelativeLayout>
-
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/imgBtn_menu_preferences"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:contentDescription="@string/description"
         android:src="@android:drawable/ic_menu_preferences" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
+
+        <EditText
+            android:id="@+id/et_height"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:text="@string/string_height_counter"
+            android:textColor="@android:color/background_dark" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/et_height"
+            android:text="@string/string_height"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/et_weight"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:text="@string/string_weight_counter"
+            android:textColor="@android:color/background_dark" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/et_weight"
+            android:layout_alignBottom="@+id/et_weight"
+            android:layout_alignParentLeft="true"
+            android:text="@string/string_weight"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </RelativeLayout>
 
 </RelativeLayout>

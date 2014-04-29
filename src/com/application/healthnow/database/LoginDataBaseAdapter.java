@@ -145,6 +145,39 @@ public class LoginDataBaseAdapter {
 		 return mylist;
 	}
 	
+	public String GetWeight() {
+		 String userName = GlobalVariables.userName;
+		 String where = " USERNAME=?";
+		 Cursor c = db.query(DBAdapter.TABLE_LOGIN, null, where,
+					new String[] { userName }, null, null, null);
+		if (c.getCount() < 1) // UserName Not Exist
+		{
+			c.close();
+		}
+		c.moveToFirst();
+
+		 String weight = c.getString(c.getColumnIndex(DBAdapter.INFO_COLUMN_WEIGHT));
+		 
+		 return weight;
+	}
+	
+	public String GetHeight() {
+		 String userName = GlobalVariables.userName;
+		 String where = " USERNAME=?";
+		 Cursor c = db.query(DBAdapter.TABLE_LOGIN, null, where,
+					new String[] { userName }, null, null, null);
+		if (c.getCount() < 1) // UserName Not Exist
+		{
+			c.close();
+		}
+		c.moveToFirst();
+
+		String height = c.getString(c.getColumnIndex(DBAdapter.INFO_COLUMN_HEIGHT));
+		 
+		 return height;
+	}
+		 
+	
 	public void updatePin(String pin)
 	{
 		final String userName = GlobalVariables.userName;

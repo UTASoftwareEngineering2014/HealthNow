@@ -51,7 +51,7 @@ public class MedicationDataBaseAdapter
 	public String[] GetAllMedication()
 	{
 		String where = null;
-		String[] medicationNames=null;
+		String[] medicationNames = null;
 		Cursor c = db.query(true, DBAdapter.TABLE_MEDICATION, DBAdapter.MEDICATION_ALLCOLUMNS,
 						where, null, null, null, null, null);
 		if (c != null) {
