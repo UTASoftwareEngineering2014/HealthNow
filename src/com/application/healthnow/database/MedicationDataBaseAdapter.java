@@ -48,10 +48,15 @@ public class MedicationDataBaseAdapter
 					new String[] { medicationName });	
 	}
 	
-	public String[] GetAllMedication()
+	public ArrayList<String> GetAllMedication()
 	{
 		String where = null;
+<<<<<<< HEAD
 		String[] medicationNames = null;
+=======
+		ArrayList<String> medicationNames = new ArrayList<String>();
+		
+>>>>>>> c5f71fd37b42fea83eec5da04499c8c985a4e535
 		Cursor c = db.query(true, DBAdapter.TABLE_MEDICATION, DBAdapter.MEDICATION_ALLCOLUMNS,
 						where, null, null, null, null, null);
 		if (c != null) {
@@ -61,21 +66,30 @@ public class MedicationDataBaseAdapter
 		
 		 while(c.isAfterLast() == false)
 		 {
-			medicationNames[i] = c.getString(c.getColumnIndex(DBAdapter.MEDICATION_COLUMN_MEDICATION_NAME));
+			medicationNames.add(c.getString(c.getColumnIndex(DBAdapter.MEDICATION_COLUMN_MEDICATION_NAME)));
 			 
 			i++;
 			c.moveToNext();
 		 }
 		 
+		 /*String medicationString[]=new String[medicationNames.size()];
+		 for(int j=0;i<medicationNames.size();j++)
+		 {
+			 medicationString[j]=medicationNames.get(j).toString();
+		 }*/
+		 
 		 return medicationNames;
-	
+	 
 	}
 	
 	public int GetIntentId(String medicationName)
 	{
 		int intentId;
-		Cursor cursor = db.query(DBAdapter.TABLE_MEDICATION, null, " USERNAME=?",
-				new String[] { medicationName }, null, null, null);
+		
+		 String where = " USERNAME=?";
+		 Cursor cursor = db.query(DBAdapter.TABLE_MEDICATION, null, where,
+					new String[] { medicationName }, null, null, null);
+
 		if (cursor.getCount() < 1) // UserName Not Exist
 		{
 			cursor.close();
