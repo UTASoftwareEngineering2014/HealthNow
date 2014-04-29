@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.application.healthnow.database.LoginDataBaseAdapter;
+import com.application.healthnow.database.MedicationDataBaseAdapter;
 import com.application.healthnow.search.ExpandableListAdapter;
 import com.application.healthnow.search.WebViewResult;
 
@@ -29,7 +31,9 @@ public class SearchResultsActivity extends Activity
     List<String> diet;
     List<String> exerciseurl;
     List<String> dieturl;
-    int sizeofdietresult,sizeofexerciseresult;
+    List <String> medication;
+    MedicationDataBaseAdapter db;LoginDataBaseAdapter lgdb;
+    int sizeofdietresult,sizeofexerciseresult,sizeofmedresult;
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -41,6 +45,8 @@ public class SearchResultsActivity extends Activity
     	diet=new ArrayList<String>();
     	exerciseurl=new ArrayList<String>();
     	dieturl=new ArrayList<String>();
+    	db=new MedicationDataBaseAdapter(this);
+    	lgdb=new LoginDataBaseAdapter(this);
     	prepareListData(getIntent());
     	listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
     	expListView.setAdapter(listAdapter);
@@ -126,7 +132,7 @@ public class SearchResultsActivity extends Activity
         // Adding child data
         listDataHeader.add("Diet");
         listDataHeader.add("Exercise");
- 
+        listDataHeader.add("Medication");
         // Adding child data
  
         
@@ -198,15 +204,28 @@ public class SearchResultsActivity extends Activity
 			sizeofexerciseresult=0;
 		}
     	
+    	ArrayList<String> a=db.GetAllMedication();String m;
+    	medication=new ArrayList<String>();
+    	for(int i=0;i<a.size();i++)
+    	{
+    		m=a.get(i).toString();
+    		if(m.contains(""+lgdb.GetUserId()))
+    		{
+    			m=m.replace(""+lgdb.GetUserId(), "");
+    			if(m.toLowerCase().contains(query))
+    			{
+    				medication.add(m);
+    			}
+    		}
+    	}
     	
-    	
-    	
-    	
+    	if(medication.size()==0)medication.add("No Match In Medication");
 
 
  
         listDataChild.put(listDataHeader.get(0), diet); // Header, Child data
         listDataChild.put(listDataHeader.get(1), exercise);
+        listDataChild.put(listDataHeader.get(2), medication);
     }
     
 }

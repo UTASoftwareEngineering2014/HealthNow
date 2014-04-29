@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +37,7 @@ public class DietFragment extends Fragment{
 	int storedDay;
 	int breakfast, lunch, dinner;
 	private static final String PREFS_NAME = "MyPrefsFile";
+	String dayhistory,breakfasthistory,lunchhistory,dinnerhistory;
 	LoginDataBaseAdapter DB;
 	
 	@Override
@@ -71,7 +73,7 @@ public class DietFragment extends Fragment{
 				SharedPreferences getPreference = PreferenceManager.getDefaultSharedPreferences(getActivity());
 				int dailyCalorieIntake = 0;
 				try {
-					dailyCalorieIntake = Integer.parseInt(getPreference.getString("cal", "0"));
+					dailyCalorieIntake = Integer.parseInt(getPreference.getString("cal"+GlobalVariables.userName, "0"));
 				} catch(Exception e) {
 					Context context = getActivity();
 					CharSequence dailyCaloriePrompt = "Please Enter a Number Only for Daily Calorie Goal.";
@@ -106,9 +108,9 @@ public class DietFragment extends Fragment{
 				
 				SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
 				SharedPreferences.Editor editor = settings.edit();
-				editor.putInt("Breakfast", breakfast);
-				editor.putInt("Lunch", lunch);
-				editor.putInt("Dinner", dinner);
+				editor.putInt("breakfast"+GlobalVariables.userName, breakfast);
+				editor.putInt("lunch"+GlobalVariables.userName, lunch);
+				editor.putInt("dinner"+GlobalVariables.userName, dinner);
 				editor.commit();
 				
 			}
@@ -187,48 +189,155 @@ public class DietFragment extends Fragment{
 	{
 		super.onResume();
 		SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
-		settings.getString("url", null);
+		settings.getString("url"+GlobalVariables.userName, null);
 		checkDay();
 		//editText = (EditText) 
 	}
 	
-	private void checkDay() {
-		Calendar calendar = Calendar.getInstance();
-		int day = calendar.get(Calendar.DAY_OF_YEAR);
-		SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
-		storedDay = settings.getInt("day", 0);
+	private void checkDay() 
+	{
 		
+		Calendar calendar = Calendar.getInstance();
+		//int day = calendar.get(Calendar.DAY_OF_YEAR);
+		int day = calendar.get(Calendar.MINUTE);
+		SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+		storedDay = settings.getInt("day"+GlobalVariables.userName, 0);
+		Log.d("dietfragment","storedday="+storedDay+"day="+day);
+		breakfasthistory=settings.getString("breakfasthistory"+GlobalVariables.userName, "");
+		Log.d("break",breakfasthistory);
+		dayhistory=settings.getString("dayhistory"+GlobalVariables.userName, "");
+		Log.d("dietfragment", dayhistory);
 		if(storedDay == 0)
 		{
+			
 			SharedPreferences.Editor editor = settings.edit();
-			editor.putInt("day", day);
+			editor.putInt("day"+GlobalVariables.userName, day);
 			breakfast = 0;
 			lunch = 0;
 			dinner = 0;
-			editor.putInt("breakfast", breakfast);
-			editor.putInt("lunch", lunch);
-			editor.putInt("dinner", dinner);
+			editor.putInt("breakfast"+GlobalVariables.userName, breakfast);
+			editor.putInt("lunch"+GlobalVariables.userName, lunch);
+			editor.putInt("dinner"+GlobalVariables.userName, dinner);
 			storedDay = day;
 			editor.commit();
 		}
 		else if(storedDay == day)
 		{
-			breakfast = settings.getInt("breakfast", 0);
-			lunch = settings.getInt("lunch", 0);
-			dinner = settings.getInt("dinner", 0);
+			breakfast = settings.getInt("breakfast"+GlobalVariables.userName, 0);
+			lunch = settings.getInt("lunch"+GlobalVariables.userName, 0);
+			dinner = settings.getInt("dinner"+GlobalVariables.userName, 0);
+			//Log.d("breakfast", "="+breakfast);	
 		}
 		else
 		{
+			breakfast = settings.getInt("breakfast"+GlobalVariables.userName, 0);
+			lunch = settings.getInt("lunch"+GlobalVariables.userName, 0);
+			dinner = settings.getInt("dinner"+GlobalVariables.userName, 0);
+			Log.d("in else", "dietfrag "+breakfast);
 			SharedPreferences.Editor editor = settings.edit();
+			dayhistory=settings.getString("dayhistory"+GlobalVariables.userName, "");
+			//Log.d("dietfragment", dayhistory);
+			editor.putString("dayhistory"+GlobalVariables.userName, dayhistory+day+" ");
+			breakfasthistory=settings.getString("breakfasthistory"+GlobalVariables.userName, "");
+			editor.putString("breakfasthistory"+GlobalVariables.userName, breakfasthistory+breakfast+" ");
+			lunchhistory=settings.getString("lunchhistory"+GlobalVariables.userName, "");
+			editor.putString("lunchhistory"+GlobalVariables.userName, lunchhistory+lunch+" ");
+			dinnerhistory=settings.getString("dinnerhistory"+GlobalVariables.userName, "");
+			editor.putString("dinnerhistory"+GlobalVariables.userName, dinnerhistory+dinner+" ");
 			breakfast = 0;
 			lunch = 0;
 			dinner = 0;
-			editor.putInt("breakfast", breakfast);
-			editor.putInt("lunch", lunch);
-			editor.putInt("dinner", dinner);
-			editor.putInt("day", day);
+			editor.putInt("breakfast"+GlobalVariables.userName, breakfast);
+			editor.putInt("lunch"+GlobalVariables.userName, lunch);
+			editor.putInt("dinner"+GlobalVariables.userName, dinner);
+			editor.putInt("day"+GlobalVariables.userName, day);
 			storedDay = day;
 			editor.commit();
 		}
+	}
+	
+	public int[] returndayhistory()
+	{
+		SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+		String dayhist=settings.getString("dayhistory"+GlobalVariables.userName, "");
+		int days[]=null;
+		if(!(dayhist.equals("")))
+		{
+			
+				
+			String dayarray[]=dayhist.split(" ");
+			int size=dayarray.length;
+			days=new int[size];
+			for(int i=0;i<size;i++)
+			{
+				days[i]=Integer.parseInt((dayarray[i].toString()));
+			}
+			
+		}
+		return days;
+		
+	}
+	public int[] returnbreakfasthistory()
+	{
+		SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+		String dayhist=settings.getString("breakfasthistory"+GlobalVariables.userName, "");
+		int days[]=null;
+		if(!(dayhist.equals("")))
+		{
+			
+				
+			String dayarray[]=dayhist.split(" ");
+			int size=dayarray.length;
+			days=new int[size];
+			for(int i=0;i<size;i++)
+			{
+				days[i]=Integer.parseInt((dayarray[i].toString()));
+			}
+			
+		}
+		return days;
+		
+	}
+	public int[] returnlunchhistory()
+	{
+		SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+		String dayhist=settings.getString("lunchhistory"+GlobalVariables.userName, "");
+		int days[]=null;
+		if(!(dayhist.equals("")))
+		{
+			
+				
+			String dayarray[]=dayhist.split(" ");
+			int size=dayarray.length;
+			days=new int[size];
+			for(int i=0;i<size;i++)
+			{
+				days[i]=Integer.parseInt((dayarray[i].toString()));
+			}
+			
+		}
+		return days;
+		
+	}
+	public int[] returndinnerhistory()
+	{
+		SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+		String dayhist=settings.getString("dinnerhistory"+GlobalVariables.userName, "");
+		int days[]=null;
+		if(!(dayhist.equals("")))
+		{
+			
+				
+			String dayarray[]=dayhist.split(" ");
+			int size=dayarray.length;
+			days=new int[size];
+			for(int i=0;i<size;i++)
+			{
+				days[i]=Integer.parseInt((dayarray[i].toString()));
+			}
+			
+		}
+		return days;
+		
 	}
 }
