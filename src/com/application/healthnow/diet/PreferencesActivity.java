@@ -1,13 +1,9 @@
 package com.application.healthnow.diet;
 
-<<<<<<< HEAD
-import com.application.healthnow.DoctorsActivity;
-=======
+
 import com.application.healthnow.GlobalVariables;
->>>>>>> 6bd5c27696a23c10ae072980591089889966d51d
 import com.application.healthnow.R;
 import com.application.healthnow.SettingsActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
