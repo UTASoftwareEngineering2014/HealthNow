@@ -54,7 +54,7 @@ public class MedicationActivity extends Activity
 	PendingIntent pISender;
 	MedicationDataBaseAdapter MED_DB;
 	EditText medname;int uid;
-	ListView med;ArrayAdapter<String> adapter;
+	ListView med;StableArrayAdapter adapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -81,9 +81,12 @@ public class MedicationActivity extends Activity
 		removeMedication = (Button) findViewById(R.id.medication_button_removemedication);
 		
 		med=(ListView)findViewById(R.id.listview_medication);
-		adapter = new ArrayAdapter<String>(this,
-	              android.R.layout.simple_list_item_1, android.R.id.text1,MED_DB.GetAllMedication());
-		med.setAdapter(adapter);
+		if(MED_DB.GetAllMedication()!=null)
+			{
+					adapter = new StableArrayAdapter(this,
+							android.R.layout.simple_list_item_1, MED_DB.GetAllMedication());
+					med.setAdapter(adapter);
+			}
 		med.setOnItemClickListener(new OnItemClickListener() 
 		{
 
@@ -93,7 +96,7 @@ public class MedicationActivity extends Activity
 			{
 				// TODO Auto-generated method stub
 				final String  itemValue    = (String) med.getItemAtPosition(position);
-				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				AlertDialog.Builder builder = new AlertDialog.Builder(MedicationActivity.this);
 
 			    builder.setTitle("Confirm");
 			    builder.setMessage("Are you sure you want to delete "+itemValue+"?");
@@ -102,6 +105,9 @@ public class MedicationActivity extends Activity
 
 			        public void onClick(DialogInterface dialog, int which) 
 			        {
+			        	
+			        	
+			        	Log.d("fromlist", "1"+itemValue+"1");
 			            // Do nothing but close the dialog
 			        	int uid=MED_DB.GetIntentId(itemValue);
 			        	try
@@ -197,10 +203,12 @@ public class MedicationActivity extends Activity
 						{
 						}
 			        	MED_DB.DeleteMedication(itemValue);
-			        	med=(ListView)findViewById(R.id.listview_medication);
-			    		adapter = new ArrayAdapter<String>(context,
-			    	              android.R.layout.simple_list_item_1, android.R.id.text1,MED_DB.GetAllMedication());
-			    		med.setAdapter(adapter);
+			        	if(MED_DB.GetAllMedication()!=null)
+						{
+								adapter = new StableArrayAdapter(context,
+										android.R.layout.simple_list_item_1, MED_DB.GetAllMedication());
+								med.setAdapter(adapter);
+						}
 			         
 			        
 			        }
@@ -238,14 +246,20 @@ public class MedicationActivity extends Activity
 				friToggle = (ToggleButton) findViewById(R.id.toggle_friday);
 				satToggle = (ToggleButton) findViewById(R.id.toggle_saturday);
 				medname=(EditText)findViewById(R.id.medication_name);
-				String medication=medname.getText().toString();
+				/*String medication=medname.getText().toString();
 				uid=hash(medication);
 				idsun=uid;idmon=uid+1;idtue=uid+2;idwed=uid+3;idthu=uid+4;idfri=uid+5;idsat=uid+6;
-				MED_DB.InsertMedication(medication,uid );
+				MED_DB.InsertMedication(medication,uid );*/
 				saveAlarm.setOnClickListener(new View.OnClickListener() 
 				{
 					@SuppressLint("NewApi")
-					public void onClick(View v) {	
+					public void onClick(View v) 
+					{
+						String medication=medname.getText().toString();
+						Log.d("whenstored","1"+medication+"1");
+						uid=hash(medication);
+						idsun=uid;idmon=uid+1;idtue=uid+2;idwed=uid+3;idthu=uid+4;idfri=uid+5;idsat=uid+6;
+						MED_DB.InsertMedication(medication,uid );
 						Time time = new Time();
 						
 						timePicker.clearFocus();
@@ -581,12 +595,13 @@ public class MedicationActivity extends Activity
 	{
 		Random rand = new Random(); 
 		int value = rand.nextInt(Integer.MAX_VALUE);
-		int sum=0;
+		int sum=0;char a=name.charAt(0);
 		for(int i=0;i<name.length();i++)
 		{
-			sum=sum+name.charAt(i);
+			sum=sum+(int)name.charAt(i);
 		}
-		return (value/sum);
+		if(sum!=0)return (value/sum);
+		else return value;
 	}
 	
 	
