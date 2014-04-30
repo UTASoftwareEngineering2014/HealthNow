@@ -56,7 +56,7 @@ public class Saved_Exercise extends Activity{
 		
 		
 		
-		page = settings.getString("urlsaveExercise", null);
+		page = settings.getString("urlsaveExercise"+GlobalVariables.userName, null);
 		if (page != null) {
 			String[] pageUrlMapping = page.split("\n");
 			names = new ArrayList<String>();

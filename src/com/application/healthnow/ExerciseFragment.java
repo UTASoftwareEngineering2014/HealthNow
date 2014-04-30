@@ -3,6 +3,8 @@ package com.application.healthnow;
 import java.util.ArrayList;
 import java.util.List;
 
+import name.bagi.levente.pedometer.Pedometer;
+
 //import name.bagi.levente.pedometer.Pedometer;
 
 //import name.bagi.levente.pedometer.Pedometer;
@@ -175,8 +177,8 @@ public class ExerciseFragment extends Fragment {
    			  	int duration = Toast.LENGTH_LONG;
    			  	Toast toast = Toast.makeText(context, text, duration);
    			  	toast.show();
-				//Intent startPedometer=new Intent(getActivity(),Pedometer.class);
-				//startActivity(startPedometer);
+				Intent startPedometer=new Intent(getActivity(),Pedometer.class);
+				startActivity(startPedometer);
 			}break;
 
 			case R.id.btn_heartRateMonitor: {

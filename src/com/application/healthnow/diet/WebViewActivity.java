@@ -32,7 +32,7 @@ public class WebViewActivity extends Activity {
 		getWindow().requestFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.activity_next);
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		page = settings.getString("url", null);
+		page = settings.getString("url"+GlobalVariables.userName, null);
 		final WebView webView = (WebView) findViewById(R.id.wv_recipe);
 		Button btnSaveRecipeWebView = (Button) findViewById(R.id.btn_saveRecipeWebView);
 		
