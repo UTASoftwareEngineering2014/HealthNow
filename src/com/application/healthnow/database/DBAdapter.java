@@ -11,6 +11,7 @@ public class DBAdapter {
 	public static final String TABLE_LOGIN = "LOGIN";
 	public static final String TABLE_MEDICATION = "MEDICATION";
 	public static final String TABLE_VITALSIGNS = "VITALSIGNS";
+	public static final String TABLE_DOCTORS = "DOCTORS";
 	
 	//Login table columns
     public static final String LOGIN_COLUMN_ID = "ID";
@@ -36,6 +37,15 @@ public class DBAdapter {
     public static final String MEDICATION_COLUMN_ID = "ID";
     public static final String MEDICATION_COLUMN_MEDICATION_NAME = "MEDICATION_NAME";
     public static final String MEDICATION_COLUMN_INTENT = "INTENT";
+    
+    //Doctors table columns
+    public static final String DOCTORS_COLUMN_ID = "ID";
+    public static final String DOCTORS_COLUMN_DOCTORS_NAME = "DOCTOR_NAME";
+    public static final String DOCTORS_COLUMN_DOCTORS_PHONE = "DOCTOR_PHONE";
+    public static final String DOCTORS_COLUMN_DOCTORS_EMAIL = "DOCTOR_EMAIL";
+    public static final String DOCTORS_COLUMN_DOCTORS_OFFICE = "DOCTOR_OFFICE";
+    public static final String DOCTORS_COLUMN_LOGINID = "LOGIN_ID";
+    
 
     public static String[] LOGIN_ALLCOLUMNS= {LOGIN_COLUMN_ID,LOGIN_COLUMN_USERNAME,LOGIN_COLUMN_PASSWORD,LOGIN_COLUMN_EMAIL,
     											INFO_COLUMN_FIRSTNAME,INFO_COLUMN_LASTNAME,INFO_COLUMN_WEIGHT,INFO_COLUMN_HEIGHT,INFO_COLUMN_PIN};
@@ -43,6 +53,8 @@ public class DBAdapter {
     public static String[] VITALSIGNS_ALLCOLUMNS= {VITALSIGNS_COLUMN_ID,VITALSIGNS_COLUMN_BLOOD_PRESSURE,VITALSIGNS_COLUMN_HEART_RATE,VITALSIGNS_COLUMN_GLUCOSE,VITALSIGNS_COLUMN_CHOLESTEROL,VITALSIGNS_COLUMN_DATE};
     
     public static String[] MEDICATION_ALLCOLUMNS= {MEDICATION_COLUMN_ID,MEDICATION_COLUMN_MEDICATION_NAME, MEDICATION_COLUMN_INTENT};
+    
+    public static String[] DOCTORS_ALLCOLUMNS= {DOCTORS_COLUMN_ID,DOCTORS_COLUMN_DOCTORS_NAME, DOCTORS_COLUMN_DOCTORS_PHONE, DOCTORS_COLUMN_DOCTORS_EMAIL,DOCTORS_COLUMN_DOCTORS_OFFICE, DOCTORS_COLUMN_LOGINID};
 	
     // TODO: Create public field for each column in your table.
     // SQL Statement to create a new database.
@@ -73,6 +85,15 @@ public class DBAdapter {
     		+ MEDICATION_COLUMN_ID + " integer primary key autoincrement, " 
     		+ MEDICATION_COLUMN_MEDICATION_NAME + " text, "
     		+ MEDICATION_COLUMN_INTENT + " integer );";
+    
+    static final String CREATE_TABLE_DOCTORS = " create table " 
+    		+ TABLE_DOCTORS + "("
+    		+ DOCTORS_COLUMN_ID + " integer primary key autoincrement, " 
+    		+ DOCTORS_COLUMN_DOCTORS_NAME + " text, " 
+			+ DOCTORS_COLUMN_DOCTORS_PHONE + " text, "
+			+ DOCTORS_COLUMN_DOCTORS_EMAIL + " text, " 
+			+ DOCTORS_COLUMN_DOCTORS_OFFICE + " text, "
+    		+ DOCTORS_COLUMN_LOGINID + " integer);";
 	
 	// Variable to hold the database instance
 	public SQLiteDatabase db;

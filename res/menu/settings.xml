@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_diet"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Diet"/>
+    <item
+        android:id="@+id/action_doctors"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Doctors"/>
+
+</menu>

@@ -71,12 +71,6 @@ public class MedicationDataBaseAdapter
 			c.moveToNext();
 		 }
 		 
-		 /*String medicationString[]=new String[medicationNames.size()];
-		 for(int j=0;i<medicationNames.size();j++)
-		 {
-			 medicationString[j]=medicationNames.get(j).toString();
-		 }*/
-		 
 		 return medication;
 	 
 	}

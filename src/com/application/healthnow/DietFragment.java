@@ -54,7 +54,6 @@ public class DietFragment extends Fragment{
 		Button btnSearchRecipe = (Button) rootView.findViewById(R.id.btn_Search_Recipes);
 		Button btnSavedRecipe = (Button) rootView.findViewById(R.id.btn_Saved_Recipes);
 		Button btnSaveCalories=(Button)rootView.findViewById(R.id.btn_SaveCalories);
-		ImageButton imgBtnSetPreferences = (ImageButton) rootView.findViewById(R.id.imgBtn_menu_preferences);
 		checkDay();
 		editText = (EditText)rootView.findViewById(R.id.et_breakfast);
 		editText.setText(Integer.toString(breakfast));
@@ -116,15 +115,6 @@ public class DietFragment extends Fragment{
 				
 			}
 			
-		});
-		
-		imgBtnSetPreferences.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				Intent preferencesIntent = new Intent(getActivity(), PreferencesActivity.class);
-				startActivity(preferencesIntent);
-			}
 		});
 		
 		btnSearchRecipe.setOnClickListener(new View.OnClickListener() {

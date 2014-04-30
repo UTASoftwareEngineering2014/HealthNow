@@ -40,15 +40,15 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp" >
+                    android:layout_height="51dp" >
 
                     <TextView
                         android:id="@+id/tv_calorie_counter"
-                        android:layout_width="20dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:gravity="top"
+                        android:gravity="center|top"
                         android:text="@string/string_calorie_counter"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@android:color/background_dark"
@@ -58,7 +58,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="wrap_content" >
 
                 <EditText
                     android:id="@+id/et_breakfast"
@@ -204,15 +204,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/imgBtn_menu_preferences"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:contentDescription="@string/description"
-            android:src="@android:drawable/ic_menu_preferences" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -220,28 +211,45 @@
             android:layout_alignParentLeft="true" >
 
             <EditText
+                android:id="@+id/et_weight"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:text="@string/string_weight_counter"
+                android:textColor="@android:color/background_dark" />
+
+            <EditText
                 android:id="@+id/et_height"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="19dp"
+                android:layout_below="@+id/textView3"
                 android:ems="10"
                 android:inputType="numberDecimal"
                 android:text="@string/string_height_counter"
                 android:textColor="@android:color/background_dark" />
 
-            <EditText
-                android:id="@+id/et_weight"
-                android:layout_width="60dp"
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView2"
+                android:layout_alignBottom="@+id/textView2"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="19dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:text="@string/string_weight_counter"
-                android:textColor="@android:color/background_dark" />
+                android:text="@string/string_height"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/et_weight"
+                android:layout_alignParentRight="true"
+                android:text="@string/string_weight"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </RelativeLayout>
 
@@ -279,32 +287,15 @@
 
                     <TextView
                         android:id="@+id/tv_BMI_Counter"
-                        android:layout_width="20dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
+                        android:gravity="center"
                         android:text="@string/string_BMI_counter"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@android:color/background_dark"
                         android:textSize="30sp" />
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:text="@string/string_height"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="@string/string_weight"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 </RelativeLayout>
             </LinearLayout>

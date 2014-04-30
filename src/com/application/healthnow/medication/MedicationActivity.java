@@ -275,7 +275,7 @@ public class MedicationActivity extends Activity
 				thuToggle = (ToggleButton) findViewById(R.id.toggle_thursday);
 				friToggle = (ToggleButton) findViewById(R.id.toggle_friday);
 				satToggle = (ToggleButton) findViewById(R.id.toggle_saturday);
-				medname=(EditText)findViewById(R.id.medication_name);
+				medname=(EditText)findViewById(R.id.timer_text);
 				/*String medication=medname.getText().toString();
 				uid=hash(medication);
 				idsun=uid;idmon=uid+1;idtue=uid+2;idwed=uid+3;idthu=uid+4;idfri=uid+5;idsat=uid+6;
