@@ -7,10 +7,13 @@ import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
+import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 
 public class DietReportActivity extends Activity {
@@ -21,7 +24,8 @@ public class DietReportActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 		setContentView(R.layout.activity_diet_report);
-		
+		int br[]=returnbreakfasthistory();
+		if(br!=null)Log.e("br from ex",""+ br[0]);
 		plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
 		
 		Number[] series1Numbers = {1,8,5,2,7,4};
@@ -55,5 +59,28 @@ public class DietReportActivity extends Activity {
         // reduce the number of range labels
         plot.setTicksPerRangeLabel(3);
         plot.getGraphWidget().setDomainLabelOrientation(-45);	
+	}
+	
+	
+	public int[] returnbreakfasthistory()
+	{
+		SharedPreferences settings = getSharedPreferences("MyPrefsFile", 0);
+		String dayhist=settings.getString("breakfasthistory"+GlobalVariables.userName, "");
+		int days[]=null;
+		if(!(dayhist.equals("")))
+		{
+			
+				
+			String dayarray[]=dayhist.split(" ");
+			int size=dayarray.length;
+			days=new int[size];
+			for(int i=0;i<size;i++)
+			{
+				days[i]=Integer.parseInt((dayarray[i].toString()));
+			}
+			
+		}
+		return days;
+		
 	}
 }

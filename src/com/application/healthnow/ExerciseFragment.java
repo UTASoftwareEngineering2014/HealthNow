@@ -27,6 +27,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.AvoidXfermode.Mode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -57,6 +59,8 @@ public class ExerciseFragment extends Fragment {
 
 		View rootView = inflater.inflate(R.layout.fragment_exercise, container,
 				false);
+		/*int br[]=returnbreakfasthistory();
+		if(br!=null)Log.d("br from ex",""+ br[0]);*/
 		Button calculateCalories = (Button) rootView
 				.findViewById(R.id.btn_calculateCalories);
 		Button searchExercise = (Button) rootView
@@ -220,7 +224,29 @@ public class ExerciseFragment extends Fragment {
 			}
 
 		}
+		
 
+	}
+	public int[] returnbreakfasthistory()
+	{
+		SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", 0);
+		String dayhist=settings.getString("breakfasthistory"+GlobalVariables.userName, "");
+		int days[]=null;
+		if(!(dayhist.equals("")))
+		{
+			
+				
+			String dayarray[]=dayhist.split(" ");
+			int size=dayarray.length;
+			days=new int[size];
+			for(int i=0;i<size;i++)
+			{
+				days[i]=Integer.parseInt((dayarray[i].toString()));
+			}
+			
+		}
+		return days;
+		
 	}
 }
 
