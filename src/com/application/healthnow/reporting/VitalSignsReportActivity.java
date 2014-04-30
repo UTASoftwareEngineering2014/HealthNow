@@ -18,7 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 
-public class DietReportActivity extends Activity {
+public class VitalSignsReportActivity extends Activity {
 	private XYPlot plot;
 	private UtilityFunctions utilityFunctions = new UtilityFunctions();
 	private static final String PREFS_NAME = "MyPrefsFile";
@@ -26,7 +26,7 @@ public class DietReportActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		DietReportActivity dietReportActivity = new DietReportActivity();
-		DietFragment dietFragement = new DietFragment();
+		DietFragment dietFragment = new DietFragment();
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
 				WindowManager.LayoutParams.FLAG_SECURE);

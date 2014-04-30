@@ -18,7 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 
-public class DietReportActivity extends Activity {
+public class ExerciseReportActivity extends Activity {
 	private XYPlot plot;
 	private UtilityFunctions utilityFunctions = new UtilityFunctions();
 	private static final String PREFS_NAME = "MyPrefsFile";
