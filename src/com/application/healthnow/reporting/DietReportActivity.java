@@ -16,7 +16,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 
-public class DietReportActivity extends Activity {
+public class DietReportActivity extends Activity 
+{
 	private XYPlot plot;
 	@Override
 	public void onCreate(Bundle savedInstanceState)
