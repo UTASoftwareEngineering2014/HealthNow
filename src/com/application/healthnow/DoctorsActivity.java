@@ -93,10 +93,6 @@ public class DoctorsActivity extends Activity {
 						String phone = editPhone.getText().toString();
 						String email = editEmail.getText().toString();
 						String office = editOffice.getText().toString();
-
-						DC_DB.InsertDoctor(name, phone, email, office, userId);
-
-						refresh();	
 						
 						if (name.equals("")) {
 							Toast.makeText(getApplicationContext(),
