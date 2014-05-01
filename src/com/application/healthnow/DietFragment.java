@@ -82,8 +82,10 @@ public class DietFragment extends Fragment{
 					Toast toast = Toast.makeText(context, dailyCaloriePrompt, duration);
 					toast.show();
 				}
-				
 				int totalCalorie = 0;
+				try
+				{
+				
 				editText = (EditText)rootView.findViewById(R.id.et_breakfast);
 				int calorie = Integer.parseInt(editText.getText().toString());
 				totalCalorie = calorie;
@@ -98,6 +100,10 @@ public class DietFragment extends Fragment{
 				dinner = calorie;
 				textView = (TextView) rootView.findViewById(R.id.tv_calorie_counter);
 				textView.setText(Integer.toString(totalCalorie));
+				}catch(Exception e)
+				{
+					
+				}
 				
 				ProgressDialog progressDialog = new ProgressDialog(arg0.getContext());
 				progressDialog.setCancelable(true);

@@ -31,6 +31,8 @@ import javax.mail.internet.MimeMultipart;
 
 import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
+import com.application.healthnow.database.DoctorDataBaseAdapter;
+import com.application.healthnow.database.LoginDataBaseAdapter;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -56,6 +58,7 @@ public class PlayAlert extends Activity
 
 	MediaPlayer mPlayer;Context context;
 	int count=0; long current;String med;
+	LoginDataBaseAdapter lgdb;DoctorDataBaseAdapter ddb;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -64,6 +67,8 @@ public class PlayAlert extends Activity
 		setContentView(R.layout.alarm_alert);
 		setTitle("Medication Alarm");
 		current=System.currentTimeMillis();
+		lgdb=new LoginDataBaseAdapter(this);
+		ddb=new DoctorDataBaseAdapter(this);
 		//context.getResources().getColor(android.R.color.background_dark);
 		Window window = this.getWindow();
         window.addFlags(LayoutParams.FLAG_DISMISS_KEYGUARD);
@@ -129,31 +134,47 @@ public class PlayAlert extends Activity
 								Log.d("alert", "10seconds up without pressing dismiss");
 								//this is where email must be sent
 								Mail m = new Mail("Team3.cse3310.2014@gmail.com", "CSE_3310"); 
-								String[] toArr = {"arvind7694@gmail.com"};
-								m.setTo(toArr);
-								m.setFrom("Team3.cse3310.2014@gmail.com"); 
-								m.setSubject("Medication not Taken");
-								m.setBody(GlobalVariables.userName+" "+"did not take "+med);
-								try { 
+								ArrayList<String> dremail=ddb.GetAllDoctorsEmail();
+								if(dremail!=null)
+								{
+									String[] toArr=new String[dremail.size()];
+									for(int i=0;i<dremail.size();i++)
+									{
+										toArr[i]=dremail.get(i).toString();
+									}
+									m.setTo(toArr);
+									m.setFrom("Team3.cse3310.2014@gmail.com"); 
+									m.setSubject("Medication not Taken");
+									m.setBody(GlobalVariables.userName+" "+"did not take "+med);
+									try { 
 							        
 
-							        if(m.send()) 
-							        { 
+										if(m.send()) 
+										{	 
 							          //Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show(); 
-							        	Log.d("mail", "sent");
-							        } else 
-							        { 
+											Log.d("mail", "sent");
+										} else 
+										{ 
 							         // Toast.makeText(MailApp.this, "Email was not sent.", Toast.LENGTH_LONG).show(); 
 							        	Log.d("mail", "notsent");
-							        } 
-							      } catch(Exception e) { 
+										} 
+										} catch(Exception e) { 
 							        //Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show(); 
-							        Log.e("MailApp", "Could not send email", e); 
-							      } 
-								
-								SmsManager manager = SmsManager.getDefault();
-								manager.sendTextMessage("6784472900",null,GlobalVariables.userName+" "+"did not take "+med,null,null);
-								
+											Log.e("MailApp", "Could not send email", e); 
+										} 
+								}
+									try
+									{
+										SmsManager manager = SmsManager.getDefault();
+								ArrayList<String> drnumber=ddb.GetAllDoctorsPhone();
+								for(int i=0;i<drnumber.size();i++)
+								{
+									manager.sendTextMessage(drnumber.get(i).toString(),null,GlobalVariables.userName+" "+"did not take "+med,null,null);
+								}
+								}catch(Exception e)
+								{
+									
+								}
 								if(mPlayer!=null)mPlayer.stop();
 								PlayAlert.this.finish();
 							}
