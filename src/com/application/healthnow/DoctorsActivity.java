@@ -25,8 +25,8 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
 
-public class DoctorsActivity extends Activity{
-	
+public class DoctorsActivity extends Activity {
+
 	Context mContext = this;
 	AlertDialog.Builder builder;
 	AlertDialog alertDialog;
@@ -36,43 +36,41 @@ public class DoctorsActivity extends Activity{
 	List<String> groupList;
 	List<String> doctors;
 	List<String> doctorsInfo;
-    List<String> childList;
-    Map<String, List<String>> doctorCollection;
-    ExpandableListView expListView;
-	 
-	
+	List<String> childList;
+	Map<String, List<String>> doctorCollection;
+	ExpandableListView expListView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_doctors);
-		this.invalidateOptionsMenu();		
-		
+		this.invalidateOptionsMenu();
+
 		LG_DB = new LoginDataBaseAdapter(this);
 		DC_DB = new DoctorDataBaseAdapter(this);
-		
+
 		createGroupList();
- 
-        expListView = (ExpandableListView) findViewById(R.id.expandableListView1);
-        final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
-                this, groupList, doctorCollection);
-        expListView.setAdapter(expListAdapter);
- 
-        expListView.setOnChildClickListener(new OnChildClickListener() {
- 
-            public boolean onChildClick(ExpandableListView parent, View v,
-                    int groupPosition, int childPosition, long id) {
-                final String selected = (String) expListAdapter.getChild(
-                        groupPosition, childPosition);
-                Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
-                        .show();
- 
-                return true;
-            }
-	    }); 
+
+		expListView = (ExpandableListView) findViewById(R.id.expandableListView1);
+		final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
+				this, groupList, doctorCollection);
+		expListView.setAdapter(expListAdapter);
+
+		expListView.setOnChildClickListener(new OnChildClickListener() {
+
+			public boolean onChildClick(ExpandableListView parent, View v,
+					int groupPosition, int childPosition, long id) {
+				final String selected = (String) expListAdapter.getChild(
+						groupPosition, childPosition);
+				Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
+						.show();
+
+				return true;
+			}
+		});
 	}
-	
-	private void AddDoctor()
-	{
+
+	private void AddDoctor() {
 		LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(LAYOUT_INFLATER_SERVICE);
 		final View layout = inflater.inflate(
@@ -84,19 +82,23 @@ public class DoctorsActivity extends Activity{
 
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						editName = (EditText) layout.findViewById(R.id.add_doctor_text_name);
-						editPhone = (EditText) layout.findViewById(R.id.add_doctor_text_phone);
-						editEmail = (EditText) layout.findViewById(R.id.add_doctor_text_email);
-						editOffice = (EditText) layout.findViewById(R.id.add_doctor_text_office);
-						
-						int userId = LG_DB.GetUserId(); 
+						editName = (EditText) layout
+								.findViewById(R.id.add_doctor_text_name);
+						editPhone = (EditText) layout
+								.findViewById(R.id.add_doctor_text_phone);
+						editEmail = (EditText) layout
+								.findViewById(R.id.add_doctor_text_email);
+						editOffice = (EditText) layout
+								.findViewById(R.id.add_doctor_text_office);
+
+						int userId = LG_DB.GetUserId();
 						String name = editName.getText().toString();
 						String phone = editPhone.getText().toString();
 						String email = editEmail.getText().toString();
 						String office = editOffice.getText().toString();
-						
+
 						DC_DB.InsertDoctor(name, phone, email, office, userId);
-						
+
 						refresh();
 					}
 				});
@@ -113,54 +115,51 @@ public class DoctorsActivity extends Activity{
 	}
 
 	private void createGroupList() {
-        groupList = new ArrayList<String>();
-        doctors = new ArrayList<String>();
-        
-        doctors = DC_DB.GetAllDoctorsNames();
-        doctorCollection = new LinkedHashMap<String, List<String>>();
-        
-        for(int i = 0; i < doctors.size(); i++)
-        {
-        	childList = new ArrayList<String>();
-        	groupList.add(doctors.get(i).toString());
-        	doctorsInfo = DC_DB.GetAllDoctorsInfo(doctors.get(i).toString());
-        	for(String info : doctorsInfo)
-        	{
-        		childList.add(info);   
-        	}
-        	
-        	doctorCollection.put(doctors.get(i).toString(), childList);
-        }     
-    }
- 
-    private void setGroupIndicatorToRight() {
-        /* Get the screen width */
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
- 
-        expListView.setIndicatorBounds(width - getDipsFromPixel(35), width
-                - getDipsFromPixel(5));
-    }
-    
-    public void refresh()
-    {
-    	createGroupList();
-    	 
-        expListView = (ExpandableListView) findViewById(R.id.expandableListView1);
-        final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
-                this, groupList, doctorCollection);
-        expListView.setAdapter(expListAdapter);
-    }
- 
-    // Convert pixel to dip
-    public int getDipsFromPixel(float pixels) {
-        // Get the screen's density scale
-        final float scale = getResources().getDisplayMetrics().density;
-        // Convert the dps to pixels, based on density scale
-        return (int) (pixels * scale + 0.5f);
-    }
-	
+		groupList = new ArrayList<String>();
+		doctors = new ArrayList<String>();
+
+		doctors = DC_DB.GetAllDoctorsNames();
+		doctorCollection = new LinkedHashMap<String, List<String>>();
+
+		for (int i = 0; i < doctors.size(); i++) {
+			childList = new ArrayList<String>();
+			groupList.add(doctors.get(i).toString());
+			doctorsInfo = DC_DB.GetAllDoctorsInfo(doctors.get(i).toString());
+			for (String info : doctorsInfo) {
+				childList.add(info);
+			}
+
+			doctorCollection.put(doctors.get(i).toString(), childList);
+		}
+	}
+
+	private void setGroupIndicatorToRight() {
+		/* Get the screen width */
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int width = dm.widthPixels;
+
+		expListView.setIndicatorBounds(width - getDipsFromPixel(35), width
+				- getDipsFromPixel(5));
+	}
+
+	public void refresh() {
+		createGroupList();
+
+		expListView = (ExpandableListView) findViewById(R.id.expandableListView1);
+		final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
+				this, groupList, doctorCollection);
+		expListView.setAdapter(expListAdapter);
+	}
+
+	// Convert pixel to dip
+	public int getDipsFromPixel(float pixels) {
+		// Get the screen's density scale
+		final float scale = getResources().getDisplayMetrics().density;
+		// Convert the dps to pixels, based on density scale
+		return (int) (pixels * scale + 0.5f);
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.doctors, menu);
@@ -174,14 +173,13 @@ public class DoctorsActivity extends Activity{
 		final int settings = R.id.action_settings;
 		final int addDoctor = R.id.action_add_doctors;
 
-		if(selected == settings)
-		{
-			Intent intentStart = new Intent(getApplicationContext(),SettingsActivity.class);
+		if (selected == settings) {
+			Intent intentStart = new Intent(getApplicationContext(),
+					SettingsActivity.class);
 			startActivity(intentStart);
 			return true;
 		}
-		if(selected == addDoctor)
-		{
+		if (selected == addDoctor) {
 			AddDoctor();
 		}
 		// Handle action bar actions click
@@ -192,7 +190,5 @@ public class DoctorsActivity extends Activity{
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
-	
-	
+
 }

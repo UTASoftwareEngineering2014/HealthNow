@@ -28,7 +28,6 @@ public class HomeFragment extends Fragment {
 	 */
 	public HomeFragment() {
 	}
-	
 
 	/**
 	 * Called to instantiate the view. Creates and returns the WebView.
@@ -86,8 +85,6 @@ public class HomeFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		mobileWebView.onPause();
-		Bundle webViewBundle =  new Bundle();
-//		webViewBundle
 	}
 
 	/**
@@ -146,13 +143,6 @@ public class HomeFragment extends Fragment {
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			view.loadUrl(url);
 			return true;
-		}
-
-		@Override
-		public void onPageFinished(WebView view, String url) {
-			//Toast toast = Toast.makeText(getActivity(),
-				//	"Health magazine has finished loading", Toast.LENGTH_SHORT);
-			//toast.show();
 		}
 	}
 }

@@ -4,10 +4,10 @@
     android:layout_height="match_parent">
 
     <com.androidplot.xy.XYPlot
-            android:id="@+id/dietReportPlot"
+            android:id="@+id/dinnerReportPlot"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            androidPlot.title="Diet Report"
+            androidPlot.title="Dinner Report"
             androidPlot.domainLabel="Time"
             androidPlot.rangeLabel="Calorie Intake"
             androidPlot.titleWidget.labelPaint.textSize="@dimen/title_font_size"

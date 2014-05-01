@@ -15,45 +15,67 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.androidplot.xy.*;
-import com.application.healthnow.reporting.DietReportActivity;
-import com.application.healthnow.reporting.MedicationReportActivity;
+import com.application.healthnow.reporting.BreakfastReportActivity;
+import com.application.healthnow.reporting.DinnerReportActivity;
+import com.application.healthnow.reporting.LunchReportActivity;
 import com.application.healthnow.reporting.ReportsModel;
+import com.application.healthnow.reporting.TotalCalorieReportActivity;
+import com.application.healthnow.reporting.VitalSignsReportActivity;
 
 import java.util.Arrays;
 import java.util.SimpleTimeZone;
 
 public class ReportsFragment extends Fragment {
-	
-	public ReportsFragment() { }
+
+	public ReportsFragment() {
+	}
+
 	private XYPlot plot;
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-	{
-		View rootView = inflater.inflate(R.layout.fragment_reports, container, false);
-		
-		ListView reportListView = (ListView) rootView.findViewById(R.id.lv_reportList);
-		
-		ReportsModel[] reports = {
-				new ReportsModel(1, "Diet Report"),
-				new ReportsModel(2, "Exercise Report"),
-				new ReportsModel(3, "Medication Report"),
-				new ReportsModel(4, "Vital Signs Report"),
-		};
-		
-		ArrayAdapter<ReportsModel> reportsAdapter = new ArrayAdapter<ReportsModel>(getActivity(), android.R.layout.simple_list_item_1, reports);
-		
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_reports, container,
+				false);
+
+		ListView reportListView = (ListView) rootView
+				.findViewById(R.id.lv_reportList);
+
+		ReportsModel[] reports = { new ReportsModel(1, "Breakfast Report"),
+				new ReportsModel(2, "Lunch Report"),
+				new ReportsModel(3, "Dinner Report"),
+				new ReportsModel(4, "Total Calories Report")};
+
+		ArrayAdapter<ReportsModel> reportsAdapter = new ArrayAdapter<ReportsModel>(
+				getActivity(), android.R.layout.simple_list_item_1, reports);
+
 		reportListView.setAdapter(reportsAdapter);
-		
-		reportListView.setOnItemClickListener(new OnItemClickListener() 
-		{
+
+		reportListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-			{
-				Intent reportIntent = new Intent(getActivity(), DietReportActivity.class);
-				startActivity(reportIntent);
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				if (position == 0) {
+					Intent breakfastReportIntent = new Intent(getActivity(),
+							BreakfastReportActivity.class);
+					startActivity(breakfastReportIntent);
+				} else if (position == 1) {
+					Intent lunchReportIntent = new Intent(getActivity(),
+							LunchReportActivity.class);
+					startActivity(lunchReportIntent);
+				} else if (position == 2) {
+					Intent dinnerReportIntent = new Intent(getActivity(),
+							DinnerReportActivity.class);
+					startActivity(dinnerReportIntent);
+				} else if(position == 3) {
+					Intent totalCalorieIntent = new Intent(getActivity(),
+							TotalCalorieReportActivity.class);
+					startActivity(totalCalorieIntent);
+				}
 			}
 		});
-		
+
 		return rootView;
 	}
 }

@@ -53,11 +53,7 @@ public class SavedRecipesActivity extends Activity{
 
 		   Toast toast = Toast.makeText(context, text, duration);
 		   toast.show();
-		
-		
-		
-		
-		
+
 		page = settings.getString("url"+GlobalVariables.userName, null);
 		//if(page!=null)Log.d("pageoncreate",page);
 		if (page != null) {

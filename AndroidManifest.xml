@@ -101,7 +101,19 @@
             android:label="@string/title_activity_view_recipe" >
         </activity>
         <activity
-            android:name="com.application.healthnow.reporting.DietReportActivity"
+            android:name="com.application.healthnow.reporting.BreakfastReportActivity"
+            android:label="@string/title_reporting_activity" >
+        </activity>
+        <activity
+            android:name="com.application.healthnow.reporting.LunchReportActivity"
+            android:label="@string/title_reporting_activity" >
+        </activity>
+        <activity
+            android:name="com.application.healthnow.reporting.DinnerReportActivity"
+            android:label="@string/title_reporting_activity" >
+        </activity>
+        <activity
+            android:name="com.application.healthnow.reporting.TotalCalorieReportActivity"
             android:label="@string/title_reporting_activity" >
         </activity>
         <activity

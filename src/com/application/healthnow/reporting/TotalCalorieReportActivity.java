@@ -9,7 +9,6 @@ import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
-import com.application.healthnow.UtilityFunctions;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -17,20 +16,31 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 
-public class DietReportActivity extends Activity 
-{
+/*
+ * This class generates an XY axis report of the diet statistics.
+ * It is meant to give the user feedback how the calories of each meal they are eating
+ * is trending over time. It answers the questions if they are staying steady if it is going up, down, etc.
+ */
+public class TotalCalorieReportActivity extends Activity {
 	private XYPlot plot;
-	private UtilityFunctions utilityFunctions = new UtilityFunctions();
 	private static final String PREFS_NAME = "MyPrefsFile";
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
+	@SuppressWarnings("null")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
 				WindowManager.LayoutParams.FLAG_SECURE);
-		setContentView(R.layout.activity_diet_report);
+		setContentView(R.layout.activity_total_calorie_report);
 
-
+		/*
+		 * Getting the data for each meal from our xml file
+		 */
 		Integer breakfastCals[] = returnbreakfasthistory();
 		if (breakfastCals != null)
 			Log.e("br from ex", "" + breakfastCals[0]);
@@ -41,53 +51,50 @@ public class DietReportActivity extends Activity
 		if (dinnerCals != null)
 			Log.e("dinner from ex", "" + dinnerCals[0]);
 
-		plot = (XYPlot) findViewById(R.id.dietReportPlot);
+		/*
+		 * Setting the view to our plot
+		 */
+		plot = (XYPlot) findViewById(R.id.totalCalorieReportPlot);
 
+		/*
+		 * Setting up our series with the values
+		 */
 		Number[] breakfastCalories = (Number[]) breakfastCals;
 		Number[] lunchCalories = (Number[]) lunchCals;
 		Number[] dinnerCalories = (Number[]) dinnerCals;
-
-		XYSeries seriesBreakfast = new SimpleXYSeries(Arrays.asList(breakfastCalories),
-				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Breakfast");
-
-		XYSeries seriesLunch = new SimpleXYSeries(Arrays.asList(lunchCalories),
-				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Lunch");
-
-		XYSeries seriesDinner = new SimpleXYSeries(Arrays.asList(dinnerCalories),
-				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Dinner");
+		Number[] totalCalories = new Number[dinnerCalories.length];
+		
+		for(int i = 0; i < totalCalories.length; i++) {
+			totalCalories[i] = breakfastCalories[i].intValue() + lunchCalories[i].intValue() + dinnerCalories[i].intValue(); 
+		}
+		
+		/*
+		 * Creating the XYSeries for each meal time
+		 */
+		XYSeries seriesTotalCalories = new SimpleXYSeries(
+				Arrays.asList(totalCalories),
+				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Total Calories");
 
 		// Create a formatter to use for drawing a series using
 		// LineAndPointRenderer
 		// and configure it from xml:
-		LineAndPointFormatter breakfastSeriesFormat = new LineAndPointFormatter();
-		breakfastSeriesFormat.setPointLabelFormatter(new PointLabelFormatter());
-		breakfastSeriesFormat.configure(getApplicationContext(),
-				R.xml.breakfast_point_formatter);
 
-		// add a new series' to the xyplot:
-		plot.addSeries(seriesBreakfast, breakfastSeriesFormat);
+		LineAndPointFormatter totalCaloriesFormat = new LineAndPointFormatter();
+		totalCaloriesFormat.setPointLabelFormatter(new PointLabelFormatter());
+		totalCaloriesFormat.configure(getApplicationContext(),
+				R.xml.total_calorie_point_formatter);
 
-		// same as above:
-		LineAndPointFormatter lunchSeriesFormat = new LineAndPointFormatter();
-		lunchSeriesFormat.setPointLabelFormatter(new PointLabelFormatter());
-		lunchSeriesFormat.configure(getApplicationContext(),
-				R.xml.lunch_point_formatter);
-		
-		plot.addSeries(seriesLunch, lunchSeriesFormat);
-		
-		LineAndPointFormatter dinnerSeriesFormat = new LineAndPointFormatter();
-		dinnerSeriesFormat.setPointLabelFormatter(new PointLabelFormatter());
-		dinnerSeriesFormat.configure(getApplicationContext(),
-				R.xml.dinner_point_formatter);
-		
-		plot.addSeries(seriesDinner, dinnerSeriesFormat);
+		plot.addSeries(seriesTotalCalories, totalCaloriesFormat);
 
 		// reduce the number of range labels
 		plot.setTicksPerRangeLabel(3);
 		plot.getGraphWidget().setDomainLabelOrientation(-45);
-
 	}
 
+	/*
+	 * This method will return the breakfast history from the preferences file
+	 * written in the DietFragment class.
+	 */
 	public Integer[] returnbreakfasthistory() {
 		SharedPreferences settings = getSharedPreferences("MyPrefsFile", 0);
 		String dayhist = settings.getString("breakfasthistory"
@@ -109,6 +116,10 @@ public class DietReportActivity extends Activity
 		return days;
 	}
 
+	/*
+	 * This method will return the lunch calorie history from the preferences
+	 * file
+	 */
 	public Integer[] returnlunchhistory() {
 		SharedPreferences settings = getSharedPreferences("MyPrefsFile", 0);
 		String dayhist = settings.getString("lunchhistory"
@@ -124,12 +135,14 @@ public class DietReportActivity extends Activity
 			for (int i = 0; i < size; i++) {
 				days[i] = Integer.parseInt((dayarray[i].toString()));
 			}
-
 		}
 
 		return days;
 	}
 
+	/*
+	 * This method will return the dinner history from the preferences file
+	 */
 	public Integer[] returndinnerhistory() {
 		SharedPreferences settings = getSharedPreferences("MyPrefsFile", 0);
 		String dayhist = settings.getString("dinnerhistory"
@@ -145,7 +158,6 @@ public class DietReportActivity extends Activity
 			for (int i = 0; i < size; i++) {
 				days[i] = Integer.parseInt((dayarray[i].toString()));
 			}
-
 		}
 		return days;
 	}
