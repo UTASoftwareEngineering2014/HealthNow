@@ -18,69 +18,130 @@ import android.view.WindowManager;
 
 public class DietReportActivity extends Activity {
 	private XYPlot plot;
+
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+				WindowManager.LayoutParams.FLAG_SECURE);
 		setContentView(R.layout.activity_diet_report);
-		int br[]=returnbreakfasthistory();
-		if(br!=null)Log.e("br from ex",""+ br[0]);
-		plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
+
+		Integer breakfastCals[] = returnbreakfasthistory();
+		if (breakfastCals != null)
+			Log.e("br from ex", "" + breakfastCals[0]);
+		Integer lunchCals[] = returnlunchhistory();
+		if (lunchCals != null)
+			Log.e("lunch from ex", "" + lunchCals[0]);
+		Integer dinnerCals[] = returndinnerhistory();
+		if (dinnerCals != null)
+			Log.e("dinner from ex", "" + dinnerCals[0]);
+
+		plot = (XYPlot) findViewById(R.id.dietReportPlot);
+
+		Number[] breakfastCalories = (Number[]) breakfastCals;
+		Number[] lunchCalories = (Number[]) lunchCals;
+		Number[] dinnerCalories = (Number[]) dinnerCals;
+
+		XYSeries seriesBreakfast = new SimpleXYSeries(Arrays.asList(breakfastCalories),
+				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Breakfast");
+
+		XYSeries seriesLunch = new SimpleXYSeries(Arrays.asList(lunchCalories),
+				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Lunch");
+
+		XYSeries seriesDinner = new SimpleXYSeries(Arrays.asList(dinnerCalories),
+				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Dinner");
+
+		// Create a formatter to use for drawing a series using
+		// LineAndPointRenderer
+		// and configure it from xml:
+		LineAndPointFormatter breakfastSeriesFormat = new LineAndPointFormatter();
+		breakfastSeriesFormat.setPointLabelFormatter(new PointLabelFormatter());
+		breakfastSeriesFormat.configure(getApplicationContext(),
+				R.xml.breakfast_point_formatter);
+
+		// add a new series' to the xyplot:
+		plot.addSeries(seriesBreakfast, breakfastSeriesFormat);
+
+		// same as above:
+		LineAndPointFormatter lunchSeriesFormat = new LineAndPointFormatter();
+		lunchSeriesFormat.setPointLabelFormatter(new PointLabelFormatter());
+		lunchSeriesFormat.configure(getApplicationContext(),
+				R.xml.lunch_point_formatter);
 		
-		Number[] series1Numbers = {1,8,5,2,7,4};
-		Number[] series2Numbers = {4,6,3,8,2,10};
+		plot.addSeries(seriesLunch, lunchSeriesFormat);
 		
-		XYSeries series1 = new SimpleXYSeries(Arrays.asList(series1Numbers),
-												SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
-												"Series1");
+		LineAndPointFormatter dinnerSeriesFormat = new LineAndPointFormatter();
+		dinnerSeriesFormat.setPointLabelFormatter(new PointLabelFormatter());
+		dinnerSeriesFormat.configure(getApplicationContext(),
+				R.xml.dinner_point_formatter);
 		
-		XYSeries series2 = new SimpleXYSeries(Arrays.asList(series2Numbers),
-				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,
-				"Series2");
-		
-		// Create a formatter to use for drawing a series using LineAndPointRenderer
-        // and configure it from xml:
-        LineAndPointFormatter series1Format = new LineAndPointFormatter();
-        series1Format.setPointLabelFormatter(new PointLabelFormatter());
-        series1Format.configure(getApplicationContext(),
-                R.xml.line_point_formatter_with_plf1);
- 
-        // add a new series' to the xyplot:
-        plot.addSeries(series1, series1Format);
- 
-        // same as above:
-        LineAndPointFormatter series2Format = new LineAndPointFormatter();
-        series2Format.setPointLabelFormatter(new PointLabelFormatter());
-        series2Format.configure(getApplicationContext(),
-                R.xml.line_point_formatter_with_plf2);
-        plot.addSeries(series2, series2Format);
- 
-        // reduce the number of range labels
-        plot.setTicksPerRangeLabel(3);
-        plot.getGraphWidget().setDomainLabelOrientation(-45);	
+		plot.addSeries(seriesDinner, dinnerSeriesFormat);
+
+		// reduce the number of range labels
+		plot.setTicksPerRangeLabel(3);
+		plot.getGraphWidget().setDomainLabelOrientation(-45);
 	}
-	
-	
-	public int[] returnbreakfasthistory()
-	{
+
+	public Integer[] returnbreakfasthistory() {
 		SharedPreferences settings = getSharedPreferences("MyPrefsFile", 0);
-		String dayhist=settings.getString("breakfasthistory"+GlobalVariables.userName, "");
-		int days[]=null;
-		if(!(dayhist.equals("")))
-		{
-			
-				
-			String dayarray[]=dayhist.split(" ");
-			int size=dayarray.length;
-			days=new int[size];
-			for(int i=0;i<size;i++)
-			{
-				days[i]=Integer.parseInt((dayarray[i].toString()));
+		String dayhist = settings.getString("breakfasthistory"
+				+ GlobalVariables.userName, "");
+		Integer days[] = null;
+
+		if (!(dayhist.equals(""))) {
+			String dayarray[] = dayhist.split(" ");
+
+			int size = dayarray.length;
+			days = new Integer[size];
+
+			for (int i = 0; i < size; i++) {
+				days[i] = Integer.parseInt((dayarray[i].toString()));
 			}
-			
+
 		}
+
 		return days;
-		
+	}
+
+	public Integer[] returnlunchhistory() {
+		SharedPreferences settings = getSharedPreferences("MyPrefsFile", 0);
+		String dayhist = settings.getString("lunchhistory"
+				+ GlobalVariables.userName, "");
+		Integer days[] = null;
+
+		if (!(dayhist.equals(""))) {
+			String dayarray[] = dayhist.split(" ");
+
+			int size = dayarray.length;
+			days = new Integer[size];
+
+			for (int i = 0; i < size; i++) {
+				days[i] = Integer.parseInt((dayarray[i].toString()));
+			}
+
+		}
+
+		return days;
+	}
+
+	public Integer[] returndinnerhistory() {
+		SharedPreferences settings = getSharedPreferences("MyPrefsFile", 0);
+		String dayhist = settings.getString("dinnerhistory"
+				+ GlobalVariables.userName, "");
+		Integer days[] = null;
+
+		if (!(dayhist.equals(""))) {
+			String dayarray[] = dayhist.split(" ");
+
+			int size = dayarray.length;
+			days = new Integer[size];
+
+			for (int i = 0; i < size; i++) {
+				days[i] = Integer.parseInt((dayarray[i].toString()));
+			}
+
+		}
+
+		return days;
 	}
 }

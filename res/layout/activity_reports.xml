@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <com.androidplot.xy.XYPlot
-            android:id="@+id/mySimpleXYPlot"
+            android:id="@+id/dietReportPlot"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             androidPlot.title="A Simple XY Plot"
