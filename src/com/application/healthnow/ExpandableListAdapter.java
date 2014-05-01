@@ -93,9 +93,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 							public void onClick(DialogInterface dialog, int id) {
 								String docName = laptops.get(groupPosition);
 								DC_DB.DeleteDoctor(docName);
-								// DoctorsActivity delete = new
-								// DoctorsActivity();
-								// delete.deleteDoctor(docName);
+
 								Toast.makeText(context, docName,
 										Toast.LENGTH_LONG).show();
 								notifyDataSetChanged();
