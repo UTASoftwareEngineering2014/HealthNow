@@ -174,5 +174,11 @@
     <string name="string_glucose_level_count">0</string>
     <string name="start_heartrate_monitor">Start HeartRate Monitor</string>
     <string name="string_cholesterol_count">0</string>
-
+	<string name="ok">ok</string>
+    <string name="cancel">cancel</string>
+    <string name="dialog_message">Test</string>
+    <string name="dialog_title">Test</string>
+    
+    
+    
 </resources>
