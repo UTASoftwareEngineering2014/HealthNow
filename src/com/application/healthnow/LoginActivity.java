@@ -20,8 +20,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import com.application.healthnow.database.LoginDataBaseAdapter;
-import com.application.healthnow.medication.MedicationActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -74,6 +72,7 @@ public class LoginActivity extends Activity {
 				// Create Intent for SignUpActivity and Start The Activity
 				Intent intentSignUP = new Intent(getApplicationContext(),RegisterActivity.class);
 				startActivity(intentSignUP);
+				finish();
 			}
 		});
 		
@@ -109,12 +108,14 @@ public class LoginActivity extends Activity {
 					if(firstLogin == true)
 					{
 						Intent intentStart = new Intent(getApplicationContext(),LoginSuccessActivity.class);
-						startActivity(intentStart);						
+						startActivity(intentStart);		
+						finish();
 					}
 					else
 					{
 						Intent intentStart = new Intent(getApplicationContext(),MainActivity.class);
-						startActivity(intentStart);						
+						startActivity(intentStart);		
+						finish();
 					}
 
 				} else {

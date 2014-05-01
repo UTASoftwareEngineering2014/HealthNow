@@ -122,9 +122,6 @@ public class SavedRecipesActivity extends Activity{
          		   //int id=(int)arg3;
 					
 					
-
-					
-					
 					AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
 				    builder.setTitle("Confirm");

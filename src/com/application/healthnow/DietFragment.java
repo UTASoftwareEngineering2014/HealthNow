@@ -17,12 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.application.healthnow.database.LoginDataBaseAdapter;
-import com.application.healthnow.diet.PreferencesActivity;
 import com.application.healthnow.diet.WebViewActivity;
 import com.application.healthnow.diet.SavedRecipesActivity;
  
@@ -158,9 +155,9 @@ public class DietFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				EditText etWeight = (EditText) rootView.findViewById(R.id.et_weight);
+				EditText etWeight = (EditText) rootView.findViewById(R.id.et_height);
 				double weight = Double.valueOf(etWeight.getText().toString());
-				EditText etHeight = (EditText) rootView.findViewById(R.id.et_height);
+				EditText etHeight = (EditText) rootView.findViewById(R.id.et_weight);
 				double height = Double.valueOf(etHeight.getText().toString());
 				if(((height == 0) == false) || ((weight == 0) == false))
 				{
@@ -170,47 +167,6 @@ public class DietFragment extends Fragment{
 				}
 			}
 		});
-		
-//		editTextHeight = (EditText) rootView.findViewById(R.id.et_weight);
-		
-//		String weight = DB.GetWeight();	
-//		editTextHeight.setText(weight);
-//		editTextHeight.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				double weight = Double.valueOf(editTextHeight.getText().toString());
-//				EditText etHeight = (EditText) rootView.findViewById(R.id.et_height);
-//				double height = Double.valueOf(etHeight.getText().toString());
-//				if((height == 0) == false)
-//				{
-//					TextView textView = (TextView) rootView.findViewById(R.id.tv_BMI_Counter);
-//					double BMI = (weight/(height*height))*703;
-//					textView.setText(String.format("%.3f",BMI));
-//				}
-//			}
-//		});
-//		
-//		
-//		
-//		editTextWeight = (EditText) rootView.findViewById(R.id.et_height);
-//		String height = DB.GetHeight();
-//		editTextWeight.setText(height);
-//		editTextWeight.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View view) {
-//				double height = Double.valueOf(editTextWeight.getText().toString());
-//				EditText etWeight = (EditText) rootView.findViewById(R.id.et_weight);
-//				double weight = Double.valueOf(etWeight.getText().toString());
-//				if((weight == 0) == false)
-//				{
-//					TextView textView = (TextView) rootView.findViewById(R.id.tv_BMI_Counter);
-//					double BMI = (weight/(height*height))*703;
-//					textView.setText(String.format("%.3f",BMI));
-//				}
-//			}
-//		});
 		
 		return rootView;
 	}

@@ -74,11 +74,13 @@ public class MainActivity extends Activity {
 		// Exercise
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
 		// Medication, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
 		// Vital Signs
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 		// Reports, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "3"));
+		// Logout, We  will add a counter here
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(6, -1)));
 		
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -203,6 +205,10 @@ public class MainActivity extends Activity {
 			break;
 		case 5:
 			fragment = new ReportsFragment();
+			break;
+		case 6:
+			Intent intent = new Intent(this,LoginActivity.class);
+			startActivity(intent);
 			break;
 
 		default:
