@@ -24,6 +24,7 @@
         <item>Medication</item>
         <item>Vital Signs</item>
         <item>Reports</item>
+        <item>Logoff</item>
     </string-array>
 
     <!-- Navigation Drawer List Item Icons -->
@@ -35,6 +36,7 @@
         <item>@drawable/ic_medication</item>
         <item>@drawable/ic_vital_signs</item>
         <item>@drawable/ic_reports</item>
+        <item>@drawable/ic_logout</item>
     </array>
 
     <!-- Exercise List -->

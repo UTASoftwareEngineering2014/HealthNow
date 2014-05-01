@@ -49,7 +49,8 @@ public class SavedRecipesActivity extends Activity{
 		final Context context = SavedRecipesActivity.this;
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		CharSequence text = "Press and Hold on an Item to Delete";
-		   int duration = Toast.LENGTH_SHORT;
+	    int duration = Toast.LENGTH_SHORT;
+
 
 		   Toast toast = Toast.makeText(context, text, duration);
 		   toast.show();
@@ -120,7 +121,7 @@ public class SavedRecipesActivity extends Activity{
          		   toast.show();*/
          		   
          		   //int id=(int)arg3;
-			
+
 					AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
 				    builder.setTitle("Confirm");

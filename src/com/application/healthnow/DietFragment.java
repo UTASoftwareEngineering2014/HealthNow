@@ -17,12 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.application.healthnow.database.LoginDataBaseAdapter;
-import com.application.healthnow.diet.PreferencesActivity;
 import com.application.healthnow.diet.WebViewActivity;
 import com.application.healthnow.diet.SavedRecipesActivity;
 
@@ -58,6 +55,14 @@ public class DietFragment extends Fragment {
 	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater,
 	 * android.view.ViewGroup, android.os.Bundle)
 	 */
+	public void setWeightHeight()
+	{
+		String height = DB.GetHeight();
+		editTextWeight.setText(height);
+		String weight = DB.GetWeight();	
+		editTextHeight.setText(weight);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -67,15 +72,11 @@ public class DietFragment extends Fragment {
 		 * our on click listeners for each button press.
 		 */
 		DB = new LoginDataBaseAdapter(getActivity());
-		final View rootView = inflater.inflate(R.layout.fragment_diet,
-				container, false);
-		Button btnSearchRecipe = (Button) rootView
-				.findViewById(R.id.btn_Search_Recipes);
-		Button btnSavedRecipe = (Button) rootView
-				.findViewById(R.id.btn_Saved_Recipes);
-		Button btnSaveCalories = (Button) rootView
-				.findViewById(R.id.btn_SaveCalories);
-
+		final View rootView = inflater.inflate(R.layout.fragment_diet, container, false);
+		Button btnSearchRecipe = (Button) rootView.findViewById(R.id.btn_Search_Recipes);
+		Button btnSavedRecipe = (Button) rootView.findViewById(R.id.btn_Saved_Recipes);
+		Button btnSaveCalories=(Button)rootView.findViewById(R.id.btn_SaveCalories);
+		Button calcBmi = (Button)rootView.findViewById(R.id.bmi_button_calculator);
 		checkDay();
 
 		editText = (EditText) rootView.findViewById(R.id.et_breakfast);
@@ -114,7 +115,10 @@ public class DietFragment extends Fragment {
 				}
 
 				int totalCalorie = 0;
-				editText = (EditText) rootView.findViewById(R.id.et_breakfast);
+				try
+				{
+				
+				editText = (EditText)rootView.findViewById(R.id.et_breakfast);
 				int calorie = Integer.parseInt(editText.getText().toString());
 				totalCalorie = calorie;
 				breakfast = calorie;
@@ -129,9 +133,12 @@ public class DietFragment extends Fragment {
 				textView = (TextView) rootView
 						.findViewById(R.id.tv_calorie_counter);
 				textView.setText(Integer.toString(totalCalorie));
-
-				ProgressDialog progressDialog = new ProgressDialog(arg0
-						.getContext());
+				}catch(Exception e)
+				{
+					
+				}
+				
+				ProgressDialog progressDialog = new ProgressDialog(arg0.getContext());
 				progressDialog.setCancelable(true);
 				progressDialog.setMessage("Daily Progress");
 				progressDialog
@@ -179,6 +186,7 @@ public class DietFragment extends Fragment {
 				startActivity(savedRecipeIntent);
 			}
 		});
+
 
 		editTextHeight = (EditText) rootView.findViewById(R.id.et_weight);
 
@@ -252,7 +260,6 @@ public class DietFragment extends Fragment {
 				PREFS_NAME, 0);
 		settings.getString("url" + GlobalVariables.userName, null);
 		checkDay();
-		// editText = (EditText)
 	}
 
 	/*

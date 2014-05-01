@@ -64,6 +64,7 @@ public class DoctorDataBaseAdapter {
 		if (c != null) {
 			c.moveToFirst();
 		}
+		
 
 		while (c.isAfterLast() == false) {
 			doctors.add(c.getString(c.getColumnIndex(DBAdapter.DOCTORS_COLUMN_DOCTORS_NAME)));
@@ -96,6 +97,45 @@ public class DoctorDataBaseAdapter {
 
 		return doctorsInfo;
 
+	}
+	
+	public ArrayList<String> GetAllDoctorsEmail() {
+		ArrayList<String> doctorsInfo = new ArrayList<String>();
+		
+		String where = null;
+		Cursor c = db
+				.query(true, DBAdapter.TABLE_DOCTORS, DBAdapter.DOCTORS_ALLCOLUMNS,
+						where, null, null, null, null, null);
+		if (c != null) {
+			c.moveToFirst();
+		}
+		else return null;
+
+		while (c.isAfterLast() == false) {
+			doctorsInfo.add(c.getString(c.getColumnIndex(DBAdapter.DOCTORS_COLUMN_DOCTORS_EMAIL)));
+			c.moveToNext();
+		}
+		return doctorsInfo;
+	}
+	
+	public ArrayList<String> GetAllDoctorsPhone() {
+		ArrayList<String> doctorsInfo = new ArrayList<String>();
+		
+		String where = null;
+		Cursor c = db
+				.query(true, DBAdapter.TABLE_DOCTORS, DBAdapter.DOCTORS_ALLCOLUMNS,
+						where, null, null, null, null, null);
+		if (c != null) {
+			c.moveToFirst();
+		}
+		else return null;
+
+		while (c.isAfterLast() == false) {
+			doctorsInfo.add(c.getString(c.getColumnIndex(DBAdapter.DOCTORS_COLUMN_DOCTORS_PHONE)));
+			c.moveToNext();
+		}
+		
+		return doctorsInfo;
 	}
 
 }

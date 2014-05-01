@@ -1,8 +1,6 @@
 package com.application.healthnow;
 
-import com.application.healthnow.ExerciseFragment.buttonlistener;
 import com.application.healthnow.heartratemonitor.HeartRateMonitor;
-
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -16,8 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 

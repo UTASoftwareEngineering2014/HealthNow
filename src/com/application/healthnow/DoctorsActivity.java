@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.application.healthnow.database.DoctorDataBaseAdapter;
 import com.application.healthnow.database.LoginDataBaseAdapter;
-import com.application.healthnow.diet.PreferencesActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -99,7 +96,38 @@ public class DoctorsActivity extends Activity {
 
 						DC_DB.InsertDoctor(name, phone, email, office, userId);
 
-						refresh();
+						refresh();	
+						
+						if (name.equals("")) {
+							Toast.makeText(getApplicationContext(),
+									"PLEASE FILL NAME FEILD",
+									Toast.LENGTH_LONG).show();
+							return;
+						}
+						if (phone.equals("")) {
+							Toast.makeText(getApplicationContext(),
+									"PLEASE FILL PHONE FEILD",
+									Toast.LENGTH_LONG).show();
+							return;
+						}
+						if (email.equals("")) {
+							Toast.makeText(getApplicationContext(),
+									"PLEASE FILL EMAIL FEILD",
+									Toast.LENGTH_LONG).show();
+							return;
+						}
+						if (office.equals("")) {
+							Toast.makeText(getApplicationContext(),
+									"PLEASE FILL OFFICE FEILD",
+									Toast.LENGTH_LONG).show();
+							return;
+						}
+						else
+						{
+							DC_DB.InsertDoctor(name, phone, email, office, userId);
+							
+							refresh();
+						}
 					}
 				});
 		builder.setNegativeButton("Cancel",
