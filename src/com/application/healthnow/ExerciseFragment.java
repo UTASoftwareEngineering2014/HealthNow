@@ -1,6 +1,6 @@
 package com.application.healthnow;
 
-import name.bagi.levente.pedometer.Pedometer;
+//import name.bagi.levente.pedometer.Pedometer;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -163,8 +163,8 @@ public class ExerciseFragment extends Fragment {
    			  	int duration = Toast.LENGTH_LONG;
    			  	Toast toast = Toast.makeText(context, text, duration);
    			  	toast.show();
-				Intent startPedometer=new Intent(getActivity(),Pedometer.class);
-				startActivity(startPedometer);
+//				Intent startPedometer=new Intent(getActivity(),Pedometer.class);
+//				startActivity(startPedometer);
 			}break;
 
 			case R.id.btn_heartRateMonitor: {

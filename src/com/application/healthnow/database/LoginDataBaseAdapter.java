@@ -406,4 +406,26 @@ public class LoginDataBaseAdapter {
 
 		return uniqueId;
 	}
+	
+	public ArrayList<String> GetForgotPassword(String userName) {
+		
+		ArrayList<String> credentials = new ArrayList<String>();
+		String where = " USERNAME=?";
+		Cursor cursor = db.query(DBAdapter.TABLE_LOGIN, null, where,
+				new String[] { userName }, null, null, null);
+
+		if (cursor.getCount() < 1) // UserName Not Exist
+		{
+			cursor.close();
+		}
+		cursor.moveToFirst();
+
+		String email = cursor.getString(cursor.getColumnIndex(DBAdapter.LOGIN_COLUMN_EMAIL));
+		String password = cursor.getString(cursor.getColumnIndex(DBAdapter.LOGIN_COLUMN_PASSWORD));
+		
+		credentials.add(email);
+		credentials.add(password);
+
+		return credentials;
+	}
 }
