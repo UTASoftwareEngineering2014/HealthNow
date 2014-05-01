@@ -1,6 +1,7 @@
 package com.application.healthnow;
 
 //import name.bagi.levente.pedometer.Pedometer;
+import name.bagi.levente.pedometer.Pedometer;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
