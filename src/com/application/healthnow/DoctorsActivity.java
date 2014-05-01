@@ -95,9 +95,37 @@ public class DoctorsActivity extends Activity{
 						String email = editEmail.getText().toString();
 						String office = editOffice.getText().toString();
 						
-						DC_DB.InsertDoctor(name, phone, email, office, userId);
 						
-						refresh();
+						if (name.equals("")) {
+							Toast.makeText(getApplicationContext(),
+									"PLEASE FILL NAME FEILD",
+									Toast.LENGTH_LONG).show();
+							return;
+						}
+						if (phone.equals("")) {
+							Toast.makeText(getApplicationContext(),
+									"PLEASE FILL PHONE FEILD",
+									Toast.LENGTH_LONG).show();
+							return;
+						}
+						if (email.equals("")) {
+							Toast.makeText(getApplicationContext(),
+									"PLEASE FILL EMAIL FEILD",
+									Toast.LENGTH_LONG).show();
+							return;
+						}
+						if (office.equals("")) {
+							Toast.makeText(getApplicationContext(),
+									"PLEASE FILL OFFICE FEILD",
+									Toast.LENGTH_LONG).show();
+							return;
+						}
+						else
+						{
+							DC_DB.InsertDoctor(name, phone, email, office, userId);
+							
+							refresh();
+						}
 					}
 				});
 		builder.setNegativeButton("Cancel",

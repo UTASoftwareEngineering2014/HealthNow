@@ -46,6 +46,15 @@ public class DietFragment extends Fragment{
 		super.onCreate(savedInstanceState);
 		
 	}
+	
+	public void setWeightHeight()
+	{
+		String height = DB.GetHeight();
+		editTextWeight.setText(height);
+		String weight = DB.GetWeight();	
+		editTextHeight.setText(weight);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -54,6 +63,7 @@ public class DietFragment extends Fragment{
 		Button btnSearchRecipe = (Button) rootView.findViewById(R.id.btn_Search_Recipes);
 		Button btnSavedRecipe = (Button) rootView.findViewById(R.id.btn_Saved_Recipes);
 		Button btnSaveCalories=(Button)rootView.findViewById(R.id.btn_SaveCalories);
+		Button calcBmi = (Button)rootView.findViewById(R.id.bmi_button_calculator);
 		checkDay();
 		editText = (EditText)rootView.findViewById(R.id.et_breakfast);
 		editText.setText(Integer.toString(breakfast));
@@ -142,44 +152,65 @@ public class DietFragment extends Fragment{
 			}
 		});
 		
-		editTextHeight = (EditText) rootView.findViewById(R.id.et_weight);
+		//setWeightHeight();
 		
-		String weight = DB.GetWeight();	
-		editTextHeight.setText(weight);
-		editTextHeight.setOnClickListener(new View.OnClickListener() {
+		calcBmi.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				double weight = Double.valueOf(editTextHeight.getText().toString());
+				EditText etWeight = (EditText) rootView.findViewById(R.id.et_weight);
+				double weight = Double.valueOf(etWeight.getText().toString());
 				EditText etHeight = (EditText) rootView.findViewById(R.id.et_height);
 				double height = Double.valueOf(etHeight.getText().toString());
-				if((height == 0) == false)
+				if(((height == 0) == false) || ((weight == 0) == false))
 				{
 					TextView textView = (TextView) rootView.findViewById(R.id.tv_BMI_Counter);
 					double BMI = (weight/(height*height))*703;
-					textView.setText(String.format("%.3f",BMI));
+					textView.setText(String.format("%.3f",BMI));					
 				}
 			}
 		});
 		
-		editTextWeight = (EditText) rootView.findViewById(R.id.et_height);
-		String height = DB.GetHeight();
-		editTextWeight.setText(height);
-		editTextWeight.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				double height = Double.valueOf(editTextWeight.getText().toString());
-				EditText etWeight = (EditText) rootView.findViewById(R.id.et_weight);
-				double weight = Double.valueOf(etWeight.getText().toString());
-				if((weight == 0) == false)
-				{
-					TextView textView = (TextView) rootView.findViewById(R.id.tv_BMI_Counter);
-					double BMI = (weight/(height*height))*703;
-					textView.setText(String.format("%.3f",BMI));
-				}
-			}
-		});
+//		editTextHeight = (EditText) rootView.findViewById(R.id.et_weight);
+		
+//		String weight = DB.GetWeight();	
+//		editTextHeight.setText(weight);
+//		editTextHeight.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				double weight = Double.valueOf(editTextHeight.getText().toString());
+//				EditText etHeight = (EditText) rootView.findViewById(R.id.et_height);
+//				double height = Double.valueOf(etHeight.getText().toString());
+//				if((height == 0) == false)
+//				{
+//					TextView textView = (TextView) rootView.findViewById(R.id.tv_BMI_Counter);
+//					double BMI = (weight/(height*height))*703;
+//					textView.setText(String.format("%.3f",BMI));
+//				}
+//			}
+//		});
+//		
+//		
+//		
+//		editTextWeight = (EditText) rootView.findViewById(R.id.et_height);
+//		String height = DB.GetHeight();
+//		editTextWeight.setText(height);
+//		editTextWeight.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View view) {
+//				double height = Double.valueOf(editTextWeight.getText().toString());
+//				EditText etWeight = (EditText) rootView.findViewById(R.id.et_weight);
+//				double weight = Double.valueOf(etWeight.getText().toString());
+//				if((weight == 0) == false)
+//				{
+//					TextView textView = (TextView) rootView.findViewById(R.id.tv_BMI_Counter);
+//					double BMI = (weight/(height*height))*703;
+//					textView.setText(String.format("%.3f",BMI));
+//				}
+//			}
+//		});
 		
 		return rootView;
 	}
@@ -198,7 +229,7 @@ public class DietFragment extends Fragment{
 		SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
 		settings.getString("url"+GlobalVariables.userName, null);
 		checkDay();
-		//editText = (EditText) 
+		
 	}
 	
 	private void checkDay() 

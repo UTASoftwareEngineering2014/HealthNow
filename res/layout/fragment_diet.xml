@@ -205,51 +205,61 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/relativeLayout1"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true" >
+            android:layout_alignParentLeft="true"
+            android:gravity="bottom" >
 
-            <EditText
-                android:id="@+id/et_weight"
-                android:layout_width="60dp"
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:text="@string/string_weight_counter"
-                android:textColor="@android:color/background_dark" />
-
-            <EditText
-                android:id="@+id/et_height"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/textView3"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:text="@string/string_height_counter"
-                android:textColor="@android:color/background_dark" />
+                android:gravity="bottom"
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/textView3"
+                <Button
+                    android:id="@+id/bmi_button_calculator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView2"
-                android:layout_alignBottom="@+id/textView2"
-                android:layout_alignParentLeft="true"
-                android:text="@string/string_height"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:layout_above="@+id/linearLayout4"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/linearLayout5"
+                android:gravity="right" >
 
-            <TextView
-                android:id="@+id/textView2"
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_weight"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/et_weight"
-                android:layout_alignParentRight="true"
-                android:text="@string/string_weight"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:layout_above="@+id/linearLayout4"
+                android:layout_alignParentLeft="true" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_height"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -297,10 +307,50 @@
                         android:textColor="@android:color/background_dark"
                         android:textSize="30sp" />
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="22dp"
+                        android:layout_toLeftOf="@+id/tv_BMI_Counter" >
+
+                        <EditText
+                            android:id="@+id/et_weight"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:inputType="numberDecimal"
+                            android:text="@string/string_weight_counter"
+                            android:textColor="@android:color/background_dark" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_BMI_Counter" >
+
+                        <EditText
+                            android:id="@+id/et_height"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:inputType="numberDecimal"
+                            android:text="@string/string_height_counter"
+                            android:textColor="@android:color/background_dark" />
+
+                    </LinearLayout>
+
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
-
     </RelativeLayout>
 
 </ScrollView>

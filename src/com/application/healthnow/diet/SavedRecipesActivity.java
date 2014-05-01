@@ -49,14 +49,10 @@ public class SavedRecipesActivity extends Activity{
 		final Context context = SavedRecipesActivity.this;
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		CharSequence text = "Press and Hold on an Item to Delete";
-		   int duration = Toast.LENGTH_SHORT;
+	    int duration = Toast.LENGTH_SHORT;
 
-		   Toast toast = Toast.makeText(context, text, duration);
-		   toast.show();
-		
-		
-		
-		
+	    Toast toast = Toast.makeText(context, text, duration);
+	    toast.show();
 		
 		page = settings.getString("url"+GlobalVariables.userName, null);
 		//if(page!=null)Log.d("pageoncreate",page);
