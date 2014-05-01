@@ -86,7 +86,7 @@ public class MedicationActivity extends Activity
 		med=(ListView)findViewById(R.id.listview_medication);
 		if(MED_DB.GetAllMedication()!=null)
 			{
-					ArrayList<String> a=new ArrayList<String>();
+					ArrayList<String> a=new ArrayList<String>();	//populate the list for medication
 					ArrayList<String> b=new ArrayList<String>();
 					a=MED_DB.GetAllMedication();String ad;
         			for(int i=0;i<a.size();i++)
@@ -101,7 +101,7 @@ public class MedicationActivity extends Activity
 							android.R.layout.simple_list_item_1, b);
 					med.setAdapter(adapter);
 			}
-		med.setOnItemClickListener(new OnItemClickListener() 
+		med.setOnItemClickListener(new OnItemClickListener() //set listener for deleting
 		{
 
 			@Override
@@ -121,8 +121,8 @@ public class MedicationActivity extends Activity
 			        {
 			        	
 			        	
-			        	Log.d("fromlist", "1"+itemValue+"1");
-			            // Do nothing but close the dialog
+			        	Log.d("fromlist", "1"+itemValue+"1");	//cancel all the alarms by getting their request codes from the database
+
 			        	int uid=MED_DB.GetIntentId(itemValue+LG_DB.GetUserId());
 			        	try
 						{
@@ -287,14 +287,14 @@ public class MedicationActivity extends Activity
 					{
 						int count=0;
 						String medication=medname.getText().toString();
-						if(medication.length()==0)
+						if(medication.length()==0)   //error check for blank medication name
 						{
 							Toast.makeText(context, "Medication name cannot be blank", Toast.LENGTH_SHORT).show();
 							count=1;
 						}
 						if(count==0)
 						{
-										uid=hash(medication);
+										uid=hash(medication);   //perform a hash for the request code for the medication alarm
 										idsun=uid;idmon=uid+1;idtue=uid+2;idwed=uid+3;idthu=uid+4;idfri=uid+5;idsat=uid+6;
 										MED_DB.InsertMedication(medication+LG_DB.GetUserId(),uid );
 										Time time = new Time();
@@ -304,7 +304,7 @@ public class MedicationActivity extends Activity
 										time.minute = timePicker.getCurrentMinute();
 										hour = time.hour;
 										minute = time.minute;
-									
+									//set the alarm for the checked days
 										if(sunToggle.isChecked())
 										{
 											
@@ -353,22 +353,7 @@ public class MedicationActivity extends Activity
 											
 											
 										}
-										/*else
-										{
-											try
-											{
-												Intent i = new Intent("com.application.healthnow.medication.alarm");
-												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												pISender = PendingIntent.getBroadcast(getApplicationContext(), idmon, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-							                    am.cancel(pISender);
-							                    pISender.cancel();
-												//pISender.cancel();
-												//displayIntent.cancel();
-											}catch(Exception e){
-												
-											}
-										}*/
+
 										if(tueToggle.isChecked())
 										{
 											
@@ -387,22 +372,7 @@ public class MedicationActivity extends Activity
 											
 											
 										}
-										/*else
-										{
-											try
-											{
-												Intent i = new Intent("com.application.healthnow.medication.alarm");
-												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												pISender = PendingIntent.getBroadcast(getApplicationContext(), idtue, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-							                    am.cancel(pISender);
-							                    pISender.cancel();
-												//pISender.cancel();
-												//displayIntent.cancel();
-											}catch(Exception e){
-												
-											}
-										}*/
+
 										if(wedToggle.isChecked())
 										{
 											
@@ -420,22 +390,7 @@ public class MedicationActivity extends Activity
 											
 											
 										}
-										/*else
-										{
-											try
-											{
-												Intent i = new Intent("com.application.healthnow.medication.alarm");
-												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												pISender = PendingIntent.getBroadcast(getApplicationContext(), idwed, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-							                    am.cancel(pISender);
-							                    pISender.cancel();
-												//pISender.cancel();
-												//displayIntent.cancel();
-											}catch(Exception e){
-												
-											}
-										}*/
+
 										if(thuToggle.isChecked())
 										{
 											
@@ -453,22 +408,7 @@ public class MedicationActivity extends Activity
 											
 											
 										}
-										/*else
-										{
-											try
-											{
-												Intent i = new Intent("com.application.healthnow.medication.alarm");
-												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												pISender = PendingIntent.getBroadcast(getApplicationContext(), idthu, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-							                    am.cancel(pISender);
-							                    pISender.cancel();
-												//pISender.cancel();
-												//displayIntent.cancel();
-											}catch(Exception e){
-												
-											}
-										}*/
+
 										if(friToggle.isChecked())
 										{
 											
@@ -491,22 +431,7 @@ public class MedicationActivity extends Activity
 											
 											
 										}	
-										/*else
-										{
-											try
-											{
-												Intent i = new Intent("com.application.healthnow.medication.alarm");
-												//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												pISender = PendingIntent.getBroadcast(getApplicationContext(), idfri, i, PendingIntent.FLAG_UPDATE_CURRENT);
-												AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-							                    am.cancel(pISender);
-							                    pISender.cancel();
-												//pISender.cancel();
-												//displayIntent.cancel();
-											}catch(Exception e){
-												
-											}
-										}*/
+
 										if(satToggle.isChecked())
 										{
 											
@@ -531,29 +456,7 @@ public class MedicationActivity extends Activity
 								        	
 								        	//7days=1000*60*60*24*7milliseconds
 										}
-										/*else
-										{
-				//							
-				//							if(alarmManagersat!=null)
-				//							{
-				//								alarmManagersat.cancel(pendingIntentsat);
-				//							}
-				
-												try
-												{
-													Intent i = new Intent("com.application.healthnow.medication.alarm");
-													//PendingIntent displayIntent = PendingIntent.getBroadcast(getApplicationContext(), idsun, i, PendingIntent.FLAG_UPDATE_CURRENT);
-													pISender = PendingIntent.getBroadcast(getApplicationContext(), idsat, i, PendingIntent.FLAG_UPDATE_CURRENT);
-													AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-								                    am.cancel(pISender);
-								                    pISender.cancel();
-													//pISender.cancel();
-													//displayIntent.cancel();
-												}catch(Exception e){
-													
-												}
-											
-										}*/
+
 										
 										
 										
@@ -583,53 +486,11 @@ public class MedicationActivity extends Activity
 	
 	
 	
-	
-	/*private void RegisterAlarmBroadcast(int d)
-	{   
-		switch(d)
-		{
-			case 7:
-			{
-				Log.d("pendingintent", "sat");
-				//mReceiversat = new BroadcastReceiver()
-		    	//{
-		       // private static final String TAG = "Alarm Example Receiver";
-		       // @Override
-		        //	public void onReceive(Context context, Intent intent)
-		        	//{
-		            	//Toast.makeText(context, "Alarm time has been reached", Toast.LENGTH_SHORT).show();
-		            
-		        	//}
-		    	//};
-				mReceiversat=new MyBroadcastReceiver();
-		    	registerReceiver(mReceiversat, new IntentFilter("sample") );
-	    	    pendingIntentsat = PendingIntent.getBroadcast( context, 0, new Intent("sample"),0 );
-	    	    alarmManagersat = (AlarmManager)(context.getSystemService( Context.ALARM_SERVICE ));
-			}break;
-		}    
-	}
-	private void UnregisterAlarmBroadcast(int d)
-	{
-	    
-	    switch(d)
-	    {
-	    	case 7:
-	    	{
-	    		try
-	    		{
-	    			alarmManagersat.cancel(pendingIntentsat); 
-	    			getBaseContext().unregisterReceiver(mReceiversat);
-	    		}catch(Exception e)
-	    		{
-	    			
-	    		}
-	    	}break;
-	    }
-	}*/
+
 	
 	
 	
-	public int hash(String name)
+	public int hash(String name)  //hash function to generate the request code
 	{
 		Random rand = new Random(); 
 		int value = rand.nextInt(Integer.MAX_VALUE);
@@ -649,7 +510,7 @@ public class MedicationActivity extends Activity
 
 
 
-class StableArrayAdapter extends ArrayAdapter<String> 
+class StableArrayAdapter extends ArrayAdapter<String>   //custom adapter for the list
 {
 
 	HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
