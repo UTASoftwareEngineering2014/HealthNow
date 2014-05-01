@@ -78,7 +78,12 @@ public class DietFragment extends Fragment{
 		textView.setText(Integer.toString(breakfast + lunch + dinner));
 		int bre[]=returnbreakfasthistory();
 		if(bre!=null)Log.d("bre df:",""+bre[0]);
-
+		
+		/*
+		 * Our click listener for the save calories button
+		 * This will save the calories to our shared preferences file.
+		 * This will also show how much of the calories they have taken.
+		 */
 		btnSaveCalories.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -131,6 +136,10 @@ public class DietFragment extends Fragment{
 			
 		});
 		
+		/**
+		 * This is the click listener for the search recipe. This will come up with a web view
+		 * that will take you to a webpage to search for recipes then it will allow you to save it
+		 */
 		btnSearchRecipe.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -140,6 +149,9 @@ public class DietFragment extends Fragment{
 			}
 		});
 		
+		/**
+		 * This event listener will open the list of all the saved recipes.
+		 */
 		btnSavedRecipe.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -173,7 +185,9 @@ public class DietFragment extends Fragment{
 		String height = DB.GetHeight();
 		editTextWeight.setText(height);
 		editTextWeight.setOnClickListener(new View.OnClickListener() {
-			
+			/**
+			 * Calculate the bmi
+			 */
 			@Override
 			public void onClick(View view) {
 				double height = Double.valueOf(editTextWeight.getText().toString());
@@ -191,6 +205,10 @@ public class DietFragment extends Fragment{
 		return rootView;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Fragment#onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)
+	 */
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
@@ -198,6 +216,10 @@ public class DietFragment extends Fragment{
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Fragment#onResume()
+	 */
 	@Override
 	public void onResume()
 	{
@@ -208,6 +230,9 @@ public class DietFragment extends Fragment{
 		//editText = (EditText) 
 	}
 	
+	/*
+	 * This will check the day and then reset the values of the calories to 0
+	 */
 	private void checkDay() 
 	{
 		
