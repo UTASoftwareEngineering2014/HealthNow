@@ -64,6 +64,7 @@ public class DoctorDataBaseAdapter {
 		if (c != null) {
 			c.moveToFirst();
 		}
+		
 
 		while (c.isAfterLast() == false) {
 			doctors.add(c.getString(c.getColumnIndex(DBAdapter.DOCTORS_COLUMN_DOCTORS_NAME)));
@@ -108,6 +109,7 @@ public class DoctorDataBaseAdapter {
 		if (c != null) {
 			c.moveToFirst();
 		}
+		else return null;
 
 		while (c.isAfterLast() == false) {
 			doctorsInfo.add(c.getString(c.getColumnIndex(DBAdapter.DOCTORS_COLUMN_DOCTORS_EMAIL)));
@@ -126,6 +128,7 @@ public class DoctorDataBaseAdapter {
 		if (c != null) {
 			c.moveToFirst();
 		}
+		else return null;
 
 		while (c.isAfterLast() == false) {
 			doctorsInfo.add(c.getString(c.getColumnIndex(DBAdapter.DOCTORS_COLUMN_DOCTORS_PHONE)));

@@ -417,6 +417,7 @@ public class LoginDataBaseAdapter {
 		if (cursor.getCount() < 1) // UserName Not Exist
 		{
 			cursor.close();
+			return null;
 		}
 		cursor.moveToFirst();
 
