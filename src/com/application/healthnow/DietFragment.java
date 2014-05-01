@@ -40,15 +40,28 @@ public class DietFragment extends Fragment{
 	String dayhistory,breakfasthistory,lunchhistory,dinnerhistory;
 	LoginDataBaseAdapter DB;
 	
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Fragment#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
+		/*
+		 * Here we are creating the fields to take input from the user for each of the calories per meal
+		 * Also instantiating our objects. Registering our on click listeners for each button press.
+		 */
 		DB = new LoginDataBaseAdapter(getActivity());
 		final View rootView = inflater.inflate(R.layout.fragment_diet, container, false);
 		Button btnSearchRecipe = (Button) rootView.findViewById(R.id.btn_Search_Recipes);

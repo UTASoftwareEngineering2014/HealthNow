@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <config xmlns:tools="http://schemas.android.com/tools"
         linePaint.strokeWidth="3dp"
-        linePaint.color="#0000AA"
-        vertexPaint.color="#000077"
+        linePaint.color="#ffffff"
+        vertexPaint.color="#000000"
         fillPaint.color="#00000000"
-        pointLabelFormatter.textPaint.color="#FFFFFF"/>
+        pointLabelFormatter.textPaint.color="#FFFFFF">
+        </config>
