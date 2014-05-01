@@ -2,6 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <EditTextPreference
         android:title="Daily Calorie Goal"
-        android:key="cal">
+        android:key="cal"
+      android:inputType="number">
     </EditTextPreference>
 </PreferenceScreen>
