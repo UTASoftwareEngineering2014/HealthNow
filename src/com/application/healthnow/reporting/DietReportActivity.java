@@ -7,7 +7,6 @@ import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
-import com.application.healthnow.DietFragment;
 import com.application.healthnow.GlobalVariables;
 import com.application.healthnow.R;
 import com.application.healthnow.UtilityFunctions;
@@ -26,11 +25,11 @@ public class DietReportActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		DietReportActivity dietReportActivity = new DietReportActivity();
-		DietFragment dietFragement = new DietFragment();
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
 				WindowManager.LayoutParams.FLAG_SECURE);
 		setContentView(R.layout.activity_diet_report);
+
 
 		try {
 			int[] breakfastCalories = dietReportActivity.returnBreakfastHistory();
@@ -48,6 +47,10 @@ public class DietReportActivity extends Activity {
 //		} catch (NullPointerException e) {
 //			e.printStackTrace();
 //		}
+
+
+		int br[]=returnbreakfasthistory();
+		if(br!=null)Log.e("br from ex",""+ br[0]);
 
 		plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
 
@@ -175,5 +178,28 @@ public class DietReportActivity extends Activity {
 		Number[] dinnerHistoryArray = (Number[]) dinnerHistoryObj;
 
 		return dinnerHistoryArray;
+	}
+	
+	
+	public int[] returnbreakfasthistory()
+	{
+		SharedPreferences settings = getSharedPreferences("MyPrefsFile", 0);
+		String dayhist=settings.getString("breakfasthistory"+GlobalVariables.userName, "");
+		int days[]=null;
+		if(!(dayhist.equals("")))
+		{
+			String dayarray[] = dayhist.split(" ");
+			int size=dayarray.length;
+			
+			days = new int[size];
+			
+			for(int i=0;i<size;i++)
+			{
+				days[i]=Integer.parseInt((dayarray[i].toString()));
+			}	
+		}
+		
+		return days;
+		
 	}
 }

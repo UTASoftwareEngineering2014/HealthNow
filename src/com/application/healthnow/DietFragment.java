@@ -63,7 +63,8 @@ public class DietFragment extends Fragment{
 		editText.setText(Integer.toString(dinner));
 		textView = (TextView) rootView.findViewById(R.id.tv_calorie_counter);
 		textView.setText(Integer.toString(breakfast + lunch + dinner));
-		
+		int bre[]=returnbreakfasthistory();
+		if(bre!=null)Log.d("bre df:",""+bre[0]);
 
 		btnSaveCalories.setOnClickListener(new View.OnClickListener()
 		{

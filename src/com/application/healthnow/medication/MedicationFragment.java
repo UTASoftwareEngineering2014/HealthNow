@@ -48,7 +48,8 @@ public class MedicationFragment extends Fragment{
 					Toast.makeText(getActivity(), "Wrong Pin", Toast.LENGTH_SHORT).show();
 				}
 			}
-		});		
+		});	
+		
 		return rootView;
 	}
 }
