@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,8 +96,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                             public void onClick(DialogInterface dialog, int id) {
                                 String docName = laptops.get(groupPosition);
                                 DC_DB.DeleteDoctor(docName);
-//                                DoctorsActivity delete = new DoctorsActivity();
-//                                delete.deleteDoctor(docName);
+                                Intent intent = new Intent();
+                                context.startActivity(intent);
                                 Toast.makeText(context, docName, Toast.LENGTH_LONG).show();
                                 notifyDataSetChanged();
                             }

@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
 		// Reports, We  will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "3"));
 		// Logout, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(6, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 		
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -209,6 +209,7 @@ public class MainActivity extends Activity {
 		case 6:
 			Intent intent = new Intent(this,LoginActivity.class);
 			startActivity(intent);
+			finish();
 			break;
 
 		default:

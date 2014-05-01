@@ -63,7 +63,7 @@
             android:name="com.application.healthnow.DoctorsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:noHistory="true"
-            android:label="Doctors" >
+            android:label="Doctors and Emergency Contacts" >
         </activity>
         <activity
             android:name="com.application.healthnow.RegisterActivity"

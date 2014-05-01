@@ -100,9 +100,12 @@ public class DoctorsActivity extends Activity{
 							return;
 						}
 						if (phone.equals("")) {
-							Toast.makeText(getApplicationContext(),
-									"PLEASE FILL PHONE FEILD",
-									Toast.LENGTH_LONG).show();
+							if (phone.length() == 8)
+							{
+								Toast.makeText(getApplicationContext(),
+										"PLEASE CORRECT PHONE FEILD",
+										Toast.LENGTH_LONG).show();
+							}
 							return;
 						}
 						if (email.equals("")) {
