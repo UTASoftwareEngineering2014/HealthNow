@@ -1,6 +1,5 @@
 package com.application.healthnow;
 
-
 import com.application.healthnow.adapter.NavDrawerListAdapter;
 import com.application.healthnow.medication.MedicationFragment;
 import com.application.healthnow.model.NavDrawerItem;
@@ -26,12 +25,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+/*
+ * This is our main activity which hosts all the other fragments.
+ * This holds our navigation bar that has all the sections and logos.
+ */
 public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private Fragment mContent = null;
-	
+
 	// nav drawer title
 	private CharSequence mDrawerTitle;
 
@@ -45,13 +48,19 @@ public class MainActivity extends Activity {
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);		
-		
-		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-		
+		setContentView(R.layout.activity_main);
+
+		this.getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -68,20 +77,34 @@ public class MainActivity extends Activity {
 
 		// adding nav drawer items to array
 		// Home
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons
+				.getResourceId(0, -1)));
 		// Diet
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons
+				.getResourceId(1, -1)));
 		// Exercise
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons
+				.getResourceId(2, -1)));
 		// Medication, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
+
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons
+				.getResourceId(3, -1), true, "22"));
 		// Vital Signs
+<<<<<<< HEAD
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 		// Reports, We  will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "3"));
 		// Logout, We  will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 		
+=======
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons
+				.getResourceId(4, -1)));
+		// Reports, We will add a counter here
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons
+				.getResourceId(5, -1), true, "50+"));
+
+>>>>>>> 84b8a06cb853d2fb57be6e60ea8d65fb0bf9d9a3
 		// Recycle the typed array
 		navMenuIcons.recycle();
 
@@ -97,9 +120,11 @@ public class MainActivity extends Activity {
 		getActionBar().setHomeButtonEnabled(true);
 
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.ic_drawer, //nav menu toggle icon
-				R.string.app_name, // nav drawer open - description for accessibility
-				R.string.app_name // nav drawer close - description for accessibility
+				R.drawable.ic_drawer, // nav menu toggle icon
+				R.string.app_name, // nav drawer open - description for
+									// accessibility
+				R.string.app_name // nav drawer close - description for
+									// accessibility
 		) {
 			public void onDrawerClosed(View view) {
 				getActionBar().setTitle(mTitle);
@@ -133,17 +158,16 @@ public class MainActivity extends Activity {
 			displayView(position);
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
-		 // Associate searchable configuration with the SearchView 
- 			    SearchManager searchManager = 
- 			           (SearchManager) getSystemService(Context.SEARCH_SERVICE); 
- 				    SearchView searchView = 
- 			            (SearchView) menu.findItem(R.id.search).getActionView(); 
- 			    searchView.setSearchableInfo( 
- 			            searchManager.getSearchableInfo(getComponentName())); 
+		// Associate searchable configuration with the SearchView
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		SearchView searchView = (SearchView) menu.findItem(R.id.search)
+				.getActionView();
+		searchView.setSearchableInfo(searchManager
+				.getSearchableInfo(getComponentName()));
 		return true;
 	}
 
@@ -152,13 +176,12 @@ public class MainActivity extends Activity {
 		// toggle nav drawer on selecting action bar app icon/title
 		int selected = item.getItemId();
 		final int settings = R.id.action_settings;
-		if(selected == settings)
-		{
-			Intent intentStart = new Intent(getApplicationContext(),SettingsActivity.class);
+		if (selected == settings) {
+			Intent intentStart = new Intent(getApplicationContext(),
+					SettingsActivity.class);
 			startActivity(intentStart);
 			return true;
-		}
-		else if (mDrawerToggle.onOptionsItemSelected(item)) {
+		} else if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
 		// Handle action bar actions click
@@ -183,6 +206,7 @@ public class MainActivity extends Activity {
 
 	/**
 	 * Diplaying fragment view for selected nav drawer list item
+	 * checks the position passed in and creates a new fragment.
 	 * */
 	private void displayView(int position) {
 		// update the main content by replacing fragments
@@ -232,6 +256,10 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Activity#setTitle(java.lang.CharSequence)
+	 */
 	@Override
 	public void setTitle(CharSequence title) {
 		mTitle = title;
@@ -256,5 +284,4 @@ public class MainActivity extends Activity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-
 }

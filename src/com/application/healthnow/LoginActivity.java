@@ -39,52 +39,56 @@ public class LoginActivity extends Activity {
 	LoginDataBaseAdapter DB;
 	View forgot_pass;Context context;
 	ArrayList<String> emailandpass;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
+
 		final EditText editTextUserName = (EditText) findViewById(R.id.editTextUserNameToLogin);
+
+		// Place username in textfield after successful registration.
 		context=this;
-		//Place username in textfield after successful registration.
+		
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-		    boolean isNew = extras.getBoolean("userName", false);
-		    if (isNew) {
-		    		
-		    } else {
-		        // Do something else
-		    	String userName = extras.getString("userName");
-		    	editTextUserName.setText(userName);
-		    }
+			boolean isNew = extras.getBoolean("userName", false);
+			if (isNew) {
+
+			} else {
+				// Do something else
+				String userName = extras.getString("userName");
+				editTextUserName.setText(userName);
+			}
 		}
-			
+
 		// create a instance of SQLite Database
 		DB = new LoginDataBaseAdapter(this);
-		
+
 		// Get The Reference Of Buttons
 		btnSignUp = findViewById(R.id.link_to_register);
 		btnSignIn = (Button) findViewById(R.id.buttonSignIn);
 		forgot_pass=findViewById(R.id.forgot_pass);
 		// Set OnClick Listener on SignUp button
 		btnSignUp.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {	
+			public void onClick(View v) {
 				// Create Intent for SignUpActivity and Start The Activity
-				Intent intentSignUP = new Intent(getApplicationContext(),RegisterActivity.class);
+				Intent intentSignUP = new Intent(getApplicationContext(),
+						RegisterActivity.class);
 				startActivity(intentSignUP);
 				finish();
 			}
 		});
-		
+
 		btnSignIn.setOnClickListener(new View.OnClickListener() {
 			// get The User name and Password
-			
+
 			public void onClick(View v) {
 
 				// get the References of views
 				final EditText editTextUserName = (EditText) findViewById(R.id.editTextUserNameToLogin);
 				final EditText editTextPassword = (EditText) findViewById(R.id.editTextPasswordToLogin);
-				
+
 				String userName = editTextUserName.getText().toString();
 				String password = editTextPassword.getText().toString();
 				// fetch the Password from database for respective user name
@@ -96,12 +100,12 @@ public class LoginActivity extends Activity {
 					Toast.makeText(LoginActivity.this,
 							"Congrats: Login Successfull", Toast.LENGTH_LONG)
 							.show();
-					
-					//Set username to be used globally
+
+					// Set username to be used globally
 					GlobalVariables globalVariable = (GlobalVariables) getApplicationContext();
 					globalVariable.SetUserName(userName);
-					
-					//Is this first time login?
+
+					// Is this first time login?
 					boolean firstLogin = DB.IsFirstLogin(userName);
 					
 					//If fist time take to welcome screen
@@ -217,13 +221,14 @@ public class LoginActivity extends Activity {
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		// Close The Database
-		if(DB.db != null)
-            DB.db.close();;
+		if (DB.db != null)
+			DB.db.close();
+		;
 	}
 }
 

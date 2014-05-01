@@ -36,23 +36,25 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
-
-            <intent-filter>
+			<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
         </activity>
         <activity
             android:name="com.application.healthnow.communication.MailSenderActivity"
             android:label="Mail Sender"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+            
         </activity>
         <activity
             android:name="com.application.healthnow.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+            
         </activity>
         <activity
             android:name="com.application.healthnow.diet.WebViewActivity"
@@ -100,7 +102,19 @@
             android:label="@string/title_activity_view_recipe" >
         </activity>
         <activity
-            android:name="com.application.healthnow.reporting.DietReportActivity"
+            android:name="com.application.healthnow.reporting.BreakfastReportActivity"
+            android:label="@string/title_reporting_activity" >
+        </activity>
+        <activity
+            android:name="com.application.healthnow.reporting.LunchReportActivity"
+            android:label="@string/title_reporting_activity" >
+        </activity>
+        <activity
+            android:name="com.application.healthnow.reporting.DinnerReportActivity"
+            android:label="@string/title_reporting_activity" >
+        </activity>
+        <activity
+            android:name="com.application.healthnow.reporting.TotalCalorieReportActivity"
             android:label="@string/title_reporting_activity" >
         </activity>
         <activity

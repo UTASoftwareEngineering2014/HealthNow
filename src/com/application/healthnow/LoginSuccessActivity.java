@@ -177,7 +177,6 @@ public class LoginSuccessActivity extends Activity {
 								}
 							}
 						});
-
 					}
 				});
 

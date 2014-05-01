@@ -51,9 +51,10 @@ public class SavedRecipesActivity extends Activity{
 		CharSequence text = "Press and Hold on an Item to Delete";
 	    int duration = Toast.LENGTH_SHORT;
 
-	    Toast toast = Toast.makeText(context, text, duration);
-	    toast.show();
-		
+
+		   Toast toast = Toast.makeText(context, text, duration);
+		   toast.show();
+
 		page = settings.getString("url"+GlobalVariables.userName, null);
 		//if(page!=null)Log.d("pageoncreate",page);
 		if (page != null) {
@@ -120,8 +121,7 @@ public class SavedRecipesActivity extends Activity{
          		   toast.show();*/
          		   
          		   //int id=(int)arg3;
-					
-					
+
 					AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
 				    builder.setTitle("Confirm");
@@ -196,37 +196,12 @@ public class SavedRecipesActivity extends Activity{
 
 				    AlertDialog alert = builder.create();
 				    alert.show();
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-				    
-					
-					
 
 					return true;
 				}
 				});
 			
-				
-			
 			//listview.setOnTouchListener(new SwipeGestureListener(context));
-			
-
-			
-			
-
 		}
 
 	}
@@ -255,14 +230,8 @@ public class SavedRecipesActivity extends Activity{
 		{
 			names.add(namescopy.get(i));
 		}
-		
 	}
-	
-	
-	
-	
-	
-	
+
 	 class SwipeGestureListener extends SimpleOnGestureListener implements
 	   OnTouchListener {
 	  Context context;
@@ -384,7 +353,6 @@ public class SavedRecipesActivity extends Activity{
 	  public GestureDetector getDetector() {
 	   return gDetector;
 	  }
-	 
 	 }
 	
 	

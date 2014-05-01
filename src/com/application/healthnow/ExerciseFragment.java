@@ -32,17 +32,28 @@ import com.application.healthnow.heartratemonitor.HeartRateMonitor;
 public class ExerciseFragment extends Fragment {
 	String tag = "Exercise fragment";
 
+	/*
+	 * No argument constructor for our fragment
+	 */
 	public ExerciseFragment() {
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater,
+	 * android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.fragment_exercise, container,
 				false);
-		/*int br[]=returnbreakfasthistory();
-		if(br!=null)Log.d("br from ex",""+ br[0]);*/
+		/*
+		 * int br[]=returnbreakfasthistory(); if(br!=null)Log.d("br from ex",""+
+		 * br[0]);
+		 */
 		Button calculateCalories = (Button) rootView
 				.findViewById(R.id.btn_calculateCalories);
 		Button searchExercise = (Button) rootView
@@ -152,13 +163,10 @@ public class ExerciseFragment extends Fragment {
 			}
 				break;
 
-			case R.id.btn_startPedometer:
-			{
+			case R.id.btn_startPedometer: {
 				Log.d(tag, "inpedom");
-				//Intent startPedometer = getActivity().getPackageManager().getLaunchIntentForPackage("name.bagi.levente.pedometer");
-				//Intent startPedometer = new Intent(Intent.ACTION_MAIN);
-				//startPedometer.setComponent(new ComponentName("name.bagi.levente.pedometer","name.bagi.levente.pedometer.Pedometer"));
 				Context context = getActivity().getApplicationContext();
+
    			  	CharSequence text = "Please Calibrate Settings Before Use";
    			  	int duration = Toast.LENGTH_LONG;
    			  	Toast toast = Toast.makeText(context, text, duration);
@@ -168,23 +176,17 @@ public class ExerciseFragment extends Fragment {
 			}break;
 
 			case R.id.btn_heartRateMonitor: {
-
-				// Context context = getActivity().getApplicationContext();
 				Intent startHeartRateMnitor = new Intent(getActivity(),
 						HeartRateMonitor.class);
 				startActivity(startHeartRateMnitor);
-
 			}
 				break;
-
 			}
-
 		}
 
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView,
 				boolean isChecked) {
-			// TODO Auto-generated method stub
 			switch (buttonView.getId()) {
 			case R.id.togbtn_timerToggle: {
 				Chronometer timer = (Chronometer) exerciseView
@@ -204,31 +206,26 @@ public class ExerciseFragment extends Fragment {
 				}
 			}
 			}
-
 		}
-		
-
 	}
-	public int[] returnbreakfasthistory()
-	{
-		SharedPreferences settings = getActivity().getSharedPreferences("MyPrefsFile", 0);
-		String dayhist=settings.getString("breakfasthistory"+GlobalVariables.userName, "");
-		int days[]=null;
-		if(!(dayhist.equals("")))
-		{
-			
-				
-			String dayarray[]=dayhist.split(" ");
-			int size=dayarray.length;
-			days=new int[size];
-			for(int i=0;i<size;i++)
-			{
-				days[i]=Integer.parseInt((dayarray[i].toString()));
+
+	public int[] returnbreakfasthistory() {
+		SharedPreferences settings = getActivity().getSharedPreferences(
+				"MyPrefsFile", 0);
+		String dayhist = settings.getString("breakfasthistory"
+				+ GlobalVariables.userName, "");
+		int days[] = null;
+		if (!(dayhist.equals(""))) {
+
+			String dayarray[] = dayhist.split(" ");
+			int size = dayarray.length;
+			days = new int[size];
+			for (int i = 0; i < size; i++) {
+				days[i] = Integer.parseInt((dayarray[i].toString()));
 			}
-			
+
 		}
 		return days;
-		
 	}
 }
 
@@ -237,7 +234,6 @@ class runningDialog extends DialogFragment {
 	String type;
 
 	public runningDialog(String s) {
-		// TODO Auto-generated constructor stub
 		type = s;
 	}
 
